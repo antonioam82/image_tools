@@ -13,7 +13,7 @@ def veri(n):
             print("No se encontro ningún archivo con tales iniciales.")
     return ciert
 
-os.chdir(r'C:\Users\Antonio\Documents\Nueva carpeta\imagess')
+os.chdir(r'#path to folder')
 
 while True:
     
