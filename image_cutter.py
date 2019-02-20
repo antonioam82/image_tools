@@ -13,9 +13,13 @@ def veri(n):
             print("No se encontro ningún archivo con tales iniciales.")
     return ciert
 
-
-nueva_ruta=input("Ingrese ruta: ")
-os.chdir(nueva_ruta)
+while True:
+    nueva_ruta=input("Introduzca ruta: ")
+    try:
+        os.chdir(nueva_ruta)
+        break
+    except:
+        print("RUTA NO VALIDA")
 
 while True:
     
