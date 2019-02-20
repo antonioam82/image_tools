@@ -2,8 +2,13 @@ from PIL import Image
 import os, subprocess
 from VALID import ns, OKI
 
-
-os.chdir(r'#path to folder')
+while True:
+    nueva_ruta=input("Intorduzca ruta: ")
+    try:
+        os.chdir(nueva_ruta)
+        break
+    except:
+        print("RUTA NO VALIDA")
 
 while True:
 
@@ -34,6 +39,8 @@ while True:
     file=giff+str(count)
     n_imagen = im.crop(box)
     n_imagen.save(file+".gif")
+    print("")
+    print("Extraido frame: ",file+".gif")
     
     im.seek(0)
     try:
@@ -43,9 +50,10 @@ while True:
             file=giff+str(count)
             n_imagen = im.crop(box)
             n_imagen.save(file+".gif")
+            print("Extraido frame: ",file+".gif")
     except EOFError:
         pass
-
+    print("")
     conti=ns(input("¿Desea continuar?: "))
     if conti=="n":
         break
