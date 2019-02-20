@@ -3,7 +3,7 @@ import os, subprocess
 from VALID import ns, OKI
 
 while True:
-    nueva_ruta=input("Intorduzca ruta: ")
+    nueva_ruta=input("Introduzca ruta: ")
     try:
         os.chdir(nueva_ruta)
         break
