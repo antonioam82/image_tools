@@ -1,9 +1,10 @@
+from __future__ import print_function
 from PIL import Image
 import os, subprocess
 from VALID import ns, OKI
 
 while True:
-    nueva_ruta=input("Introduzca ruta: ")
+    nueva_ruta=input("Intorduzca ruta: ")
     try:
         os.chdir(nueva_ruta)
         break
@@ -25,6 +26,11 @@ while True:
     if not gif_name in os.listdir():
         print("No se encontró el archivo",gif_name)
         break
+    
+    arch=Image.open(gif_name)
+    print("")
+    print("Dimensiones: ",arch.size[0],"x",arch.size[1])
+    print("")
         
     dato_iz=OKI(input("Introduce dato izquierdo: "))
     dato_sup=OKI(input("Introduce dato superior: "))
@@ -58,3 +64,5 @@ while True:
     if conti=="n":
         break
     subprocess.call(["cmd.exe","/C","cls"])
+        
+
