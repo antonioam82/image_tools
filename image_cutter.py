@@ -15,10 +15,10 @@ def veri(n):
 
 while True:
     nueva_ruta=input("Introduzca ruta: ")
-    try:
+    if os.path.isdir(nueva_ruta):
         os.chdir(nueva_ruta)
         break
-    except:
+    else:
         print("RUTA NO VALIDA")
 
 while True:
