@@ -4,11 +4,11 @@ import os, subprocess
 from VALID import ns, OKI
 
 while True:
-    nueva_ruta=input("Intorduzca ruta: ")
-    try:
+    nueva_ruta=input("Introduzca ruta: ")
+    if os.path.isdir(nueva_ruta):
         os.chdir(nueva_ruta)
         break
-    except:
+    else:
         print("RUTA NO VALIDA")
 
 while True:
@@ -20,7 +20,7 @@ while True:
     print("|___________________________|")
     print("")
 
-    giff=input("Nobre del archivo: ")
+    giff=input("Nombre del archivo: ")
     gif_name=giff+".gif"
 
     if not gif_name in os.listdir():
