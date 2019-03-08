@@ -40,7 +40,7 @@ while True:
     box=(dato_iz, dato_sup, dato_der, dato_inf)
     count=0
     
-    #im = Image.open(gif_name)
+    print("")
 
     for frame in ImageSequence.Iterator(im):
         try:
