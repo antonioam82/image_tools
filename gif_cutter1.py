@@ -3,15 +3,13 @@ from PIL import Image, ImageSequence
 import os, subprocess
 from VALID import ns, OKI
 
-#while True:
-    #nueva_ruta=input("Introduzca ruta: ")
-    #if os.path.isdir(nueva_ruta):
-        #os.chdir(nueva_ruta)
-        #break
-    #else:
-        #print("RUTA NO VALIDA")
-
-os.chdir(r'C:\Users\Antonio\Documents\Nueva carpeta\imagess')
+while True:
+    nueva_ruta=input("Introduzca ruta: ")
+    if os.path.isdir(nueva_ruta):
+        os.chdir(nueva_ruta)
+        break
+    else:
+        print("RUTA NO VALIDA")
 
 while True:
 
