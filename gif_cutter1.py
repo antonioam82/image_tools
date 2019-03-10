@@ -3,13 +3,15 @@ from PIL import Image, ImageSequence
 import os, subprocess
 from VALID import ns, OKI
 
-while True:
-    nueva_ruta=input("Introduzca ruta: ")
-    if os.path.isdir(nueva_ruta):
-        os.chdir(nueva_ruta)
-        break
-    else:
-        print("RUTA NO VALIDA")
+#while True:
+    #nueva_ruta=input("Introduzca ruta: ")
+    #if os.path.isdir(nueva_ruta):
+        #os.chdir(nueva_ruta)
+        #break
+    #else:
+        #print("RUTA NO VALIDA")
+
+os.chdir(r'C:\Users\Antonio\Documents\Nueva carpeta\imagess')
 
 while True:
 
@@ -38,18 +40,21 @@ while True:
     dato_inf=OKI(input("Introduce dato inferior: "))
     
     box=(dato_iz, dato_sup, dato_der, dato_inf)
-    count=0
+    count=1
     
+    formato=input("Introduce formato para frames: ")
+    t_ar="."+formato
     print("")
-
+    
     for frame in ImageSequence.Iterator(im):
         try:
             n_imagen=im.crop(box)
-            n_imagen.save(giff+str(count)+".png")
-            print("Extraído frame: ",giff+str(count)+".png")
+            n_imagen.save(giff+str(count)+t_ar)
+            print("Extraído frame: ",giff+str(count)+t_ar)
             count += 1
-        except EOFError:
+        except:
             print("La operación no pudo completarse con éxito")
+            break
             pass
     
     print("")
@@ -57,3 +62,5 @@ while True:
     if conti=="n":
         break
     subprocess.call(["cmd.exe","/C","cls"])
+    
+
