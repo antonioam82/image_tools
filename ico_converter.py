@@ -26,7 +26,7 @@ while True:
         try:
             imagen=Image.open(im)
             imagen.save(name+".ico")
-            print("CONVERSIÓN REALIZADA CON EXITO")
+            print("ARCHIVO '.ICO' CREADO CON EXITO")
         except:
             print("No se pudo completar la operación")
     else:
