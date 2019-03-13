@@ -15,7 +15,7 @@ while True:
     print("")
     print("_____________________________")
     print("|                           |")
-    print("|     --ICO CONVERTER--     |")
+    print("|      --ICO CREATOR--      |")
     print("|___________________________|")
     print("")
     
