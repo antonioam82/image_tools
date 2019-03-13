@@ -1,6 +1,6 @@
 from PIL import Image
 from VALID import ns
-import os
+import os, subprocess
 
 while True:
     nueva_ruta=input("Introduzca ruta: ")
