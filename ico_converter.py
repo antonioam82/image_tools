@@ -9,8 +9,16 @@ while True:
         break
     else:
         print("RUTA NO VALIDA")
-        
+
 while True:
+
+    print("")
+    print("_____________________________")
+    print("|                           |")
+    print("|     --ICO CONVERTER--     |")
+    print("|___________________________|")
+    print("")
+    
     im = input("Introduce nombre de archivo: ")
     if im in os.listdir():
         diiv = im.split(".")
@@ -26,4 +34,6 @@ while True:
     conti = ns(input("¿Desea continuar?: "))
     if conti == "n":
          break
+    subprocess.call(["cmd.exe","/C","cls"])
+
 
