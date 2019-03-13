@@ -1,6 +1,10 @@
 from PIL import Image
-from VALID import ns
 import os, subprocess
+
+def ns(c):
+    while c!=("s") and c!=("n"):
+        print(chr(7));c=input("Escribe solo \'n\' o \'s\' según su opción: ")
+    return(c)
 
 while True:
     nueva_ruta=input("Introduzca ruta: ")
