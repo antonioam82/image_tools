@@ -53,7 +53,6 @@ while True:
         except:
             print("La operación no pudo completarse con éxito")
             break
-            pass
     
     print("")
     conti=ns(input("¿Desea continuar?: "))
