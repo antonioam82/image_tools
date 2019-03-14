@@ -14,16 +14,17 @@ while True:
     else:
         print("RUTA NO VALIDA")
 
-while True:
-
+ while True:
+    
     print("")
     print("_____________________________")
     print("|                           |")
-    print("|      --ICO CREATOR--      |")
+    print("|       --ICO CREATOR--     |")
     print("|___________________________|")
     print("")
     
     im = input("Introduce nombre de archivo: ")
+    print("")
     if im in os.listdir():
         diiv = im.split(".")
         name = diiv[0]
@@ -35,9 +36,10 @@ while True:
             print("No se pudo completar la operación")
     else:
         print("No se encontró el archivo",im)
+    print("")
     conti = ns(input("¿Desea continuar?: "))
     if conti == "n":
          break
-    subprocess.call(["cmd.exe","/C","cls"])
+    subprocess.call(["cmd.exe","/C","cls"])       
 
 
