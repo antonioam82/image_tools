@@ -15,10 +15,10 @@ def veri(n):
 
 while True:
     nueva_ruta=input("Introduzca ruta: ")
-    if os.path.isdir(nueva_ruta):
+    try:
         os.chdir(nueva_ruta)
         break
-    else:
+    except:
         print("RUTA NO VALIDA")
 
 while True:
@@ -41,22 +41,24 @@ while True:
     dato_inf=OKI(input("Introduce dato inferior: "))
     
     box=(dato_iz, dato_sup, dato_der, dato_inf)
-
+    
+    print("")
     for file in os.listdir():
-        if file.startswith(inicial):
+        if file.startswith(inicial) and not file.endswith('.gif'):
             try:
                 imagen = Image.open(file)
-                #ig=imagen
+                ig=imagen
                 n_imagen = imagen.crop(box)
                 n_imagen.save(file)
                 print("Operación completada con éxito para el archivo", file) 
 
             except:
                 print("La operación no pudo completarse con éxito para el archivo", file)
-                #ig.save(file)
-                imagen.close()
+                ig.save(file)
+                ig.close()
                 break
-            
+    print("")
+
     conti=ns(input("¿Continuar?: "))
 
     if conti=="n":
