@@ -6,13 +6,13 @@ import os, subprocess
 from VALID import ns, OKI
 
 while True:
-    nueva_ruta=raw_input("Introduzca ruta: ")
+    nueva_ruta=input("Introduzca ruta: ")
     if os.path.isdir():
 		os.chdir(nueva_ruta)
 		break
     else:
         print("RUTA NO VALIDA")
-        
+       
 
 while True:
 
@@ -51,7 +51,7 @@ while True:
     print("")
     
     for frame in ImageSequence.Iterator(im):
-    try:
+        try:
 			if corte=="s":
 				n_imagen=im.crop(box)
 			else:
@@ -67,5 +67,5 @@ while True:
     conti=ns(raw_input("¿Desea continuar?: "))
     if conti=="n":
         break
-    os.system("clear
+    subprocess.call(["cmd.exe","/C","cls"])
         
