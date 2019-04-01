@@ -29,11 +29,16 @@ while True:
     if not gif_name in os.listdir():
         print("No se encontró el archivo",gif_name)
         break
-    
-    im=Image.open(gif_name)
-    print("")
-    print("Dimensiones: ",im.size[0],"x",im.size[1])
-    print("")
+    try:
+	im=Image.open(gif_name)
+        print("")
+        print("Dimensiones: ",im.size[0],"x",im.size[1])
+        print("")
+	
+    except:
+	print("")
+	print("No se pudo abrir el archivo",gif_name)
+	break
     
     corte=ns(input("¿Desea efectuar recortes sobre la imagen?: "))
     
