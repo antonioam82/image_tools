@@ -66,7 +66,7 @@ while True:
 			count += 1
         except:
             print("La operación no pudo completarse con éxito")
-			os.remove(giff+str(count)+t_ar)
+	    os.remove(giff+str(count)+t_ar)
             break
     
     print("")
