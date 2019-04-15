@@ -1,11 +1,6 @@
 from PIL import Image
 import os, subprocess
 
-def ns(c):
-    while c!=("s") and c!=("n"):
-        print(chr(7));c=input("Escribe solo \'n\' o \'s\' según su opción: ")
-    return(c)
-
 while True:
     nueva_ruta=input("Introduzca ruta: ")
     if os.path.isdir(nueva_ruta):
@@ -14,8 +9,13 @@ while True:
     else:
         print("RUTA NO VALIDA")
 
- while True:
-    
+def ns(c):
+    while c!=("s") and c!=("n"):
+        print(chr(7));c=input("Escribe solo \'n\' o \'s\' según su opción: ")
+    return(c)
+        
+while True:
+
     print("")
     print("_____________________________")
     print("|                           |")
@@ -26,8 +26,7 @@ while True:
     im = input("Introduce nombre de archivo: ")
     print("")
     if im in os.listdir():
-        diiv = im.split(".")
-        name = diiv[0]
+        name, ext = os.path.splitext(im)
         try:
             imagen=Image.open(im)
             imagen.save(name+".ico")
@@ -40,6 +39,5 @@ while True:
     conti = ns(input("¿Desea continuar?: "))
     if conti == "n":
          break
-    subprocess.call(["cmd.exe","/C","cls"])       
-
+    subprocess.call(["cmd.exe","/C","cls"])
 
