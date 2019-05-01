@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from PIL import Image
 import os.path
 #from VALID import ns, OKI
