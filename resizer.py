@@ -1,6 +1,6 @@
 from PIL import Image
 import os.path
-from VALID import ns, OKI
+#from VALID import ns, OKI
 import subprocess
 
 while True:
@@ -10,8 +10,19 @@ while True:
         break
     else:
         print("RUTA NO VALIDA")
+        
+def ns(c):
+    while c!=("s") and c!=("n"):
+        print(chr(7));c=input("Escribe solo \'n\' o \'s\' según su opción: ")
+    return(c)
+ 
+def OKI(n):
+    try:
+        n=int(n)
+    except:
+        n=OKI(input("Caracter no valido: "))
+    return n
     
-
 def resuze(fn,tama):
     file, ext = os.path.splitext(fn)
     im = Image.open(fn)
