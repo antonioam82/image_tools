@@ -25,16 +25,20 @@ while True:
         print("RUTA NO VALIDA")
     
 
-def resize(fn,tama):
+def resize(fn):
     file, ext = os.path.splitext(fn)
-    im = Image.open(fn)
-    w,h=im.size
-    if tama < w:
-        im.thumbnail((tama,int(tama*h/w)),Image.ANTIALIAS)
-        im.save(file+"_resized"+ext,"PNG")
-        print("\nACCIÓN COMPLETADA CON ÉXITO")
-    else:
-        print("El tamaño solicitado es igual o menor al original",im.size)
+    try:
+        im = Image.open(fn)
+        tama=OKI(input("Nuevo tamaño: "))
+        w,h=im.size
+        if tama < w:
+            im.thumbnail((tama,int(tama*h/w)),Image.ANTIALIAS)
+            im.save(file+"_resized"+ext,"PNG")
+            print("\nACCIÓN COMPLETADA CON ÉXITO")
+        else:
+            print("\nEl tamaño solicitado es igual o menor al original",im.size)
+    except:
+        print("\nEl archivo solicitado no es apto para la operación")
 
 
 while True:
@@ -46,14 +50,12 @@ while True:
     
     imagen=input("Nombre imagen: ")
     if imagen in os.listdir():
-        tama=OKI(input("Nuevo tamaño: "))
-        resize(imagen,tama)
+        resize(imagen)
     else:
         print("\nNo se encontró el archivo",imagen)
     conti=ns(input("\n¿Desea continuar?: "))
     if conti=="n":
         break
     subprocess.call(["cmd.exe","/C","cls"])
-    
 
     
