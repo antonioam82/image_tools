@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from PIL import Image
 import os.path
 import subprocess
@@ -29,11 +30,12 @@ def resize(fn):
     file, ext = os.path.splitext(fn)
     try:
         im = Image.open(fn)
-        tama = OKI(input("Nuevo tamaño: "))
+        print("\nDimensiones: ",im.size[0],"x",im.size[1])
+        tama = OKI(input("\nNuevo tamaño: "))
         w,h = im.size
         if tama < w:
             im.thumbnail((tama,int(tama*h/w)),Image.ANTIALIAS)
-            im.save(file+"_resized"+ext,"PNG")
+            im.save(file+"_resized"+ext)
             print("\nACCIÓN COMPLETADA CON ÉXITO")
         else:
             print("\nEl tamaño solicitado es igual o mayor al original",im.size)
@@ -57,5 +59,7 @@ while True:
     if conti=="n":
         break
     subprocess.call(["cmd.exe","/C","cls"])
+    
+
 
     
