@@ -28,7 +28,6 @@ while True:
     print("|___________________________|")
     print("")
 
-    #giff=input("Nombre del archivo: ")
     gif_name=busca()
 
     while not gif_name in os.listdir():
