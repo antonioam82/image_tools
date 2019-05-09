@@ -13,6 +13,12 @@ while True:
     else:
         print("RUTA NO VALIDA")
 
+def busca():
+    archiv=input("Nombre del archivo: ")
+    if not ".gif" in archiv:
+        archiv=archiv+".gif"
+    return archiv
+
 while True:
 
     print("")
@@ -22,13 +28,13 @@ while True:
     print("|___________________________|")
     print("")
 
-    giff=input("Nombre del archivo: ")
-    gif_name=giff+".gif"
+    #giff=input("Nombre del archivo: ")
+    gif_name=busca()
 
     while not gif_name in os.listdir():
-        giff=input("Archivo no encontrado: ")
-        gif_name=giff+".gif"
-    
+        print("NO SE ENCONTRÓ EL ARCHIVO",gif_name)
+        gif_name=busca()
+        
     try:
         im=Image.open(gif_name)
         print("")
@@ -71,4 +77,3 @@ while True:
     if conti=="n":
         break
     subprocess.call(["cmd.exe","/C","cls"])
-    
