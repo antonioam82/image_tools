@@ -28,6 +28,7 @@ while True:
     print("|___________________________|")
     print("")
 
+    #giff=input("Nombre del archivo: ")
     gif_name=busca()
 
     while not gif_name in os.listdir():
@@ -61,12 +62,12 @@ while True:
                 n_imagen=im.crop(box)
             else:
                 n_imagen=im
-            n_imagen.save(giff+str(count)+'.png')
-            print("Extraído frame: ",giff+str(count)+'.png')
+            n_imagen.save(gif_name+str(count)+'.png')
+            print("Extraído frame: ",gif_name+str(count)+'.png')
             count += 1
         except:
             print("La operación no pudo completarse con éxito")
-            os.remove(giff+str(count)+'png')
+            os.remove(gif_name+str(count)+'png')
             break
             #pass
         
@@ -76,3 +77,5 @@ while True:
     if conti=="n":
         break
     subprocess.call(["cmd.exe","/C","cls"])
+    
+
