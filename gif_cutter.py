@@ -35,6 +35,8 @@ while True:
         print("NO SE ENCONTRÓ EL ARCHIVO",gif_name)
         gif_name=busca()
         
+    name,ext=os.path.splitext(gif_name)
+        
     try:
         im=Image.open(gif_name)
         print("")
@@ -62,12 +64,12 @@ while True:
                 n_imagen=im.crop(box)
             else:
                 n_imagen=im
-            n_imagen.save(gif_name+str(count)+'.png')
-            print("Extraído frame: ",gif_name+str(count)+'.png')
+            n_imagen.save(name+str(count)+'.png')
+            print("Extraído frame: ",name+str(count)+'.png')
             count += 1
         except:
             print("La operación no pudo completarse con éxito")
-            os.remove(gif_name+str(count)+'png')
+            os.remove(name+str(count)+'.png')
             break
             #pass
         
