@@ -28,6 +28,7 @@ while True:
     print("|___________________________|")
     print("")
 
+    #giff=input("Nombre del archivo: ")
     gif_name=busca()
 
     while not gif_name in os.listdir():
@@ -70,7 +71,6 @@ while True:
             print("La operación no pudo completarse con éxito")
             os.remove(name+str(count)+'.png')
             break
-
         
     
     print("")
@@ -79,4 +79,5 @@ while True:
         break
     subprocess.call(["cmd.exe","/C","cls"])
     
+
 
