@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from PIL import Image
 from VALID import ns, OKI
 import subprocess, os
@@ -21,6 +23,8 @@ while True:
     except:
         print("RUTA NO VALIDA")
 
+#os.chdir(r'C:\Users\Antonio\Documents\Nueva carpeta\imagess')
+
 while True:
     
     print("")
@@ -29,6 +33,8 @@ while True:
     print("|     --IMAGE  CUTTER--     |")
     print("|___________________________|")
     print("")
+
+    saving=ns(input("¿Desea conservar los archivos originales?: "))
 
     pasa=False
     while pasa==False:
@@ -49,6 +55,9 @@ while True:
                 imagen = Image.open(file)
                 ig=imagen
                 n_imagen = imagen.crop(box)
+                if saving=="s":
+                    nom, ext = os.path.splitext(file)
+                    file = nom+"(copia)"+ext
                 n_imagen.save(file)
                 print("Operación completada con éxito para el archivo", file) 
 
