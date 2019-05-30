@@ -23,8 +23,6 @@ while True:
     except:
         print("RUTA NO VALIDA")
 
-#os.chdir(r'C:\Users\Antonio\Documents\Nueva carpeta\imagess')
-
 while True:
     
     print("")
