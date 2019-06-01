@@ -19,7 +19,7 @@ def busca():
         archiv=archiv+".gif"
     return archiv
 
-formatos = ["P", "L", "RGB", "LA"]
+formatos = ["P", "L", "RGB", "RGBA", "LA"]
 
 while True:
 
