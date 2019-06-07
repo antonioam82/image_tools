@@ -3,6 +3,7 @@
 from __future__ import print_function
 from PIL import Image, ImageSequence
 import os, subprocess
+import shutil
 from VALID import ns, OKI
 
 while True:
@@ -19,9 +20,16 @@ def busca():
         archiv=archiv+".gif"
     return archiv
 
+def carpeta_nueva(m,n):
+    if not os.path.exists(n):
+        os.makedirs(n)
+    shutil.move(m,n)
+
 formatos = ["P", "L", "RGB", "RGBA", "LA"]
 
 while True:
+
+    carpeta_destino="frames"
 
     print("")
     print("_____________________________")
@@ -41,17 +49,15 @@ while True:
         
     try:
         im=Image.open(gif_name)
-        print("")
-        print("Dimensiones: ",im.size[0],"x",im.size[1])
+        print("\nDimensiones: ",im.size[0],"x",im.size[1])
         print("")
     except:
-        print("")
-        print("No se pudo abrir el archivo",gif_name)
+        print("\nNo se pudo abrir el archivo",gif_name)
         break
 
     while True:
-        form = input("Formato: ")
-        if form not in formatos:
+        form=input("Fromato: ")
+        if form in formatos:
             continue
         else:
             break
@@ -59,6 +65,7 @@ while True:
     corte=ns(input("¿Desea realizar cortes sobre los frames?: "))
 
     if corte=="s":
+        carpeta_destino="cropped"
         dato_iz=OKI(input("Introduce dato izquierdo: "))
         dato_sup=OKI(input("Introduce dato superior: "))
         dato_der=OKI(input("Introduce dato derecho: "))
@@ -73,8 +80,10 @@ while True:
                 n_imagen=im.crop(box)
             else:
                 n_imagen=im.convert(form)
-            n_imagen.save(name+str(count)+'.png')
-            print("Extraído frame: ",name+str(count)+'.png')
+            nom_imagen=name+str(count)+'.png'
+            n_imagen.save(nom_imagen)
+            print("Extraído frame: ",nom_imagen)
+            carpeta_nueva(nom_imagen,carpeta_destino)
             count += 1
         except:
             print("La operación no pudo completarse con éxito")
