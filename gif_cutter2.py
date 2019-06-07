@@ -25,7 +25,7 @@ def carpeta_nueva(m,n):
         os.makedirs(n)
     shutil.move(m,n)
 
-formatos = ["P", "L", "RGB", "RGBA", "LA"]
+#formatos = ["P", "L", "RGB", "RGBA", "LA"]
 
 while True:
 
@@ -55,12 +55,12 @@ while True:
         print("\nNo se pudo abrir el archivo",gif_name)
         break
 
-    while True:
-        form=input("Fromato: ")
-        if form in formatos:
-            continue
-        else:
-            break
+    #while True:
+        #form=input("Fromato: ")
+        #if form in formatos:
+            #continue
+        #else:
+            #break
 
     corte=ns(input("¿Desea realizar cortes sobre los frames?: "))
 
@@ -79,7 +79,7 @@ while True:
             if corte=="s":
                 n_imagen=im.crop(box)
             else:
-                n_imagen=im.convert(form)
+                n_imagen=im#convert(form)
             nom_imagen=name+str(count)+'.png'
             n_imagen.save(nom_imagen)
             print("Extraído frame: ",nom_imagen)
@@ -96,4 +96,3 @@ while True:
     if conti=="n":
         break
     subprocess.call(["cmd.exe","/C","cls"])
-    
