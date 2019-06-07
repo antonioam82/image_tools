@@ -89,7 +89,7 @@ while True:
             print("La operación no pudo completarse con éxito")
             os.remove(name+str(count)+'.png')
             break
-    print("\nLos archivos han sido gurdados en la carpeta", carpeta_destino)
+    print("\nLos archivos han sido guardados en la carpeta", carpeta_destino)
         
     
     print("")
