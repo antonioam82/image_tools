@@ -39,12 +39,10 @@ while True:
         
     try:
         im=Image.open(gif_name)
-        print("")
-        print("Dimensiones: ",im.size[0],"x",im.size[1])
+        print("\nDimensiones: ",im.size[0],"x",im.size[1])
         print("")
     except:
-        print("")
-        print("No se pudo abrir el archivo",gif_name)
+        print("\nNo se pudo abrir el archivo",gif_name)
         break
 
     corte=ns(input("¿Desea realizar cortes sobre los frames?: "))
@@ -78,6 +76,8 @@ while True:
     if conti=="n":
         break
     subprocess.call(["cmd.exe","/C","cls"])
+    
+
     
 
 
