@@ -36,6 +36,7 @@ while True:
         gif_name=busca()
         
     name,ext=os.path.splitext(gif_name)
+    titl=" frame"
         
     try:
         im=Image.open(gif_name)
@@ -48,6 +49,7 @@ while True:
     corte=ns(input("¿Desea realizar cortes sobre los frames?: "))
 
     if corte=="s":
+        titl=" cropped"
         dato_iz=OKI(input("Introduce dato izquierdo: "))
         dato_sup=OKI(input("Introduce dato superior: "))
         dato_der=OKI(input("Introduce dato derecho: "))
@@ -55,6 +57,8 @@ while True:
     
         box=(dato_iz, dato_sup, dato_der, dato_inf)
     count=1
+
+    
     
     for frame in ImageSequence.Iterator(im):
         try:
@@ -62,12 +66,13 @@ while True:
                 n_imagen=im.crop(box)
             else:
                 n_imagen=im
-            n_imagen.save(name+str(count)+'.png')
-            print("Extraído frame: ",name+str(count)+'.png')
+            nom_imagen=name+titl+str(count)+'.png'
+            n_imagen.save(nom_imagen)
+            print("Extraído frame: ",nom_imagen)
             count += 1
         except:
             print("La operación no pudo completarse con éxito")
-            os.remove(name+str(count)+'.png')
+            os.remove(nom_imagen)
             break
         
     
