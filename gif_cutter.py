@@ -28,7 +28,6 @@ while True:
     print("|___________________________|")
     print("")
 
-    #giff=input("Nombre del archivo: ")
     gif_name=busca()
 
     while not gif_name in os.listdir():
@@ -58,8 +57,6 @@ while True:
         box=(dato_iz, dato_sup, dato_der, dato_inf)
     count=1
 
-    
-    
     for frame in ImageSequence.Iterator(im):
         try:
             if corte=="s":
@@ -75,12 +72,13 @@ while True:
             os.remove(nom_imagen)
             break
         
-    
     print("")
     conti=ns(input("¿Desea continuar?: "))
     if conti=="n":
         break
     subprocess.call(["cmd.exe","/C","cls"])
+    
+
     
 
     
