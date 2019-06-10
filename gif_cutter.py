@@ -3,6 +3,7 @@
 from __future__ import print_function
 from PIL import Image, ImageSequence
 import os, subprocess
+from VALID import ns, OKI
 
 while True:
     nueva_ruta=input("Introduzca ruta: ")
@@ -11,18 +12,6 @@ while True:
         break
     else:
         print("RUTA NO VALIDA")
-
-def ns(c):
-    while c!=("s") and c!=("n"):
-        print(chr(7));c=input("Escribe solo \'n\' o \'s\' según su opción: ")
-    return(c)
-        
-def OKI(n):
-    try:
-        n=int(n)
-    except:
-        n=OKI(input("Caracter no valido: "))
-    return n
 
 def busca():
     archiv=input("Nombre del archivo: ")
@@ -83,6 +72,7 @@ while True:
             os.remove(nom_imagen)
             break
         
+    
     print("")
     conti=ns(input("¿Desea continuar?: "))
     if conti=="n":
