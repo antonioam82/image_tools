@@ -24,8 +24,10 @@ def abre_archivo():
 
 def inserta_texto(img, font, text, cuent,color):
     base = Image.open(img).convert('RGBA')
-    separa_texto=img.split(".")
-    nombre_archivo = separa_texto[0]
+    #print(img)
+    #separa_texto=img.split(".")
+    #nombre_archivo = separa_texto[0]
+    #print(nombre_archivo)
     txt = Image.new("RGBA", base.size, (255,255,255,0))
     draw = ImageDraw.Draw(txt)
     text_width, text_height = draw.textsize(text, font)
@@ -33,8 +35,8 @@ def inserta_texto(img, font, text, cuent,color):
     draw.text(position, text, color, font=font)
     out = Image.alpha_composite(base, txt)
     out.convert('RGBA')#
-    out.save(nombre_archivo+str(cuent)+".png")
-    return img
+    out.save(img)
+    cuent+=1
 
 def fuente():
     while True:
@@ -53,7 +55,7 @@ def main():
         archivo = abre_archivo()
         texto = input("Introduzca texto a insertar: ")
         font = fuente()
-        cuenta=0
+        cuenta=1
         color="white"
         for i in os.listdir():
             if i.startswith(archivo):
