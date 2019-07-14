@@ -56,7 +56,7 @@ def main():
         archivo = abre_archivo()
         texto = input("Introduzca texto a insertar: ")
         font = fuente()
-        cuenta=1
+        #cuenta=1
         color="white"
         for i in os.listdir():
             if i.startswith(archivo):
