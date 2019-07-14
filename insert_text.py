@@ -33,7 +33,7 @@ def inserta_texto(img, font, text, cuent,color):
     draw.text(position, text, color, font=font)
     out = Image.alpha_composite(base, txt)
     out.convert('RGBA')#
-    outer.save("nombre_archivo"+cuenta+".png")
+    out.save(nombre_archivo+str(cuent)+".png")
     return img
 
 def fuente():
@@ -59,7 +59,7 @@ def main():
             if i.startswith(archivo):
                 inserta_texto(i,font,texto,cuenta,color)
         conti = ns(input("¿Desea continuar?: "))
-        if conri=="n":
+        if conti=="n":
             break
 
 main()
