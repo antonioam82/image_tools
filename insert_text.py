@@ -36,6 +36,7 @@ def inserta_texto(img, font, text, cuent,color):
     out = Image.alpha_composite(base, txt)
     out.convert('RGBA')#
     out.save(img)
+    print("Texto insertado en ",img)
     #cuent+=1
 
 def fuente():
@@ -65,3 +66,4 @@ def main():
             break
 
 main()
+
