@@ -11,7 +11,7 @@ def directorio():
         else:
             print("DIRECTORIO NO VÁLIDO")
 
-def abre_archivo():
+def encuentra_archivo():
     while True:
         inicial = input("Introduce inicial del archivo/s sobre los que desea insertar texto: ")
         for i in os.listdir():
@@ -39,6 +39,12 @@ def inserta_texto(img, font, text, cuent,color):
     print("Texto insertado en ",img)
     #cuent+=1
 
+def color_numero(n):
+    while n<0 or n>255:
+        n = OKI(input("Introduzca cifra entre 0 y 255: "))
+    return n
+        
+
 def fuente():
     while True:
         fuen = input("Establezca tipo de fuente: ")
@@ -50,14 +56,26 @@ def fuente():
         except:
             print("NO SE PUDO ESTABLECER LA FUENTE ESPECIFICADA")
 
+def color_texto():
+    col = ns(input("¿Definir color del texto?: "))
+    if col == "s":
+        rojo = color_numero(OKI(input("Introduce valor para ROJO: ")))
+        verde = color_numero(OKI(input("Introduce valor para VERDE: ")))
+        azul = color_numero(OKI(input("Introduce valor para AZUL: ")))
+        opac = color_numero(OKI(input("Introduce valor de opacidad: ")))
+        tup_color = (rojo,verde,azul,opac)
+    else:
+        tup_color = (255,255,255,255)
+    return tup_color
+
 def main():
     while True:
         directorio()
-        archivo = abre_archivo()
+        archivo = encuentra_archivo()
         texto = input("Introduzca texto a insertar: ")
         font = fuente()
         cuenta=1
-        color="white"
+        color=color_texto()
         for i in os.listdir():
             if i.startswith(archivo):
                 try:
