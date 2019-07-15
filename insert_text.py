@@ -2,8 +2,6 @@ from PIL import Image, ImageDraw, ImageFont
 from VALID import ns, OKI
 import os
 
-#INTRODUCIENDO TEXTO (CENTRADO) SOBRE CONJUNTOS DE IMAGENES REPETIDAS
-
 def directorio():
     while True:
         dire = input("Introduce ruta al archivo: ")
@@ -50,6 +48,7 @@ def color_numero(n):
 def fuente():
     while True:
         fuen = input("Establezca tipo de fuente: ")
+        fuen = fuen.lower()
         tama = OKI(input("Establezca tamaño de la fuente: "))
         try:
             fnt = ImageFont.truetype(fuen, tama)
