@@ -56,11 +56,14 @@ def main():
         archivo = abre_archivo()
         texto = input("Introduzca texto a insertar: ")
         font = fuente()
-        #cuenta=1
+        cuenta=1
         color="white"
         for i in os.listdir():
             if i.startswith(archivo):
-                inserta_texto(i,font,texto,cuenta,color)
+                try:
+                    inserta_texto(i,font,texto,cuenta,color)
+                except:
+                    print("LA OPERACIÓN NO PUDO LLEVARSE A CABO PARA EL ARCHIVO ",i)
         conti = ns(input("¿Desea continuar?: "))
         if conti=="n":
             break
