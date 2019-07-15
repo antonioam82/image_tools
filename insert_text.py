@@ -21,7 +21,6 @@ def encuentra_archivo():
                 break
         print("INICIAL NO ENCONTRADA")
 
-
 def inserta_texto(img, font, text, cuent,color):
     base = Image.open(img).convert('RGBA')
     #print(img)
