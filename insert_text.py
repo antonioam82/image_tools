@@ -2,6 +2,8 @@ from PIL import Image, ImageDraw, ImageFont
 from VALID import ns, OKI
 import os
 
+#INTRODUCIENDO TEXTO (CENTRADO) SOBRE CONJUNTOS DE IMAGENES REPETIDAS
+
 def directorio():
     while True:
         dire = input("Introduce ruta al archivo: ")
