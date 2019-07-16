@@ -1,5 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 from VALID import ns, OKI
+import subprocess
 import os
 
 def directorio():
@@ -20,6 +21,7 @@ def encuentra_archivo():
                 return inicial
                 break
         print("INICIAL NO ENCONTRADA")
+
 
 def inserta_texto(img, font, text, cuent,color):
     base = Image.open(img).convert('RGBA')
@@ -70,6 +72,12 @@ def color_texto():
 
 def main():
     while True:
+        print("")
+        print("_____________________________")
+        print("|                           |")
+        print("|      --INSERT TEXT--      |")
+        print("|___________________________|")
+        print("")
         directorio()
         archivo = encuentra_archivo()
         texto = input("Introduzca texto a insertar: ")
@@ -85,6 +93,6 @@ def main():
         conti = ns(input("¿Desea continuar?: "))
         if conti=="n":
             break
+        subprocess.call(["cmd.exe","/C","cls"])
 
 main()
-
