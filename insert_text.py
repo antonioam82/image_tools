@@ -1,5 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont
-from VALID import ns, OKI
+from VALID import ns, OKI #SE NECESITAN LAS FUNCIONES "ns" Y "OKI" DEL MÓDULO "VALID" PRESENTE ES ESTE REPOSITORIO.
 import subprocess
 import os
 
