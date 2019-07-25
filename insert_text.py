@@ -25,10 +25,6 @@ def encuentra_archivo():
 
 def inserta_texto(img, font, text, cuent,color):
     base = Image.open(img).convert('RGBA')
-    #print(img)
-    #separa_texto=img.split(".")
-    #nombre_archivo = separa_texto[0]
-    #print(nombre_archivo)
     txt = Image.new("RGBA", base.size, (255,255,255,0))
     draw = ImageDraw.Draw(txt)
     text_width, text_height = draw.textsize(text, font)
@@ -38,7 +34,6 @@ def inserta_texto(img, font, text, cuent,color):
     out.convert('RGBA')#
     out.save(img)
     print("Texto insertado en ",img)
-    #cuent+=1
 
 def color_numero(n):
     while n<0 or n>255:
