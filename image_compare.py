@@ -21,7 +21,15 @@ def busca_imagen():
         else:
             print("NO SE ENCONTRÓ LA IMAGEN ", im)
     
+
 while True:
+
+    print("")
+    print("_____________________________")
+    print("|                           |")
+    print("|     --IMAGE COMPARE--     |")
+    print("|___________________________|")
+    print("")
 
     imagen1 = cv2.imread(busca_imagen())
     imagen2 = cv2.imread(busca_imagen())
