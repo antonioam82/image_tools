@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import os
+import subprocess
 from VALID import ns
 
 
@@ -21,7 +22,6 @@ def busca_imagen():
         else:
             print("NO SE ENCONTRÓ LA IMAGEN ", im)
     
-
 while True:
 
     print("")
@@ -31,11 +31,16 @@ while True:
     print("|___________________________|")
     print("")
 
-    imagen1 = cv2.imread(busca_imagen())
-    imagen2 = cv2.imread(busca_imagen())
+    try:
+        imagen1 = cv2.imread(busca_imagen())
+        imagen2 = cv2.imread(busca_imagen())
     
-    tama1 = imagen1.shape
-    tama2 = imagen2.shape
+        tama1 = imagen1.shape
+        tama2 = imagen2.shape
+    except:
+        print("NO SE PUDO COMPLETAR LA OPERACIÓN")
+        subprocess.call(["cmd.exe","/C","cls"])
+        continue
 
     try:
         diferencia = cv2.subtract(imagen1, imagen2)
@@ -53,3 +58,4 @@ while True:
     conti = ns(input("¿Continuar?: "))
     if conti == "n":
         break
+    subprocess.call(["cmd.exe","/C","cls"])
