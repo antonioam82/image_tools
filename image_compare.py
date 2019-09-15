@@ -39,7 +39,6 @@ while True:
         tama2 = imagen2.shape
     except:
         print("NO SE PUDO COMPLETAR LA OPERACIÓN")
-        subprocess.call(["cmd.exe","/C","cls"])
         continue
 
     try:
