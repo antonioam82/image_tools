@@ -31,16 +31,16 @@ while True:
     print("|___________________________|")
     print("")
 
-    try:
+    while True:
         imagen1 = cv2.imread(busca_imagen())
         imagen2 = cv2.imread(busca_imagen())
     
         tama1 = imagen1.shape
         tama2 = imagen2.shape
-    except:
-        print("NO SE PUDO COMPLETAR LA OPERACIÓN")
-        continue
-
+        if tama1==tama2:
+            break
+        else:
+            print("LAS DIMENSIONES DE LAS IMAGENES NO COINCIDEN")
     try:
         diferencia = cv2.subtract(imagen1, imagen2)
         resul = not np.any(diferencia)
