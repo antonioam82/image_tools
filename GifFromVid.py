@@ -6,6 +6,13 @@ from VALID import direc, ns
 direccion = direc()
 
 while True:
+    print("")
+    print("_____________________________")
+    print("|                           |")
+    print("|       --GIFfromVID--      |")
+    print("|___________________________|")
+    print("")
+    
     vid = input("Introducir video:" )
     start = input("Inicio: ")
     end = input("Final: ")
