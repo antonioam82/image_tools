@@ -4,13 +4,15 @@ from VALID import direc
 
 direccion = direc()
 
-vid = input("Introducir video")
-mi1 = input("Corte: ")
-sec1 = input("Corte: ")
-mi2 = input("Corte: ")
-sec2 = input("Corte: ")
+vid = input("Introducir video:" )
+start = input("Inicio: ")
+end = input("Final: ")
+inicio = (start).split(",")
+ended = (end).split(",")
+name = input("Nombre gif: ")
+
 
 clip = (VideoFileClip(vid)
-        .subclip((float(mi1),float(sec1)),(float(mi2),float(sec2))))
+        .subclip((float(inicio[0]),float(inicio[1])),(float(ended[0]),float(ended[1]))))
 
-clip.write_gif("new_gif.gif")
+clip.write_gif(name)
