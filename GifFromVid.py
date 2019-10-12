@@ -5,6 +5,14 @@ from VALID import direc, ns
 
 direccion = direc()
 
+def busca():
+    while True:
+        filename = input("Introduce nombre del video fuente: ")
+        if filename in os.listdir():
+            return filename
+            break
+        print("VIDEO NO ENCONTRADO")
+
 while True:
     print("")
     print("_____________________________")
@@ -13,7 +21,7 @@ while True:
     print("|___________________________|")
     print("")
     
-    vid = input("Introducir video:" )
+    vid = busca()
     start = input("Inicio: ")
     end = input("Final: ")
     inicio = (start).split(",")
