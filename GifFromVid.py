@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from moviepy.editor import *
-#import os
+import sys
 import pyglet
 import subprocess
 from VALID import direc, ns
@@ -56,5 +56,5 @@ while True:
     print("")   
     conti = ns(input("¿Desea continuar?: "))
     if conti == "n":
-        break
+        sys.exit()
     subprocess.call(["cmd.exe","/C","cls"])
