@@ -1,9 +1,26 @@
 from moviepy.editor import *
 import os
+import pyglet
 import subprocess
 from VALID import direc, ns
 
 direccion = direc()
+
+def show(g):
+    animation = pyglet.image.load_animation(g)
+    bin = pyglet.image.atlas.TextureBin()
+    animation.add_to_texture_bin(bin)
+    sprite = pyglet.sprite.Sprite(animation)
+
+    w = sprite.width
+    h = sprite.height
+
+    window = pyglet.window.Window(width=w, height=h)
+
+    @window.event
+    def on_draw():
+        sprite.draw()
+    pyglet.app.run()
 
 def busca():
     while True:
@@ -33,9 +50,10 @@ while True:
             .subclip((float(inicio[0]),float(inicio[1])),
             (float(ended[0]),float(ended[1]))))
         clip.write_gif(name)
+        show(name)
     except:
         print("Hubo un problema al realizar la operación")
-        
+    print("")   
     conti = ns(input("¿Desea continuar?: "))
     if conti == "n":
         break
