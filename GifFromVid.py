@@ -36,13 +36,13 @@ while True:
     print("")
     print("_____________________________")
     print("|                           |")
-    print("|       --GIFfromVID--      |")
+    print("|      --GIFfromVID--       |")
     print("|___________________________|")
     print("")
     
     vid = busca()
-    start = (input("Establecer Inicio: ")).split(",")
-    end = (input("Establecer Final: ")).split(",")
+    start = (input("Inicio: ")).split(",")
+    end = (input("Final: ")).split(",")
     name = input("Nombre gif: ")
 
     try:
