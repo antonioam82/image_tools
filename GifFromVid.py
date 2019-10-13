@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from moviepy.editor import *
-import os
+#import os 
 import pyglet
 import subprocess
 from VALID import direc, ns
