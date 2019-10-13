@@ -41,8 +41,8 @@ while True:
     print("")
     
     vid = busca()
-    start = input("Inicio: ")
-    end = input("Final: ")
+    start = input("Establecer inicio: ")
+    end = input("Establecer final: ")
     inicio = (start).split(",")
     ended = (end).split(",")
     name = input("Nombre gif: ")
