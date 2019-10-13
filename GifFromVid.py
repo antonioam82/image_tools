@@ -53,6 +53,7 @@ while True:
         show(name)
     except:
         print("Hubo un problema al realizar la operación")
+        
     print("")   
     conti = ns(input("¿Desea continuar?: "))
     if conti == "n":
