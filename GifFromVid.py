@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from moviepy.editor import *
-#import os 
+#import os
 import pyglet
 import subprocess
 from VALID import direc, ns
@@ -41,21 +41,18 @@ while True:
     print("")
     
     vid = busca()
-    start = input("Establecer inicio: ")
-    end = input("Establecer final: ")
-    inicio = (start).split(",")
-    ended = (end).split(",")
+    start = (input("Establecer Inicio: ")).split(",")
+    end = (input("Establecer Final: ")).split(",")
     name = input("Nombre gif: ")
 
     try:
         clip = (VideoFileClip(vid)
-            .subclip((float(inicio[0]),float(inicio[1])),
-            (float(ended[0]),float(ended[1]))))
+            .subclip((float(start[0]),float(start[1])),
+            (float(end[0]),float(end[1]))))
         clip.write_gif(name)
         show(name)
     except:
         print("Hubo un problema al realizar la operación")
-        
     print("")   
     conti = ns(input("¿Desea continuar?: "))
     if conti == "n":
