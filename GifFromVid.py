@@ -3,6 +3,7 @@
 from moviepy.editor import *
 import sys
 import pyglet
+from pyglet.window import key
 import subprocess
 from VALID import direc, ns
 
@@ -20,7 +21,7 @@ def show(g):
         h = sprite.height
 
         window = pyglet.window.Window(width=w, height=h)
-
+                
         @window.event
         def on_draw():
             sprite.draw()
