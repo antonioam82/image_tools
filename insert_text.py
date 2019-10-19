@@ -22,7 +22,6 @@ def encuentra_archivo():
                 break
         print("INICIAL NO ENCONTRADA")
 
-
 def inserta_texto(img, font, text, cuent,color):
     base = Image.open(img).convert('RGBA')
     txt = Image.new("RGBA", base.size, (255,255,255,0))
@@ -40,11 +39,10 @@ def color_numero(n):
         n = OKI(input("Introduzca cifra entre 0 y 255: "))
     return n
         
-
 def fuente():
     while True:
         fuen = input("Establezca tipo de fuente: ")
-        fuen = fuen.lower()
+        fuen = (fuen.lower())+".ttf"
         tama = OKI(input("Establezca tamaño de la fuente: "))
         try:
             fnt = ImageFont.truetype(fuen, tama)
