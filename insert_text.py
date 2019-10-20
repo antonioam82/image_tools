@@ -22,12 +22,13 @@ def encuentra_archivo():
                 break
         print("INICIAL NO ENCONTRADA")
 
-def inserta_texto(img, font, text, cuent,color):
+
+def inserta_texto(img, font, text, cuent, color, d1, d2):
     base = Image.open(img).convert('RGBA')
     txt = Image.new("RGBA", base.size, (255,255,255,0))
     draw = ImageDraw.Draw(txt)
     text_width, text_height = draw.textsize(text, font)
-    position = ((base.size[0]-text_width)/2,(base.size[1]-text_height)/2)
+    position = (((base.size[0]-text_width)/2)+(d1),((base.size[1]-text_height)/2)+(d2))
     draw.text(position, text, color, font=font)
     out = Image.alpha_composite(base, txt)
     out.convert('RGBA')#
@@ -39,6 +40,7 @@ def color_numero(n):
         n = OKI(input("Introduzca cifra entre 0 y 255: "))
     return n
         
+
 def fuente():
     while True:
         fuen = input("Establezca tipo de fuente: ")
@@ -76,11 +78,13 @@ def main():
         texto = input("Introduzca texto a insertar: ")
         font = fuente()
         cuenta=1
+        desv1 = OKI(input("Desviación x del centro: "))
+        desv2 = OKI(input("Desviación y del centro: "))
         color=color_texto()
         for i in os.listdir():
             if i.startswith(archivo):
                 try:
-                    inserta_texto(i,font,texto,cuenta,color)
+                    inserta_texto(i,font,texto,cuenta,color,desv1,desv2)
                 except:
                     print("LA OPERACIÓN NO PUDO LLEVARSE A CABO PARA EL ARCHIVO ",i)
         conti = ns(input("¿Desea continuar?: "))
