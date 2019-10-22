@@ -4,7 +4,7 @@ from moviepy.editor import *
 import sys
 import pyglet
 from pyglet.window import key
-import subprocess
+#import subprocess
 from VALID import direc, ns
 
 direccion = direc()
@@ -60,4 +60,4 @@ while True:
     conti = ns(input("¿Desea continuar?: "))
     if conti == "n":
         sys.exit()
-    subprocess.call(["cmd.exe","/C","cls"])
+    #subprocess.call(["cmd.exe","/C","cls"]) 
