@@ -54,7 +54,7 @@ while True:
         print("")
     except:
         print("\nNo se pudo abrir el archivo",gif_name)
-        break
+        continue
 
     corte=ns(input("¿Desea realizar cortes sobre los frames?: "))
 
