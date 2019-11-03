@@ -3,6 +3,7 @@
 from __future__ import print_function
 from PIL import Image, ImageSequence
 import os, subprocess
+from VALID import ns, OKI
 
 while True:
     nueva_ruta=input("Introduzca ruta: ")
@@ -11,18 +12,6 @@ while True:
         break
     else:
         print("RUTA NO VALIDA")
-        
-def OKI(n):
-    try:
-        n=int(n)
-    except:
-        n=OKI(input("Caracter no valido: "))
-    return n
-
-def ns(c):
-    while c!=("s") and c!=("n"):
-        print(chr(7));c=input("Escribe solo \'n\' o \'s\' según su opción: ")
-    return(c)
 
 def busca():
     archiv=input("Nombre del archivo: ")
@@ -38,23 +27,21 @@ while True:
     print("|       --GIF CUTTER--      |")
     print("|___________________________|")
     print("")
-
-    gif_name=busca()
-
-    while not gif_name in os.listdir():
-        print("NO SE ENCONTRÓ EL ARCHIVO",gif_name)
+    
+    while True:
         gif_name=busca()
-        
-    name,ext=os.path.splitext(gif_name)
-    titl=" frame"
-        
-    try:
-        im=Image.open(gif_name)
-        print("\nDimensiones: ",im.size[0],"x",im.size[1])
-        print("")
-    except:
-        print("\nNo se pudo abrir el archivo",gif_name)
-        continue
+        while not gif_name in os.listdir():
+            print("NO SE ENCONTRÓ EL ARCHIVO",gif_name)
+            gif_name=busca()
+        name,ext=os.path.splitext(gif_name)
+        titl=" frame"
+        try:
+            im=Image.open(gif_name)
+            print("\nDimensiones: ",im.size[0],"x",im.size[1])
+            print("")
+            break
+        except:
+            print("\nNo se pudo abrir el archivo",gif_name)
 
     corte=ns(input("¿Desea realizar cortes sobre los frames?: "))
 
