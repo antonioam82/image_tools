@@ -53,7 +53,7 @@ while True:
         print("")
     except:
         print("\nNo se pudo abrir el archivo",gif_name)
-        break
+        continue
 
     #while True:
         #form=input("Fromato: ")
