@@ -34,7 +34,6 @@ while True:
             print("NO SE ENCONTRÓ EL ARCHIVO",gif_name)
             gif_name=busca()
         name,ext=os.path.splitext(gif_name)
-        titl=" frame"
         try:
             im=Image.open(gif_name)
             print("\nDimensiones: ",im.size[0],"x",im.size[1])
@@ -42,11 +41,11 @@ while True:
             break
         except:
             print("\nNo se pudo abrir el archivo",gif_name)
+            os.remove(gif_name)
 
     corte=ns(input("¿Desea realizar cortes sobre los frames?: "))
 
     if corte=="s":
-        titl=" cropped"
         dato_iz=OKI(input("Introduce dato izquierdo: "))
         dato_sup=OKI(input("Introduce dato superior: "))
         dato_der=OKI(input("Introduce dato derecho: "))
@@ -61,7 +60,7 @@ while True:
                 n_imagen=im.crop(box)
             else:
                 n_imagen=im
-            nom_imagen=name+titl+str(count)+'.png'
+            nom_imagen=name+str(count)+'.png'
             n_imagen.save(nom_imagen)
             print("Extraído frame: ",nom_imagen)
             count += 1
@@ -70,12 +69,12 @@ while True:
             os.remove(nom_imagen)
             break
         
-    
     print("")
     conti=ns(input("¿Desea continuar?: "))
     if conti=="n":
         break
     subprocess.call(["cmd.exe","/C","cls"])
+
     
 
     
