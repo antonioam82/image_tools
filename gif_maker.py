@@ -5,7 +5,6 @@ import sys
 import pyglet
 import os
 from pyglet.window import key
-#import subprocess
 from VALID import direc, ns, OKI
 
 direccion = direc()
@@ -63,7 +62,7 @@ while True:
             print("Hubo un problema al realizar la operación")
     else:
         name = input("Nombre gif: ")
-        file = input("Palabra clave: ")
+        file = (input("Palabra clave: ")+" ")
         speed = OKI(input("Velocidad: "))
         frames=[]
         try:
