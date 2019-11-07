@@ -63,13 +63,19 @@ while True:
         name = input("Nombre gif: ")
         file = input("Palabra clave: ")
         frames=[]
+        #clave,ext = os.path.splitext(file)
+        #print(ext)
         for i in os.listdir():
             if file in i:
-                frames.append(i)
+                frames.append(i[:-4])
+        print(frames)
         frames.sort(key=lambda x: int(x.split()[1]))
-        clip = ImageSequence(frames,fps=25)
-        clip.write_gif(name)
-        show(name)
+        print(frames)
+        frames = map(lambda x: x+".png", frames)
+        print(list(frames))
+        #clip = ImageSequenceClip(frames,fps=25)
+        #clip.write_gif(name)
+        #show(name)
             
     print("")   
     conti = ns(input("¿Desea continuar?: "))
