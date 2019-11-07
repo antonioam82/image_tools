@@ -43,14 +43,16 @@ while True:
     print("|       --GIF MAKER--       |")
     print("|___________________________|")
     print("")
-
+    print("         ESCOJA OPCIÓN        ")
+    print("A) CREAR GIF A PARTIR DE VIDEO")
+    print("B) CREAR A PARTIR DE SECUENCIA\n")
     opcion = input("Introduzca aqui su opción: ")
     
     if opcion == "A":
         vid = busca()
         start = input("Inicio: ").split(",")
         end = input("Final: ").split(",")
-        name = input("Nombre gif: ")
+        name = input("Nombre del nuevo gif: ")
         try:
             clip = (VideoFileClip(vid)
             .subclip((float(start[0]),(float(start[1])),((float(start[0]),(float(start[1])))
@@ -69,7 +71,10 @@ while True:
                 if file in i:
                     frames.append(i[:-4])
             frames.sort(key=lambda x: int(x.split()[1]))
-            frames_new = list(map(lambda x: x+".png",frames))
+            try:
+                frames_new = list(map(lambda x: x+".png",frames))
+            except:
+                frames_new = list(map(lambda x: x+".jpg",frames))
             clip = ImageSequenceClip(frames_new,fps=speed)
             clip.write_gif(name)
             show(name)
