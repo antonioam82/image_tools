@@ -6,7 +6,7 @@ import pyglet
 import os
 from pyglet.window import key
 #import subprocess
-from VALID import direc, ns
+from VALID import direc, ns, OKI
 
 direccion = direc()
 
@@ -62,20 +62,18 @@ while True:
     else:
         name = input("Nombre gif: ")
         file = input("Palabra clave: ")
+        speed = OKI(input("Velocidad: "))
         frames=[]
         #clave,ext = os.path.splitext(file)
         #print(ext)
         for i in os.listdir():
             if file in i:
                 frames.append(i[:-4])
-        print(frames)
         frames.sort(key=lambda x: int(x.split()[1]))
-        print(frames)
-        frames = map(lambda x: x+".png", frames)
-        print(list(frames))
-        #clip = ImageSequenceClip(frames,fps=25)
-        #clip.write_gif(name)
-        #show(name)
+        frames_new = list(map(lambda x: x+".png",frames))
+        clip = ImageSequenceClip(frames_new,fps=speed)
+        clip.write_gif(name)
+        show(name)
             
     print("")   
     conti = ns(input("¿Desea continuar?: "))
