@@ -60,7 +60,7 @@ while True:
                 n_imagen=im.crop(box)
             else:
                 n_imagen=im
-            nom_imagen=name+str(count)+'.png'
+            nom_imagen=name+" "+str(count)+'.png'
             n_imagen.save(nom_imagen)
             print("Extraído frame: ",nom_imagen)
             count += 1
