@@ -64,19 +64,19 @@ while True:
         file = input("Palabra clave: ")
         speed = OKI(input("Velocidad: "))
         frames=[]
-        #clave,ext = os.path.splitext(file)
-        #print(ext)
-        for i in os.listdir():
-            if file in i:
-                frames.append(i[:-4])
-        frames.sort(key=lambda x: int(x.split()[1]))
-        frames_new = list(map(lambda x: x+".png",frames))
-        clip = ImageSequenceClip(frames_new,fps=speed)
-        clip.write_gif(name)
-        show(name)
+        try:
+            for i in os.listdir():
+                if file in i:
+                    frames.append(i[:-4])
+            frames.sort(key=lambda x: int(x.split()[1]))
+            frames_new = list(map(lambda x: x+".png",frames))
+            clip = ImageSequenceClip(frames_new,fps=speed)
+            clip.write_gif(name)
+            show(name)
+        except:
+            print("Hubo un problema al realizar la operación")
             
     print("")   
     conti = ns(input("¿Desea continuar?: "))
     if conti == "n":
         sys.exit()
-    #subprocess.call(["cmd.exe","/C","cls"])
