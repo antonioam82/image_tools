@@ -61,7 +61,7 @@ while True:
         except:
             print("Hubo un problema al realizar la operación")
     else:
-        name = input("Nombre gif: ")
+        name = input("Nombre del nuevo gif: ")
         file = (input("Palabra clave: ")+" ")
         speed = OKI(input("Velocidad: "))
         frames=[]
