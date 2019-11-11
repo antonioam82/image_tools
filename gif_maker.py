@@ -52,14 +52,14 @@ while True:
         start = input("Inicio: ").split(",")
         end = input("Final: ").split(",")
         name = input("Nombre del nuevo gif: ")
-        try:
-            clip = (VideoFileClip(vid)
-            .subclip((float(start[0]),(float(start[1])),((float(start[0]),(float(start[1])))
-            .crop(145,400)))))
-            clip.write_gif(name)
-            show(name)
-        except:
-            print("Hubo un problema al realizar la operación")
+        #try:
+        clip = (VideoFileClip(vid)
+        .subclip((float(start[0]),float(start[1])),
+            (float(end[0]),float(end[1]))))
+        clip.write_gif(name)
+        show(name)
+        #except:
+            #print("Hubo un problema al realizar la operación")
     else:
         name = input("Nombre del nuevo gif: ")
         file = (input("Palabra clave: ")+" ")
@@ -84,3 +84,4 @@ while True:
     conti = ns(input("¿Desea continuar?: "))
     if conti == "n":
         sys.exit()
+    #subprocess.call(["cmd.exe","/C","cls"])
