@@ -56,8 +56,8 @@ while True:
     
     if opcion == "A":
         vid = busca()
-        start = input("Inicio: ").split(",")
-        end = input("Final: ").split(",")
+        start = input("Inicio (min,sec): ").split(",")
+        end = input("Final (min,sec): ").split(",")
         name = input("Nombre del nuevo gif: ")
         change = ns(input("¿Cambiar tamaño?: "))
         try:
