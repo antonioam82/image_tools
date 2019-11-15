@@ -34,6 +34,11 @@ def show(g):
             sprite.draw()
         pyglet.app.run()
 
+def add_ext(n):
+    if not ".gif" in n:
+        n = n+".gif"
+    return n
+
 def busca():
     while True:
         filename = input("Introduce nombre del video: ")
@@ -58,7 +63,7 @@ while True:
         vid = busca()
         start = input("Inicio (min,sec): ").split(",")
         end = input("Final (min,sec): ").split(",")
-        name = input("Nombre del nuevo gif: ")
+        name = add_ext(input("Nombre del nuevo gif: "))
         change = ns(input("¿Cambiar tamaño?: "))
         try:
             clip = (VideoFileClip(vid)
@@ -93,3 +98,4 @@ while True:
     conti = ns(input("¿Desea continuar?: "))
     if conti == "n":
         sys.exit()
+
