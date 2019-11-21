@@ -9,6 +9,12 @@ from VALID import direc, ns, OKI, OK
 
 direccion = direc()
 
+def size(num):
+    for x in ['bytes', 'KB', 'MB', 'GB', 'TB']:
+        if num < 1024.0:
+            print("%3.1f %s" % (num, x))
+        num /= 1024.0
+
 def new_size(d):
     if d == "s":
         ns = OK(input("Nuevo tamaño: "))
@@ -90,6 +96,9 @@ while True:
                 frames_new = list(map(lambda x: x+".jpg",frames))
             clip = ImageSequenceClip(frames_new,fps=speed)
             clip.write_gif(name)
+            print("\nTAMAÑO")
+            siz = size((os.stat(name)[6]))
+            print("\n")
             show(name)
         except:
             print("Hubo un problema al realizar la operación")
