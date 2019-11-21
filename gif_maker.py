@@ -77,6 +77,9 @@ while True:
                      (float(end[0]),float(end[1])))
             .resize(new_size(change)))
             clip.write_gif(name)
+            print("\nTAMAÑO")
+            siz = size((os.stat(name)[6]))
+            print("\n")
             show(name)
         except:
             print("Hubo un problema al realizar la operación")
