@@ -9,6 +9,11 @@ from VALID import direc, ns, OKI, OK
 
 direccion = direc()
 
+def ab(r):
+    while r!='A' and r!='B':
+        r = input("Introduzca \'A\' o \'B\' según su opción: ")
+    return r
+
 def size(num):
     for x in ['bytes', 'KB', 'MB', 'GB', 'TB']:
         if num < 1024.0:
@@ -63,7 +68,7 @@ while True:
     print("         ESCOJA OPCIÓN        ")
     print("A) CREAR GIF A PARTIR DE VIDEO")
     print("B) CREAR A PARTIR DE SECUENCIA\n")
-    opcion = input("Introduzca aqui su opción: ")
+    opcion = ab(input("Introduzca aqui su opción: ").upper())
     
     if opcion == "A":
         vid = busca()
