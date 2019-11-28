@@ -68,7 +68,7 @@ while True:
     print("         ESCOJA OPCIÓN        ")
     print("A) CREAR GIF A PARTIR DE VIDEO")
     print("B) CREAR A PARTIR DE SECUENCIA\n")
-    opcion = ab(input("Introduzca aqui su opción: ").upper())
+    opcion = ab(input("Introduzca aqui su opción (A o B): ").upper())
     
     if opcion == "A":
         vid = busca()
