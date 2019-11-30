@@ -2,7 +2,7 @@ import Pmw
 import PIL
 
 ventana = Pmw.initialise(fontScheme = 'pmw1')
-ventana.title("GIF CUTTER")
+ventana.title("GIF CUTT3R")
 
 def clear():
     display.clear()
