@@ -4,9 +4,6 @@ import PIL
 ventana = Pmw.initialise(fontScheme = 'pmw1')
 ventana.title("GIF CUTTER")
 
-def texto():
-    display.appendtext("HOla")
-
 def clear():
     display.clear()
 
@@ -23,7 +20,6 @@ display = Pmw.ScrolledText(ventana, hscrollmode='none',
 display.pack(padx=0,pady=0)
 
 buttons = Pmw.ButtonBox(ventana)
-
 buttons.pack(fill='both', expand=1, padx=1, pady=1)
 
 buttons.add('LIMPIAR',bg='light blue',command=clear,width=15)
