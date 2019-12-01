@@ -5,7 +5,7 @@ from tkinter import filedialog
 
 ventana = Pmw.initialise(fontScheme = 'pmw1')
 ventana.title("GIF CUTTER")
-archivo = ""
+archivo_selec = ""
 
 def clear():
     display.clear()
@@ -14,14 +14,14 @@ def clear():
     #try:
         
 def busca():
-    global archivo
+    global archivo_selec
     archivo_selec=filedialog.askopenfilename(initialdir = "/",
     title = "Seleccione archivo",filetypes = (("gif","*.*"),
     ("webp","*.*")))
     if archivo_selec!="":
         try:
             archivo=(((archivo_selec).split("/"))[-1])
-            im=Image.open(archivo)
+            im=Image.open(archivo_selec)
             time.sleep(1)
             display.appendtext("Dir: "+archivo_selec+"\n")
         except:
