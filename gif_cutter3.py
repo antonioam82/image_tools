@@ -1,5 +1,5 @@
 import Pmw
-import PIL
+from PIL import Image, ImageSequence
 from tkinter import filedialog
 
 ventana = Pmw.initialise(fontScheme = 'pmw1')
@@ -14,6 +14,7 @@ def busca():
     ("webp","*.*")))
     if archivo_selec!="":
         display.appendtext("\nDir: "+archivo_selec)
+        #im=Image.open(archivo_selec)
     
 
 def texto_inicio():
