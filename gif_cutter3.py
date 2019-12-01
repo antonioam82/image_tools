@@ -1,23 +1,35 @@
 import Pmw
+import time
 from PIL import Image, ImageSequence
 from tkinter import filedialog
 
 ventana = Pmw.initialise(fontScheme = 'pmw1')
 ventana.title("GIF CUTTER")
+archivo_selec = ""
 
 def clear():
     display.clear()
 
+#def corta():
+    #try:
+        
 def busca():
+    global archivo_selec
     archivo_selec=filedialog.askopenfilename(initialdir = "/",
     title = "Seleccione archivo",filetypes = (("gif","*.*"),
     ("webp","*.*")))
     if archivo_selec!="":
-        display.appendtext("\nDir: "+archivo_selec)
-        #im=Image.open(archivo_selec)
+        try:
+            im=Image.open(archivo_selec)
+            time.sleep(1)
+            display.appendtext("Dir: "+archivo_selec+"\n")
+        except:
+            archivo_selec = ""
+            display.appendtext("NO SE PUDO ABRIR EL ARCHIVO\n")
     
+
 def texto_inicio():
-    display.appendtext("Pulse \'BUSCAR\' para escoger archivo.")
+    display.appendtext("Pulse \'BUSCAR\' para escoger archivo.\n")
 
 display = Pmw.ScrolledText(ventana, hscrollmode='none',
                       vscrollmode='dynamic', hull_relief='sunken',#vscrollmode=dynamic
