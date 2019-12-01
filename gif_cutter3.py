@@ -5,9 +5,6 @@ from tkinter import filedialog
 ventana = Pmw.initialise(fontScheme = 'pmw1')
 ventana.title("GIF CUTTER")
 
-def texto():
-    display.appendtext("HOla")
-
 def clear():
     display.clear()
 
