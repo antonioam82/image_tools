@@ -16,7 +16,6 @@ def busca():
         display.appendtext("\nDir: "+archivo_selec)
         #im=Image.open(archivo_selec)
     
-
 def texto_inicio():
     display.appendtext("Pulse \'BUSCAR\' para escoger archivo.")
 
