@@ -14,6 +14,11 @@ def clear():
     display.clear()
     texto_inicio()
 
+def direc():
+    directorio=filedialog.askdirectory()
+    if directorio!="":
+        os.chdir(directorio)
+
 def iniciar_extract():
     t=threading.Thread(target=corta)
     t.start()
@@ -28,6 +33,7 @@ def corta():
             im.save(nom_imagen)
             display.appendtext("\nExtraido frame: "+nom_imagen)
             count+=1
+        display.appendtext("\n\nPROCESO FINALIZADO\n")
     except:
         display.appendtext("\nHUBO UN PROBLEMA AL REALIZAR LA OPERACIÓN")
         
@@ -46,6 +52,7 @@ def busca():
             archivo_selec = ""
             display.appendtext("NO SE PUDO ABRIR EL ARCHIVO\n")
     
+
 def texto_inicio():
     display.appendtext("Pulse \'BUSCAR\' para escoger archivo.\n")
 
@@ -63,7 +70,7 @@ buttons = Pmw.ButtonBox(ventana)
 buttons.pack(fill='both', expand=1, padx=1, pady=1)
 
 buttons.add('LIMPIAR',bg='light blue',command=clear,width=12)
-buttons.add('CARPETA',bg='light blue')
+buttons.add('CARPETA',bg='light blue',command=direc)
 buttons.add('EXTRAER',bg='light blue',command=iniciar_extract)
 buttons.add('BUSCAR',bg='light blue',command=busca)
 buttons.alignbuttons()
@@ -71,4 +78,5 @@ buttons.alignbuttons()
 texto_inicio()
 
 ventana.mainloop()
+
 
