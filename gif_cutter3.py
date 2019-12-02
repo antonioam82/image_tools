@@ -11,8 +11,11 @@ archivo_selec = ""
 im = ""
 
 def clear():
+    global archivo_selec, im
     display.clear()
     texto_inicio()
+    archivo_selec=""
+    im=""
 
 def direc():
     directorio=filedialog.askdirectory()
@@ -56,7 +59,7 @@ def busca():
             display.appendtext("NO SE PUDO ABRIR EL ARCHIVO\n")
     
 def texto_inicio():
-    display.appendtext("Pulse \'BUSCAR\' para escoger archivo.\n")
+    display.appendtext("Pulse \'BUSCAR\' para escoger archivo.\nPulse \'CARPETA\' para escoger carpeta de destino.\n")
 
 display = Pmw.ScrolledText(ventana, hscrollmode='none',
                       vscrollmode='dynamic', hull_relief='sunken',#vscrollmode=dynamic
