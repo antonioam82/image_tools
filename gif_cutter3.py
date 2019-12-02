@@ -46,7 +46,6 @@ def busca():
             archivo_selec = ""
             display.appendtext("NO SE PUDO ABRIR EL ARCHIVO\n")
     
-
 def texto_inicio():
     display.appendtext("Pulse \'BUSCAR\' para escoger archivo.\n")
 
@@ -63,8 +62,9 @@ buttons = Pmw.ButtonBox(ventana)
 
 buttons.pack(fill='both', expand=1, padx=1, pady=1)
 
-buttons.add('LIMPIAR',bg='light blue',command=clear,width=17)
-buttons.add('EXTRAER',bg='light blue',command=iniciar_extrac)
+buttons.add('LIMPIAR',bg='light blue',command=clear,width=12)
+buttons.add('CARPETA',bg='light blue')
+buttons.add('EXTRAER',bg='light blue',command=iniciar_extract)
 buttons.add('BUSCAR',bg='light blue',command=busca)
 buttons.alignbuttons()
 
