@@ -20,8 +20,11 @@ def direc():
         os.chdir(directorio)
 
 def iniciar_extract():
-    t=threading.Thread(target=corta)
-    t.start()
+    if archivo_selec!="" and im!="":
+        t=threading.Thread(target=corta)
+        t.start()
+    else:
+        display.appendtext("\nSELECCIONE UN ARCHIVO\n")
 
 def corta():
     count=1
@@ -52,7 +55,6 @@ def busca():
             archivo_selec = ""
             display.appendtext("NO SE PUDO ABRIR EL ARCHIVO\n")
     
-
 def texto_inicio():
     display.appendtext("Pulse \'BUSCAR\' para escoger archivo.\n")
 
@@ -78,5 +80,4 @@ buttons.alignbuttons()
 texto_inicio()
 
 ventana.mainloop()
-
 
