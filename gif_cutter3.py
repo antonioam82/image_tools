@@ -66,7 +66,7 @@ display = Pmw.ScrolledText(ventana, hscrollmode='none',
                       hull_background='gray20', hull_borderwidth=10,
                       text_background='honeydew4', text_width=55, #ancho pantalla
                       text_foreground='black', text_height=17, #alto pantalla
-          text_padx=10, text_pady=10, text_relief='groove',
+                      text_padx=10, text_pady=10, text_relief='groove',
                       text_font=('Fixedsys', 10))
 display.pack(padx=0,pady=0)
 
