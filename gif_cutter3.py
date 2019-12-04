@@ -53,20 +53,21 @@ def busca():
         try:
             im=Image.open(archivo_selec)
             time.sleep(1)
-            display.appendtext("Dir: "+archivo_selec+"\n")
+            display.appendtext("Archivo seleccionado: "+(((archivo_selec).split("/"))[-1])+"\n")
         except:
             archivo_selec = ""
             display.appendtext("NO SE PUDO ABRIR EL ARCHIVO\n")
     
+
 def texto_inicio():
     display.appendtext("Pulse \'BUSCAR\' para escoger archivo.\nPulse \'CARPETA\' para escoger carpeta de destino.\n")
 
 display = Pmw.ScrolledText(ventana, hscrollmode='none',
-                      vscrollmode='dynamic', hull_relief='sunken',#vscrollmode=dynamic
+                      vscrollmode='dynamic', hull_relief='sunken',
                       hull_background='gray20', hull_borderwidth=10,
-                      text_background='honeydew4', text_width=55, #ancho pantalla
-                      text_foreground='black', text_height=17, #alto pantalla
-                      text_padx=10, text_pady=10, text_relief='groove',
+                      text_background='honeydew4', text_width=55,
+                      text_foreground='black', text_height=17,
+          text_padx=10, text_pady=10, text_relief='groove',
                       text_font=('Fixedsys', 10))
 display.pack(padx=0,pady=0)
 
@@ -83,4 +84,3 @@ buttons.alignbuttons()
 texto_inicio()
 
 ventana.mainloop()
-
