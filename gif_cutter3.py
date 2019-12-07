@@ -21,7 +21,8 @@ def direc():
     directorio=filedialog.askdirectory()
     if directorio!="":
         os.chdir(directorio)
-        display.appendtext("Dir: "+str(os.getcwd())+"\n")
+        display.appendtext(f"Dir: {os.getcwd()}")
+        display.appendtext("\n")
 
 def iniciar_extract():
     if archivo_selec!="" and im!="":
@@ -85,3 +86,4 @@ buttons.alignbuttons()
 texto_inicio()
 
 ventana.mainloop()
+
