@@ -21,6 +21,7 @@ def direc():
     directorio=filedialog.askdirectory()
     if directorio!="":
         os.chdir(directorio)
+        display.appendtext("Dir: "+str(os.getcwd())+"\n")
 
 def iniciar_extract():
     if archivo_selec!="" and im!="":
@@ -60,7 +61,7 @@ def busca():
     
 
 def texto_inicio():
-    display.appendtext("Pulse \'BUSCAR\' para escoger archivo.\nPulse \'CARPETA\' para escoger carpeta de destino.\n")
+    display.appendtext("Pulse \'BUSCAR\' para escoger archivo.\nPulse \'CARPETA\' para escoger carpeta de destino.\n\n")
 
 display = Pmw.ScrolledText(ventana, hscrollmode='none',
                       vscrollmode='dynamic', hull_relief='sunken',
