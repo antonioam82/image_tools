@@ -1,5 +1,4 @@
 import Pmw
-import time
 from PIL import Image, ImageSequence
 from tkinter import filedialog
 import threading
@@ -53,7 +52,6 @@ def busca():
     if archivo_selec!="":
         try:
             im=Image.open(archivo_selec)
-            time.sleep(1)
             display.appendtext("Archivo seleccionado: "+(((archivo_selec).split("/"))[-1])+"\n")
         except:
             archivo_selec = ""
