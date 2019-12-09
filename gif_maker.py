@@ -14,12 +14,13 @@ def ab(r):
         r = input("Introduzca \'A\' o \'B\' según su opción: ")
     return r
 
-def size(num):
-    for x in ['bytes', 'KB', 'MB', 'GB', 'TB']:
-        if num < 1024.0:
-            print("%3.1f %s" % (num, x))
-        num /= 1024.0
-
+def size(bytes, suffix="B"):
+    factor = 1024
+    for unit in ["", "K", "M", "G", "T", "P"]:
+        if bytes < factor:
+            print (f"{bytes:.2f}{unit}{suffix}")
+        bytes /= factor
+        
 def new_size(d):
     if d == "s":
         ns = OK(input("Nuevo tamaño: "))
