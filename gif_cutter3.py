@@ -1,3 +1,4 @@
+from tkinter import *
 import Pmw
 from PIL import Image, ImageSequence
 from tkinter import filedialog
@@ -59,6 +60,11 @@ def busca():
     
 
 def texto_inicio():
+    display.appendtext("_____________________________\n")
+    display.appendtext("|                           |\n")
+    display.appendtext("|       --GIF CUTTER--      |\n")
+    display.appendtext("|___________________________|\n")
+    display.appendtext("\n")
     display.appendtext("Pulse \'BUSCAR\' para escoger archivo.\nPulse \'CARPETA\' para escoger carpeta de destino.\n\n")
 
 display = Pmw.ScrolledText(ventana, hscrollmode='none',
