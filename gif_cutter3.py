@@ -58,7 +58,6 @@ def busca():
             archivo_selec = ""
             display.appendtext("NO SE PUDO ABRIR EL ARCHIVO\n")
     
-
 def texto_inicio():
     display.appendtext("_____________________________\n")
     display.appendtext("|                           |\n")
@@ -70,8 +69,8 @@ def texto_inicio():
 display = Pmw.ScrolledText(ventana, hscrollmode='none',
                       vscrollmode='dynamic', hull_relief='sunken',
                       hull_background='gray20', hull_borderwidth=10,
-                      text_background='honeydew4', text_width=55,
-                      text_foreground='black', text_height=17,
+                      text_background='honeydew4', text_width=65,
+                      text_foreground='black', text_height=22,
           text_padx=10, text_pady=10, text_relief='groove',
                       text_font=('Fixedsys', 10))
 display.pack(padx=0,pady=0)
@@ -84,6 +83,7 @@ buttons.add('LIMPIAR',bg='light blue',command=clear,width=12)
 buttons.add('CARPETA',bg='light blue',command=direc)
 buttons.add('EXTRAER',bg='light blue',command=iniciar_extract)
 buttons.add('BUSCAR',bg='light blue',command=busca)
+buttons.add('RECORTAR',bg='light blue')
 buttons.alignbuttons()
 
 texto_inicio()
