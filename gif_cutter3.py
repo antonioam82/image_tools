@@ -10,6 +10,14 @@ ventana.title("GIF CUTTER")
 archivo_selec = ""
 im = ""
 
+def recorte():
+    global _start, _end
+    raiz = tk.Tk()
+    mi_Frame = tk.Frame(master=raiz) 
+    mi_Frame.pack() 
+    mi_Frame.config(width=size[0], height=size[1])   
+    raiz.mainloop()
+
 def clear():
     global archivo_selec, im
     display.clear()
@@ -84,7 +92,7 @@ buttons.add('LIMPIAR',bg='light blue',command=clear,width=12)
 buttons.add('CARPETA',bg='light blue',command=direc)
 buttons.add('EXTRAER',bg='light blue',command=iniciar_extract)
 buttons.add('BUSCAR',bg='light blue',command=busca)
-buttons.add('RECORTAR',bg='light blue')
+buttons.add('RECORTAR',bg='light blue',command=recorte)
 buttons.alignbuttons()
 
 texto_inicio()
