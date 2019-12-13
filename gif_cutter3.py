@@ -76,6 +76,7 @@ def busca():
             size=(im.size)
             print(im)
             print(size[0])
+            _end=size
             display.appendtext("Archivo seleccionado: "+(((archivo_selec).split("/"))[-1])+"\n")
         except:
             archivo_selec = ""
