@@ -1,6 +1,6 @@
-from tkinter import *
 import Pmw
-from PIL import Image, ImageSequence
+#from tkinter.filedialog import askopenfilename
+from PIL import Image, ImageTk, ImageSequence
 from tkinter import filedialog
 import threading
 import os
@@ -53,6 +53,7 @@ def busca():
     if archivo_selec!="":
         try:
             im=Image.open(archivo_selec)
+            print(im.size)
             display.appendtext("Archivo seleccionado: "+(((archivo_selec).split("/"))[-1])+"\n")
         except:
             archivo_selec = ""
@@ -89,4 +90,6 @@ buttons.alignbuttons()
 texto_inicio()
 
 ventana.mainloop()
+
+
 
