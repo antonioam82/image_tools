@@ -2,7 +2,8 @@ import Pmw
 #from tkinter.filedialog import askopenfilename
 import tkinter as tk
 from PIL import Image, ImageTk, ImageSequence
-from tkinter.filedialog import askopenfilename
+from tkinter import filedialog
+from tkinter.filedialog import askopenfilename, askdirectory
 from tkinter import Label
 import threading
 import os
