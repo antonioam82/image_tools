@@ -26,15 +26,17 @@ def clear():
 
 def recorte():
     global _start, _end, canvas
-    raiz = tk.Tk()
-    raiz.title("SELECCIONE AREA CON EL RATÓN")
-    mi_Frame = tk.Frame(master=raiz)
-    mi_Frame.pack()
-    mi_Frame.config(width=size[0], height=size[1])
-    canvas = tk.Canvas(mi_Frame, bd=0)
-    ima=tk.PhotoImage(master = canvas, file = archivo_selec)
-    fondo=Label(mi_Frame,image=ima).place(x=0,y=0)
-    crop_btn = tk.Button(raiz, text="Recortar imagen", state="disabled", bg="light green").pack(side="bottom",expand=1, fill=tk.X)
+    name,ex = os.path.splitext(archivo)
+    if ex!=".webp":
+        raiz = tk.Tk()
+        raiz.title("SELECCIONE AREA CON EL RATÓN")
+        mi_Frame = tk.Frame(master=raiz)
+        mi_Frame.pack()
+        mi_Frame.config(width=size[0], height=size[1])
+        canvas = tk.Canvas(mi_Frame, bd=0)
+        ima=tk.PhotoImage(master = canvas, file = archivo_selec)
+        fondo=Label(mi_Frame,image=ima).place(x=0,y=0)
+        crop_btn = tk.Button(raiz, text="Recortar imagen", state="disabled", bg="light green").pack(side="bottom",expand=1, fill=tk.X)
     
     ventana.mainloop()
 
