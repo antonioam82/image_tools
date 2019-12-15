@@ -2,7 +2,8 @@ import Pmw
 #from tkinter.filedialog import askopenfilename
 import tkinter as tk
 from PIL import Image, ImageTk, ImageSequence
-from tkinter import filedialog, Label
+from tkinter.filedialog import askopenfilename
+from tkinter import Label
 import threading
 import os
 
@@ -68,9 +69,7 @@ def busca():
     global archivo_selec
     global im, size, archivo
     global _end
-    archivo_selec=filedialog.askopenfilename(initialdir = "/",
-    title = "Seleccione archivo",filetypes = (("gif","*.*"),
-    ("webp","*.*")))
+    archivo_selec = askopenfilename(parent=ventana, initialdir="M:/",title='Choose an image.')
     archivo=(((archivo_selec).split("/"))[-1])
     if archivo_selec!="":
         try:
@@ -84,7 +83,6 @@ def busca():
             archivo_selec = ""
             display.appendtext("NO SE PUDO ABRIR EL ARCHIVO\n")
     
-
 def texto_inicio():
     display.appendtext("_____________________________\n")
     display.appendtext("|                           |\n")
@@ -116,6 +114,5 @@ buttons.alignbuttons()
 texto_inicio()
 
 ventana.mainloop()
-
 
 
