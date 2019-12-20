@@ -1,6 +1,7 @@
 import Pmw
 #from tkinter.filedialog import askopenfilename
-import tkinter as tk
+#import tkinter as tk
+from tkinter import *
 from PIL import Image, ImageTk, ImageSequence
 from tkinter import filedialog
 from tkinter.filedialog import askopenfilename, askdirectory
@@ -26,19 +27,15 @@ def clear():
 
 def recorte():
     global _start, _end, canvas
-    name,ex = os.path.splitext(archivo)
-    if ex!=".webp":
-        raiz = tk.Tk()
-        raiz.title("SELECCIONE AREA CON EL RATÓN")
-        mi_Frame = tk.Frame(master=raiz)
-        mi_Frame.pack()
-        mi_Frame.config(width=size[0], height=size[1])
-        canvas = tk.Canvas(mi_Frame, bd=0)
-        ima=tk.PhotoImage(master = canvas, file = archivo_selec)
-        fondo=Label(mi_Frame,image=ima).place(x=0,y=0)
-        crop_btn = tk.Button(raiz, text="Recortar imagen", state="disabled", bg="light green").pack(side="bottom",expand=1, fill=tk.X)
+    #name,ex = os.path.splitext(archivo)
+    top = Toplevel()
+    canvas = Canvas(top,width=_end[0],height=_end[1],background='black')
+    canvas.pack(padx=0,pady=0)
+    archi = ImageTk.PhotoImage(Image.open(archivo_selec))
+    canvas.create_image(0,0,image=archi,anchor=NW)
+    crop_btn = Button(top, text="Recortar imagen", state="disabled", bg="light green").pack(side="bottom",expand=1, fill=X)
     
-    ventana.mainloop()
+    top.mainloop()
 
 def direc():
     directorio=filedialog.askdirectory()
@@ -75,6 +72,7 @@ def busca():
     archivo_selec = askopenfilename(parent=ventana, initialdir="M:/",title='Choose an image.')
     archivo=(((archivo_selec).split("/"))[-1])
     if archivo_selec!="":
+        print(archivo_selec)
         try:
             im=Image.open(archivo_selec)
             size=(im.size)
@@ -117,5 +115,7 @@ buttons.alignbuttons()
 texto_inicio()
 
 ventana.mainloop()
+
+
 
 
