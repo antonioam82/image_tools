@@ -28,6 +28,7 @@ def clear():
 def recorte():
     global _start, _end, canvas
     #name,ex = os.path.splitext(archivo)
+    #ventana.title("SELECCIONAR AREA DE RECORTE")
     top = Toplevel()
     canvas = Canvas(top,width=_end[0],height=_end[1],background='black')
     canvas.pack(padx=0,pady=0)
