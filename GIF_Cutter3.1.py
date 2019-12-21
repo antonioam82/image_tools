@@ -96,8 +96,8 @@ def texto_inicio():
 display = Pmw.ScrolledText(ventana, hscrollmode='none',
                       vscrollmode='dynamic', hull_relief='sunken',
                       hull_background='gray20', hull_borderwidth=10,
-                      text_background='honeydew4', text_width=65,
-                      text_foreground='black', text_height=22,
+                      text_background='green4', text_width=65,
+                      text_foreground='PaleGreen2', text_height=22,
           text_padx=10, text_pady=10, text_relief='groove',
                       text_font=('Fixedsys', 10))
 display.pack(padx=0,pady=0)
