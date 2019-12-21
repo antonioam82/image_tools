@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import filedialog
 from tkinter.filedialog import askopenfilename, askdirectory
+from tkinter import messagebox
 from PIL import Image, ImageTk, ImageSequence
 import os
 
@@ -120,8 +121,6 @@ def iniciar_extract():
         display.appendtext("\nSELECCIONE UN ARCHIVO\n")
 
 
-
-
 def _on_drag(event):
     global _start
     global _end
@@ -162,11 +161,11 @@ def _crop_image():
         c_im=_img.crop(_start+_end)
         c_im.save(nom_imagen)
         count+=1
+    messagebox.showinfo("TAREA COMPLETADA","Proceso finalizado con éxito")
     crop_btn.config(state="normal")
     #cropped = _img.crop(_start + _end)
     #cropped.show()
     #cropped.save("RECORTE.png")
-
 
 root = tk.Tk()
 root.title("Recortar imagen")
