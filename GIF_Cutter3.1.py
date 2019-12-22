@@ -57,11 +57,12 @@ def _on_click(event):
     _end = None
 
 def clear():
-    global archivo_selec, im
+    global archivo_selec, im, ver
     display.clear()
     texto_inicio()
     archivo_selec=""
     im=""
+    ver=False
 
 def verify():
     global ver
