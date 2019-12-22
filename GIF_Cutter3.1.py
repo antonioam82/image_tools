@@ -1,5 +1,7 @@
 import Pmw
 from random import *
+#from tkinter.filedialog import askopenfilename
+#import tkinter as tk
 from tkinter import *
 from PIL import Image, ImageTk, ImageSequence
 from tkinter import filedialog
@@ -17,6 +19,7 @@ size=""
 archivo_selec = ""
 _funcids = {}
 im = ""
+ver = False
 canvas = ""
 
 def _on_drag(event):
@@ -61,9 +64,12 @@ def clear():
     archivo_selec=""
     im=""
 
+def verify():
+    global ver
+    ver = True
+
 def recorte():
     global _start, _end, canvas
-    #name,ex = os.path.splitext(archivo)
     #ventana.title("SELECCIONAR AREA DE RECORTE")
     if archivo_selec!="":
         top = Toplevel()
@@ -73,7 +79,7 @@ def recorte():
         canvas.create_image(0,0,image=archi,anchor=NW)
         canvas.bind('<Button-1>',_on_click)
         canvas.bind("<B1-Motion>", _on_drag)
-        #crop_btn = Button(top, text="Recortar imagen", state="normal", bg="light green",command=verify).pack(side="bottom",expand=1, fill=X)
+        crop_btn = Button(top, text="Recortar imagen", state="normal", bg="light green",command=verify).pack(side="bottom",expand=1, fill=X)
         top.mainloop()
     else:
         display.appendtext("PULSE \'BUSCAR\' PARA SELECCIONAR UN ARCHIVO\n")
@@ -92,7 +98,11 @@ def iniciar_extract():
         display.appendtext("PULSE \'BUSCAR\' PARA SELECCIONAR UN ARCHIVO\n")
 
 def corta():
+    global _start, _end, ver
     count=1
+    if ver==False:
+        _start=(0,0)
+        _end=size
     archivo=(((archivo_selec).split("/"))[-1])
     try:
         name,ex = os.path.splitext(archivo)
@@ -105,6 +115,7 @@ def corta():
         display.appendtext("\n\nPROCESO FINALIZADO\n")
     except:
         display.appendtext("\nHUBO UN PROBLEMA AL REALIZAR LA OPERACIÓN")
+    ver=False
         
 def busca():
     global archivo_selec
@@ -154,6 +165,7 @@ buttons.alignbuttons()
 texto_inicio()
 
 ventana.mainloop()
+
 
 
 
