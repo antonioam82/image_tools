@@ -17,7 +17,6 @@ _start = (0,0)
 _end=""
 size=""
 archivo_selec = ""
-_funcids = {}
 im = ""
 ver = False
 canvas = ""
@@ -145,7 +144,7 @@ display = Pmw.ScrolledText(ventana, hscrollmode='none',
                       vscrollmode='dynamic', hull_relief='sunken',
                       hull_background='gray20', hull_borderwidth=10,
                       text_background='black', text_width=65,
-                      text_foreground='white', text_height=22,
+                      text_foreground='light blue', text_height=22,
                       text_padx=10, text_pady=10, text_relief='groove',
                       text_font=('Fixedsys', 10))
 display.pack(padx=0,pady=0)
