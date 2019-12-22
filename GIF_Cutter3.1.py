@@ -1,7 +1,4 @@
 import Pmw
-from random import *
-#from tkinter.filedialog import askopenfilename
-#import tkinter as tk
 from tkinter import *
 from PIL import Image, ImageTk, ImageSequence
 from tkinter import filedialog
@@ -45,8 +42,7 @@ def _draw_rectangle():
     x1, y1 = _end
 
     canvas.create_rectangle(x0, y0, x1, y1, fill="#18c194",
-                            width=1, stipple="gray50", tags='rectangle'
-                            )
+                            width=1, stipple="gray50", tags='rectangle')
     
 def _on_click(event):
     global _start
@@ -67,9 +63,10 @@ def clear():
 def verify():
     global ver
     ver = True
+    display.appendtext("RECORTE\n")
 
 def recorte():
-    global _start, _end, canvas
+    global _start, _end, canvas, crop_btn
     #ventana.title("SELECCIONAR AREA DE RECORTE")
     if archivo_selec!="":
         top = Toplevel()
@@ -154,18 +151,17 @@ buttons = Pmw.ButtonBox(ventana,hull_background="LightBlue3")
 
 buttons.pack(fill='both', expand=1, padx=1, pady=1)
 
-buttons.add('LIMPIAR',bg='khaki',command=clear,width=12)
-buttons.add('CARPETA',bg='khaki',command=direc)
-buttons.add('EXTRAER',bg='khaki',command=iniciar_extract)
-buttons.add('BUSCAR',bg='khaki',command=busca)
-buttons.add('RECORTAR',bg='khaki',command=recorte)
+buttons.add('LIMPIAR',bg='light green',command=clear,width=12)
+buttons.add('CARPETA',bg='light green',command=direc)
+buttons.add('EXTRAER',bg='light green',command=iniciar_extract)
+buttons.add('BUSCAR',bg='light green',command=busca)
+buttons.add('RECORTAR',bg='light green',command=recorte)
 
 buttons.alignbuttons()
 
 texto_inicio()
 
 ventana.mainloop()
-
 
 
 
