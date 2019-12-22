@@ -29,14 +29,15 @@ def recorte():
     global _start, _end, canvas
     #name,ex = os.path.splitext(archivo)
     #ventana.title("SELECCIONAR AREA DE RECORTE")
-    top = Toplevel()
-    canvas = Canvas(top,width=_end[0],height=_end[1],background='black')
-    canvas.pack(padx=0,pady=0)
-    archi = ImageTk.PhotoImage(Image.open(archivo_selec))
-    canvas.create_image(0,0,image=archi,anchor=NW)
-    crop_btn = Button(top, text="Recortar imagen", state="disabled", bg="light green").pack(side="bottom",expand=1, fill=X)
+    if archivo_selec!="":
+        top = Toplevel()
+        canvas = Canvas(top,width=_end[0],height=_end[1],background='black')
+        canvas.pack(padx=0,pady=0)
+        archi = ImageTk.PhotoImage(Image.open(archivo_selec))
+        canvas.create_image(0,0,image=archi,anchor=NW)
+        crop_btn = Button(top, text="Recortar imagen", state="disabled", bg="light green").pack(side="bottom",expand=1, fill=X)
     
-    top.mainloop()
+        top.mainloop()
 
 def direc():
     directorio=filedialog.askdirectory()
