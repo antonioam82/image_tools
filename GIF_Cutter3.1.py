@@ -3,7 +3,6 @@ from tkinter import *
 from PIL import Image, ImageTk, ImageSequence
 from tkinter import filedialog
 from tkinter.filedialog import askopenfilename, askdirectory
-from tkinter import Label
 import threading
 import os
 
