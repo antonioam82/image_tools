@@ -110,7 +110,6 @@ def _on_drop(event):
     y1 = img_y if y1 > img_y else 0 if y1 < 0 else y1       
     _end = (x1, y1)
 
-        
     if x0 > x1:
         if y0 < y1: 
             _start = (x1, y0)
