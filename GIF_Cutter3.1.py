@@ -39,6 +39,7 @@ def _draw_rectangle():
 
     x0, y0 = _start
     x1, y1 = _end
+   
 
     canvas.create_rectangle(x0, y0, x1, y1, fill="#18c194",
                             width=1, stipple="gray50", tags='rectangle'
@@ -91,6 +92,41 @@ def direc():
         os.chdir(directorio)
         display.appendtext(f"Dir: {os.getcwd()}"+"\n")
 
+def adjust(s,e):
+    global _start, _end
+    et1=e[0]
+    et2=e[1]
+    st1=s[0]
+    st2=s[1]
+    print(_start)
+    print(_end)
+    print("S: ",size)
+    if (e[0] < 0 or e[1] < 0) or (e[0] > size[0] or e[1] > size[1]):
+        if e[0] < 0 or e[1] < 0:
+            print("AAAAAA")
+            if e[0] < 0:
+                et1 = 0
+            if e[1] < 0:
+                et2 = 0
+            _start = (et1,et2)
+            _end = (s[0],s[1])
+        else:
+            _start = s#ok
+        if e[0] > size[0] or e[1] > size[1]:
+            print("BBBBBB")
+            if e[0] > size[0]:  #
+                st1 = size[0]
+            if e[1] > size[1]:  #if e[1] > size[0]:
+                st2 = size[1]
+            _start = (s[0],s[1])
+            _end = (st1,st2)
+        else:
+            _end = s
+        print(_start)
+        print(_end)
+        print("S: ",size)
+    #return (e,s)
+
 def iniciar_extract():
     if archivo_selec!="" and im!="":
         t=threading.Thread(target=corta)
@@ -104,18 +140,20 @@ def corta():
     if ver==False:
         _start=(0,0)
         _end=size
+    else:
+        adjust(_start,_end)
     archivo=(((archivo_selec).split("/"))[-1])
-    try:
-        name,ex = os.path.splitext(archivo)
-        for frame in ImageSequence.Iterator(im):
-            nom_imagen=name+" "+str(count)+'.png'
-            c_im=im.crop(_start+_end)
-            c_im.save(nom_imagen)
-            display.appendtext("\nExtraido frame: "+nom_imagen)
-            count+=1
-        display.appendtext("\n\nPROCESO FINALIZADO\n")
-    except:
-        display.appendtext("\nHUBO UN PROBLEMA AL REALIZAR LA OPERACIÓN")
+    #try:
+    name,ex = os.path.splitext(archivo)
+    for frame in ImageSequence.Iterator(im):
+        nom_imagen=name+" "+str(count)+'.png'
+        c_im=im.crop(_start+_end)
+        c_im.save(nom_imagen)
+        display.appendtext("\nExtraido frame: "+nom_imagen)
+        count+=1
+    display.appendtext("\n\nPROCESO FINALIZADO\n")
+    #except:
+        #display.appendtext("\nHUBO UN PROBLEMA AL REALIZAR LA OPERACIÓN")
     ver=False
         
 def busca():
@@ -166,6 +204,7 @@ buttons.alignbuttons()
 texto_inicio()
 
 ventana.mainloop()
+
 
 
 
