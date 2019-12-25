@@ -41,7 +41,8 @@ def _draw_rectangle():
     x1, y1 = _end
 
     canvas.create_rectangle(x0, y0, x1, y1, fill="#18c194",
-                            width=1, stipple="gray50", tags='rectangle')
+                            width=1, stipple="gray50", tags='rectangle'
+                            )
     
 def _on_click(event):
     global _start
@@ -50,6 +51,9 @@ def _on_click(event):
     
     _start = (canvas.canvasx(event.x), canvas.canvasy(event.y))
     _end = None
+
+def delete_rectangle(event):
+    canvas.delete("rectangle")
 
 def clear():
     global archivo_selec, im, ver
@@ -75,6 +79,7 @@ def recorte():
         canvas.create_image(0,0,image=archi,anchor=NW)
         canvas.bind('<Button-1>',_on_click)
         canvas.bind("<B1-Motion>", _on_drag)
+        canvas.bind('<Button-3>',delete_rectangle)
         crop_btn = Button(top, text="Recortar imagen", state="normal", bg="light green",command=verify).pack(side="bottom",expand=1, fill=X)
         top.mainloop()
     else:
