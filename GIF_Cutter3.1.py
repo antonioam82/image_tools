@@ -143,17 +143,17 @@ def corta():
     else:
         adjust(_start,_end)
     archivo=(((archivo_selec).split("/"))[-1])
-    #try:
-    name,ex = os.path.splitext(archivo)
-    for frame in ImageSequence.Iterator(im):
-        nom_imagen=name+" "+str(count)+'.png'
-        c_im=im.crop(_start+_end)
-        c_im.save(nom_imagen)
-        display.appendtext("\nExtraido frame: "+nom_imagen)
-        count+=1
-    display.appendtext("\n\nPROCESO FINALIZADO\n")
-    #except:
-        #display.appendtext("\nHUBO UN PROBLEMA AL REALIZAR LA OPERACIÓN")
+    try:
+        name,ex = os.path.splitext(archivo)
+        for frame in ImageSequence.Iterator(im):
+            nom_imagen=name+" "+str(count)+'.png'
+            c_im=im.crop(_start+_end)
+            c_im.save(nom_imagen)
+            display.appendtext("\nExtraido frame: "+nom_imagen)
+            count+=1
+        display.appendtext("\n\nPROCESO FINALIZADO\n")
+    except:
+        display.appendtext("\nHUBO UN PROBLEMA AL REALIZAR LA OPERACIÓN")
     ver=False
         
 def busca():
