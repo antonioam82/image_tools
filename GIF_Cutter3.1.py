@@ -81,6 +81,7 @@ def recorte():
         canvas.bind('<Button-1>',_on_click)
         canvas.bind("<B1-Motion>", _on_drag)
         canvas.bind('<Button-3>',delete_rectangle)
+        canvas.bind("<ButtonRelease-1>", _on_drop, '+')
         crop_btn = Button(top, text="Recortar imagen", state="normal", bg="light green",command=verify).pack(side="bottom",expand=1, fill=X)
         top.mainloop()
     else:
@@ -92,40 +93,36 @@ def direc():
         os.chdir(directorio)
         display.appendtext(f"Dir: {os.getcwd()}"+"\n")
 
-def adjust(s,e):
-    global _start, _end
-    et1=e[0]
-    et2=e[1]
-    st1=s[0]
-    st2=s[1]
-    print(_start)
-    print(_end)
-    print("S: ",size)
-    if (e[0] < 0 or e[1] < 0) or (e[0] > size[0] or e[1] > size[1]):
-        if e[0] < 0 or e[1] < 0:
-            print("AAAAAA")
-            if e[0] < 0:
-                et1 = 0
-            if e[1] < 0:
-                et2 = 0
-            _start = (et1,et2)
-            _end = (s[0],s[1])
-        else:
-            _start = s#ok
-        if e[0] > size[0] or e[1] > size[1]:
-            print("BBBBBB")
-            if e[0] > size[0]:  #
-                st1 = size[0]
-            if e[1] > size[1]:  #if e[1] > size[0]:
-                st2 = size[1]
-            _start = (s[0],s[1])
-            _end = (st1,st2)
-        else:
-            _end = s
-        print(_start)
-        print(_end)
-        print("S: ",size)
-    #return (e,s)
+def _on_drop(event):
+    global _start
+    global _end
+    global im
+    
+    img_x, img_y = im.size
+
+    x0, y0 = _start
+    x0 = img_x if x0 > img_x else 0 if x0 < 0 else x0
+    y0 = img_y if y0 > img_y else 0 if y0 < 0 else y0 
+    _start = (x0, y0)
+
+    x1, y1 = _end
+    x1 = img_x if x1 > img_x else 0 if x1 < 0 else x1
+    y1 = img_y if y1 > img_y else 0 if y1 < 0 else y1       
+    _end = (x1, y1)
+
+        
+    if x0 > x1:
+        if y0 < y1: 
+            _start = (x1, y0)
+            _end = (x0, y1)
+        else:       
+            _start, _end = _end, _start
+    else:
+        if y0 > y1:  
+            _start = (x0, y1)
+            _end = (x1, y0)
+
+    _draw_rectangle()
 
 def iniciar_extract():
     if archivo_selec!="" and im!="":
@@ -140,8 +137,8 @@ def corta():
     if ver==False:
         _start=(0,0)
         _end=size
-    else:
-        adjust(_start,_end)
+    #else:
+        #adjust(_start,_end)
     archivo=(((archivo_selec).split("/"))[-1])
     try:
         name,ex = os.path.splitext(archivo)
