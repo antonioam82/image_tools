@@ -89,33 +89,35 @@ def _on_drop(event):
     global _end
     global im
 
-    # Acotar límites de seleción a la imagen
-    img_x, img_y = im.size
+    if not _end is None:
+        
+        # Acotar límites de seleción a la imagen
+        img_x, img_y = im.size
 
-    x0, y0 = _start
-    x0 = img_x if x0 > img_x else 0 if x0 < 0 else x0
-    y0 = img_y if y0 > img_y else 0 if y0 < 0 else y0 
-    _start = (x0, y0)
+        x0, y0 = _start
+        x0 = img_x if x0 > img_x else 0 if x0 < 0 else x0
+        y0 = img_y if y0 > img_y else 0 if y0 < 0 else y0 
+        _start = (x0, y0)
 
-    x1, y1 = _end
-    x1 = img_x if x1 > img_x else 0 if x1 < 0 else x1
-    y1 = img_y if y1 > img_y else 0 if y1 < 0 else y1       
-    _end = (x1, y1)
+        x1, y1 = _end
+        x1 = img_x if x1 > img_x else 0 if x1 < 0 else x1
+        y1 = img_y if y1 > img_y else 0 if y1 < 0 else y1       
+        _end = (x1, y1)
 
         # Normalizado para obtener vertice superior izquierdo e inferior derecho
-    if x0 > x1:
-        if y0 < y1: # _start es el vértice superior derecho
-            _start = (x1, y0)
-            _end = (x0, y1)
-        else:       # _start es el vértice inferior derecho
-            _start, _end = _end, _start
-    else:
-        if y0 > y1:  # _start es el vértice inferior izquierdo
-            _start = (x0, y1)
-            _end = (x1, y0)
+        if x0 > x1:
+            if y0 < y1: # _start es el vértice superior derecho
+                _start = (x1, y0)
+                _end = (x0, y1)
+            else:       # _start es el vértice inferior derecho
+                _start, _end = _end, _start
+        else:
+            if y0 > y1:  # _start es el vértice inferior izquierdo
+                _start = (x0, y1)
+                _end = (x1, y0)
 
-    # Redibujar rectágulo
-    _draw_rectangle()
+        # Redibujar rectágulo
+        _draw_rectangle()
 
 def recorte():
     global _start, _end, canvas, crop_btn
@@ -136,10 +138,10 @@ def recorte():
         display.insert(END,"PULSE \'BUSCAR\' PARA SELECCIONAR UN ARCHIVO\n")
 
 def corta():
-    global _start, _end
+    global _start, _end, ver
     if ver == False:
         _sart = (0,0)
-        _end = size
+        _end = original_size
     display.delete('1.0',END)
     display.insert(END,"\nPROCESO EN CURSO\n")
     count=1
@@ -153,13 +155,14 @@ def corta():
             #display.insert(END,"\nExtraido frame: "+nom_imagen)
             count+=1
         display.insert(END,"\n\nPROCESO FINALIZADO :D\n")
+        ver = False
     except:
         display.insert(END,"\nHUBO UN PROBLEMA AL REALIZAR LA OPERACIÓN")
     
 def busca():
     global archivo_selec
     global im, size, archivo
-    global _end
+    global _end, ver
     archivo_selec = askopenfilename(parent=ventana, initialdir="M:/",title='Elegir archivo.')
     archivo=(((archivo_selec).split("/"))[-1])
     if archivo_selec!="":
@@ -179,7 +182,6 @@ def texto_inicio():
     display.insert(END,"|___________________________|\n")
     display.insert(END,"\n")
     display.insert(END,"Pulse \'BUSCAR\' para escoger archivo.\nPulse \'CARPETA\' para escoger carpeta de destino.\n\n")
-
 
 ventana = Tk()
 ventana.title("GIF CUTTER")
