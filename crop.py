@@ -141,7 +141,7 @@ def corta():
     global _start, _end, ver
     if ver == False:
         _sart = (0,0)
-        _end = original_size
+        _end = size
     display.delete('1.0',END)
     display.insert(END,"\nPROCESO EN CURSO\n")
     count=1
