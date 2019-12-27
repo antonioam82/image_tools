@@ -58,7 +58,7 @@ def clear():
     texto_inicio()
     archivo_selec=""
     im=""
-    ver = ""
+    ver = False
 
 def recorte():
     global _start, _end, canvas
@@ -136,6 +136,10 @@ def recorte():
         display.insert(END,"PULSE \'BUSCAR\' PARA SELECCIONAR UN ARCHIVO\n")
 
 def corta():
+    global _start, _end
+    if ver == False:
+        _sart = (0,0)
+        _end = size
     display.delete('1.0',END)
     display.insert(END,"\nPROCESO EN CURSO\n")
     count=1
@@ -151,7 +155,7 @@ def corta():
         display.insert(END,"\n\nPROCESO FINALIZADO :D\n")
     except:
         display.insert(END,"\nHUBO UN PROBLEMA AL REALIZAR LA OPERACIÓN")
-        
+    
 def busca():
     global archivo_selec
     global im, size, archivo
@@ -188,8 +192,8 @@ ver = False
 canvas = ""
 
 display = scrolledtext.ScrolledText(ventana,borderwidth=10,
-                      background='darkblue', width=65,
-                      foreground='light blue', height=22,
+                      background='darkgreen', width=65,
+                      foreground='light green', height=22,
                       padx=10, pady=10,#relief='groove'
                       font=('Fixedsys', 10))
 display.pack(padx=0,pady=0)
