@@ -61,7 +61,7 @@ def clear():
     ver = False
 
 def recorte():
-    global _start, _end, canvas
+    global canvas
     root = Tk()
     canv = Canvas(root, width=500, height=375, bg='white')
     canv.grid(row=0, column=0)
@@ -120,10 +120,10 @@ def _on_drop(event):
         _draw_rectangle()
 
 def recorte():
-    global _start, _end, canvas, crop_btn
+    global canvas, crop_btn
     if archivo_selec!="":
         top = Toplevel()
-        canvas = Canvas(top,width=_end[0],height=_end[1],background='black')
+        canvas = Canvas(top,width=size[0],height=size[1],background='black')
         canvas.pack(padx=0,pady=0)
         archi = ImageTk.PhotoImage(Image.open(archivo_selec))
         canvas.create_image(0,0,image=archi,anchor=NW)
@@ -139,9 +139,11 @@ def recorte():
 
 def corta():
     global _start, _end, ver
-    if ver == False:
-        _sart = (0,0)
-        _end = size
+    if ver == True:
+        box = (_start+_end)
+    else:
+        box = ((0,0)+size)
+        print(box)
     display.delete('1.0',END)
     display.insert(END,"\nPROCESO EN CURSO\n")
     count=1
@@ -150,7 +152,7 @@ def corta():
         name,ex = os.path.splitext(archivo)
         for frame in ImageSequence.Iterator(im):
             nom_imagen=name+" "+str(count)+'.png'
-            c_im=im.crop(_start+_end)
+            c_im=im.crop(box)#_start+_end
             c_im.save(nom_imagen)
             #display.insert(END,"\nExtraido frame: "+nom_imagen)
             count+=1
@@ -169,7 +171,7 @@ def busca():
         try:
             im=Image.open(archivo_selec)
             size=(im.size)
-            _end=size
+            #_end=size
             display.insert(END,"Archivo seleccionado: "+(((archivo_selec).split("/"))[-1])+"\n")
         except:
             archivo_selec = ""
@@ -185,9 +187,9 @@ def texto_inicio():
 
 ventana = Tk()
 ventana.title("GIF CUTTER")
-_start = (0,0)
-_end=""
-size=""
+_start = ""
+_end = ""
+size = ""
 archivo_selec = ""
 im = ""
 ver = False
