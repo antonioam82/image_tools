@@ -157,9 +157,9 @@ def corta():
             #display.insert(END,"\nExtraido frame: "+nom_imagen)
             count+=1
         display.insert(END,"\n\nPROCESO FINALIZADO :D\n")
-        ver = False
     except:
         display.insert(END,"\nHUBO UN PROBLEMA AL REALIZAR LA OPERACIÓN")
+    ver = False
     
 def busca():
     global archivo_selec
