@@ -9,7 +9,7 @@ import os
 def verify():
     global ver
     ver = True
-    display.insert(END,"RECORTE\n")
+    display.insert(END,"EFECTUADO RECORTE\n")
 
 def delete_rectangle(event):
     canvas.delete("rectangle")
