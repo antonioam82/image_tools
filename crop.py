@@ -9,6 +9,7 @@ import os
 def verify():
     global ver
     ver = True
+    top.destroy()
     display.insert(END,"EFECTUADO RECORTE\n")
 
 def delete_rectangle(event):
@@ -120,7 +121,7 @@ def _on_drop(event):
         _draw_rectangle()
 
 def recorte():
-    global canvas, crop_btn
+    global canvas, crop_btn, top
     if archivo_selec!="":
         top = Toplevel()
         canvas = Canvas(top,width=size[0],height=size[1],background='black')
@@ -157,6 +158,7 @@ def corta():
             #display.insert(END,"\nExtraido frame: "+nom_imagen)
             count+=1
         display.insert(END,"\n\nPROCESO FINALIZADO :D\n")
+        
     except:
         display.insert(END,"\nHUBO UN PROBLEMA AL REALIZAR LA OPERACIÓN")
     ver = False
