@@ -150,29 +150,38 @@ def recorte():
     else:
         display.appendtext("PULSE \'BUSCAR\' PARA SELECCIONAR UN ARCHIVO\n")
 
+def name_file(cr,c,n):
+    if cr == True:
+        nf = n+" crop "+str(count)+".png"
+    else:
+        nf = n+" "+str(count)+".png"
+    return nf
+
 def corta():
-    global _start, _end, ver
+    global _start, _end, ver, count
     if ver == True:
         box = (_start+_end)
+        cropped = True
     else:
         box = ((0,0)+size)
+        cropped = False
         print(box)
     display.delete('1.0',END)
     display.appendtext("\nPROCESO EN CURSO\n")
     count=1
     archivo=(((archivo_selec).split("/"))[-1])
-    try:
-        name,ex = os.path.splitext(archivo)
-        for frame in ImageSequence.Iterator(im):
-            nom_imagen=name+" "+str(count)+'.png'
-            c_im=im.crop(box)
-            c_im.save(nom_imagen)
-            display.appendtext("\nExtraido frame: "+nom_imagen)
-            count+=1
-        display.appendtext("\n\nPROCESO FINALIZADO :D\n")
+    #try:
+    name,ex = os.path.splitext(archivo)
+    for frame in ImageSequence.Iterator(im):
+        nom_imagen=name_file(cropped,count,name)
+        c_im=im.crop(box)
+        c_im.save(nom_imagen)
+        display.appendtext("\nExtraido frame: "+nom_imagen)
+        count+=1
+    display.appendtext("\n\nPROCESO FINALIZADO :D\n")
         
-    except:
-        display.appendtext("\nHUBO UN PROBLEMA AL REALIZAR LA OPERACIÓN")
+    #except:
+        #display.appendtext("\nHUBO UN PROBLEMA AL REALIZAR LA OPERACIÓN")
     ver = False
     
 def busca():
@@ -189,8 +198,7 @@ def busca():
         except:
             archivo_selec = ""
             display.appendtext("NO SE PUDO ABRIR EL ARCHIVO\n")
-
-    
+            
 def texto_inicio():
     display.appendtext("_____________________________\n")
     display.appendtext("|                           |\n")
