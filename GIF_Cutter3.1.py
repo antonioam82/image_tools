@@ -170,18 +170,18 @@ def corta():
     display.appendtext("\nPROCESO EN CURSO\n")
     count=1
     archivo=(((archivo_selec).split("/"))[-1])
-    #try:
-    name,ex = os.path.splitext(archivo)
-    for frame in ImageSequence.Iterator(im):
-        nom_imagen=name_file(cropped,count,name)
-        c_im=im.crop(box)
-        c_im.save(nom_imagen)
-        display.appendtext("\nExtraido frame: "+nom_imagen)
-        count+=1
-    display.appendtext("\n\nPROCESO FINALIZADO :D\n")
+    try:
+        name,ex = os.path.splitext(archivo)
+        for frame in ImageSequence.Iterator(im):
+            nom_imagen=name_file(cropped,count,name)
+            c_im=im.crop(box)
+            c_im.save(nom_imagen)
+            display.appendtext("\nExtraido frame: "+nom_imagen)
+            count+=1
+        display.appendtext("\n\nPROCESO FINALIZADO :D\n")
         
-    #except:
-        #display.appendtext("\nHUBO UN PROBLEMA AL REALIZAR LA OPERACIÓN")
+    except:
+        display.appendtext("\nHUBO UN PROBLEMA AL REALIZAR LA OPERACIÓN")
     ver = False
     
 def busca():
