@@ -138,24 +138,32 @@ def recorte():
     else:
         display.insert(END,"PULSE \'BUSCAR\' PARA SELECCIONAR UN ARCHIVO\n")
 
+def name_file(t,c,n):
+    if t == "cropped":
+        nf = n+" crop "+str(count)+".png"
+    else:
+        nf = n+" "+str(count)+".png"
+    return nf
+
 def corta():
-    global _start, _end, ver
+    global _start, _end, ver, count
+    count=1
     if ver == True:
         box = (_start+_end)
+        typ = "cropped"
     else:
         box = ((0,0)+size)
+        typ = "non"
         print(box)
     display.delete('1.0',END)
     display.insert(END,"\nPROCESO EN CURSO\n")
-    count=1
     archivo=(((archivo_selec).split("/"))[-1])
     try:
         name,ex = os.path.splitext(archivo)
         for frame in ImageSequence.Iterator(im):
-            nom_imagen=name+" "+str(count)+'.png'
-            c_im=im.crop(box)#_start+_end
+            nom_imagen=name_file(typ,count,name)
+            c_im=im.crop(box)
             c_im.save(nom_imagen)
-            #display.insert(END,"\nExtraido frame: "+nom_imagen)
             count+=1
         display.insert(END,"\n\nPROCESO FINALIZADO :D\n")
         
