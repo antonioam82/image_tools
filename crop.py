@@ -138,8 +138,8 @@ def recorte():
     else:
         display.insert(END,"PULSE \'BUSCAR\' PARA SELECCIONAR UN ARCHIVO\n")
 
-def name_file(t,c,n):
-    if t == "cropped":
+def name_file(cr,c,n):
+    if cr == True:
         nf = n+" crop "+str(count)+".png"
     else:
         nf = n+" "+str(count)+".png"
@@ -150,10 +150,10 @@ def corta():
     count=1
     if ver == True:
         box = (_start+_end)
-        typ = "cropped"
+        cropped = True
     else:
         box = ((0,0)+size)
-        typ = "non"
+        cropped = False
         print(box)
     display.delete('1.0',END)
     display.insert(END,"\nPROCESO EN CURSO\n")
@@ -161,7 +161,7 @@ def corta():
     try:
         name,ex = os.path.splitext(archivo)
         for frame in ImageSequence.Iterator(im):
-            nom_imagen=name_file(typ,count,name)
+            nom_imagen=name_file(cropped,count,name)
             c_im=im.crop(box)
             c_im.save(nom_imagen)
             count+=1
