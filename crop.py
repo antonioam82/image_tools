@@ -140,7 +140,7 @@ def recorte():
 
 def name_file(cr,c,n):
     if cr == True:
-        nf = n+" crop "+str(count)+".png"
+        nf = n+"_crop "+str(count)+".png"
     else:
         nf = n+" "+str(count)+".png"
     return nf
