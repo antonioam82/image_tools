@@ -140,7 +140,7 @@ def recorte():
 
 def name_file(cr,c,n):
     if cr == True:
-        nf = n+"_crop "+str(count)+".png"
+        nf = n+" crop "+str(count)+".png"
     else:
         nf = n+" "+str(count)+".png"
     return nf
@@ -206,7 +206,7 @@ ver = False
 canvas = ""
 
 display = scrolledtext.ScrolledText(ventana,borderwidth=10,
-                      background='light gray', width=65,
+                      background='light gray', width=73,
                       foreground='black', height=22,
                       padx=10, pady=10,#relief='groove'
                       font=('Fixedsys', 10))
@@ -216,6 +216,7 @@ nframe = Frame()
 nframe.pack()
 
 Button(nframe,text='LIMPIAR',bg='light blue',command=clear,width=15,height=2).pack(side=LEFT)
+Button(nframe,text='CONVERTIR',bg='light blue',width=15,height=2).pack(side=LEFT)
 Button(nframe,text='CARPETA',bg='light blue',width=15,height=2,command=direc).pack(side=LEFT)
 Button(nframe,text='EXTRAER',bg='light blue',width=15,height=2,command=iniciar_extract).pack(side=LEFT)
 Button(nframe,text='BUSCAR',bg='light blue',width=15,height=2,command=busca).pack(side=LEFT)
