@@ -6,6 +6,17 @@ import tkinter.scrolledtext as scrolledtext
 import threading
 import os
 
+def convertir():
+    if im!="":
+        nombrea,ex=os.path.splitext(((archivo_selec).split("/"))[-1])
+        if ex=='.webp':
+            nom=nombrea+'.gif'
+            im.save(nom,'gif',save_all=True,background=0)
+        else:
+            nom=nombrea+'.webp'
+            im.save(nom,'webp',save_all=True)
+        display.insert(END,'Creado archivo: '+nom+'\n')
+
 def verify():
     global ver
     ver = True
@@ -216,7 +227,7 @@ nframe = Frame()
 nframe.pack()
 
 Button(nframe,text='LIMPIAR',bg='light blue',command=clear,width=15,height=2).pack(side=LEFT)
-Button(nframe,text='CONVERTIR',bg='light blue',width=15,height=2).pack(side=LEFT)
+Button(nframe,text='CONVERTIR',bg='light blue',width=15,height=2,command=convertir).pack(side=LEFT)
 Button(nframe,text='CARPETA',bg='light blue',width=15,height=2,command=direc).pack(side=LEFT)
 Button(nframe,text='EXTRAER',bg='light blue',width=15,height=2,command=iniciar_extract).pack(side=LEFT)
 Button(nframe,text='BUSCAR',bg='light blue',width=15,height=2,command=busca).pack(side=LEFT)
