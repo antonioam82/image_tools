@@ -18,8 +18,11 @@ ver = False
 canvas = ""
 
 def convertir():
-    
-
+    if im!="":
+        nombrea,ex=os.path.splitext(((archivo_selec).split("/"))[-1])
+        nom=nombrea+'.gif'
+        im.save(nom,'gif',save_all=True,background=0)
+        display.appendtext('Creado archivo: '+nom+'\n')
 
 def verify():
     global ver
@@ -225,8 +228,8 @@ buttons = Pmw.ButtonBox(ventana,hull_background="LightBlue3")
 buttons.pack(fill='both', expand=1, padx=1, pady=1)
 
 buttons.add('LIMPIAR',bg='light green',command=12)
-buttons.add('CONVERTIR',bg='light green')
 buttons.add('CARPETA',bg='light green',command=direc)
+buttons.add('CONVERTIR',bg='light green',command=convertir)
 buttons.add('EXTRAER',bg='light green',command=iniciar_extract)
 buttons.add('BUSCAR',bg='light green',command=busca)
 buttons.add('RECORTAR',bg='light green',command=recorte)
