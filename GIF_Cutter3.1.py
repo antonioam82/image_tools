@@ -20,8 +20,12 @@ canvas = ""
 def convertir():
     if im!="":
         nombrea,ex=os.path.splitext(((archivo_selec).split("/"))[-1])
-        nom=nombrea+'.gif'
-        im.save(nom,'gif',save_all=True,background=0)
+        if ex=='.webp':
+            nom=nombrea+'.gif'
+            im.save(nom,'gif',save_all=True,background=0)
+        else:
+            nom=nombrea+'.webp'
+            im.save(nom,'webp',save_all=True)
         display.appendtext('Creado archivo: '+nom+'\n')
 
 def verify():
