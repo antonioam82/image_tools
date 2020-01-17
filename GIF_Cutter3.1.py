@@ -17,6 +17,7 @@ im = ""
 ver = False
 canvas = ""
 
+
 def verify():
     global ver
     ver = True
@@ -169,18 +170,18 @@ def corta():
     display.appendtext("\nPROCESO EN CURSO\n")
     count=1
     archivo=(((archivo_selec).split("/"))[-1])
-    try:
-        name,ex = os.path.splitext(archivo)
-        for frame in ImageSequence.Iterator(im):
-            nom_imagen=name_file(cropped,count,name)
-            c_im=im.crop(box)
-            c_im.save(nom_imagen)
-            display.appendtext("\nExtraido frame: "+nom_imagen)
-            count+=1
-        display.appendtext("\n\nPROCESO FINALIZADO :D\n")
+    #try:
+    name,ex = os.path.splitext(archivo)
+    for frame in ImageSequence.Iterator(im):
+        nom_imagen=name_file(cropped,count,name)
+        c_im=im.crop(box)
+        c_im.save(nom_imagen)
+        display.appendtext("\nExtraido frame: "+nom_imagen)
+        count+=1
+    display.appendtext("\n\nPROCESO FINALIZADO :D\n")
         
-    except:
-        display.appendtext("\nHUBO UN PROBLEMA AL REALIZAR LA OPERACIÓN")
+    #except:
+        #display.appendtext("\nHUBO UN PROBLEMA AL REALIZAR LA OPERACIÓN")
     ver = False
     
 def busca():
@@ -197,7 +198,8 @@ def busca():
         except:
             archivo_selec = ""
             display.appendtext("NO SE PUDO ABRIR EL ARCHIVO\n")
-            
+
+    
 def texto_inicio():
     display.appendtext("_____________________________\n")
     display.appendtext("|                           |\n")
@@ -209,7 +211,7 @@ def texto_inicio():
 display = Pmw.ScrolledText(ventana, hscrollmode='none',
                       vscrollmode='dynamic', hull_relief='sunken',
                       hull_background='gray20', hull_borderwidth=10,
-                      text_background='black', text_width=65,
+                      text_background='black', text_width=73,
                       text_foreground='light blue', text_height=22,
                       text_padx=10, text_pady=10, text_relief='groove',
                       text_font=('Fixedsys', 10))
@@ -219,7 +221,8 @@ buttons = Pmw.ButtonBox(ventana,hull_background="LightBlue3")
 
 buttons.pack(fill='both', expand=1, padx=1, pady=1)
 
-buttons.add('LIMPIAR',bg='light green',command=clear,width=12)
+buttons.add('LIMPIAR',bg='light green',command=12)
+buttons.add('CONVERTIR',bg='light green')
 buttons.add('CARPETA',bg='light green',command=direc)
 buttons.add('EXTRAER',bg='light green',command=iniciar_extract)
 buttons.add('BUSCAR',bg='light green',command=busca)
@@ -230,7 +233,6 @@ buttons.alignbuttons()
 texto_inicio()
 
 ventana.mainloop()
-
 
 
 
