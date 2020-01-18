@@ -6,16 +6,20 @@ import tkinter.scrolledtext as scrolledtext
 import threading
 import os
 
-def convertir():
+def inicia_conv():
     if im!="":
-        nombrea,ex=os.path.splitext(((archivo_selec).split("/"))[-1])
-        if ex=='.webp':
-            nom=nombrea+'(CONVg).gif'
-            im.save(nom,'gif',save_all=True,background=0)
-        else:
-            nom=nombrea+'(CONVw).webp'
-            im.save(nom,'webp',save_all=True)
-        display.insert(END,'Creado archivo: '+nom+'\n')
+        t3 = threading.Thread(target=convertir)
+        t3.start()
+
+def convertir():
+    nombrea,ex=os.path.splitext(((archivo_selec).split("/"))[-1])
+    if ex=='.webp':
+        nom=nombrea+'(CONVg).gif'
+        im.save(nom,'gif',save_all=True,background=0)
+    else:
+        nom=nombrea+'(CONVw).webp'
+        im.save(nom,'webp',save_all=True)
+    display.insert(END,'Creado archivo: '+nom+'\n')
 
 def verify():
     global ver
@@ -227,7 +231,7 @@ nframe = Frame()
 nframe.pack()
 
 Button(nframe,text='LIMPIAR',bg='light blue',command=clear,width=15,height=2).pack(side=LEFT)
-Button(nframe,text='CONVERTIR',bg='light blue',width=15,height=2,command=convertir).pack(side=LEFT)
+Button(nframe,text='CONVERTIR',bg='light blue',width=15,height=2,command=inicia_conv).pack(side=LEFT)
 Button(nframe,text='CARPETA',bg='light blue',width=15,height=2,command=direc).pack(side=LEFT)
 Button(nframe,text='EXTRAER',bg='light blue',width=15,height=2,command=iniciar_extract).pack(side=LEFT)
 Button(nframe,text='BUSCAR',bg='light blue',width=15,height=2,command=busca).pack(side=LEFT)
@@ -236,6 +240,5 @@ Button(nframe,text='RECORTAR',bg='light blue',width=15,height=2,command=recorte)
 texto_inicio()
 
 ventana.mainloop()
-
 
 
