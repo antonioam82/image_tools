@@ -17,16 +17,20 @@ im = ""
 ver = False
 canvas = ""
 
-def convertir():
+def inicia_conv():
     if im!="":
-        nombrea,ex=os.path.splitext(((archivo_selec).split("/"))[-1])
-        if ex=='.webp':
-            nom=nombrea+'(CONVg).gif'
-            im.save(nom,'gif',save_all=True,background=0)
-        else:
-            nom=nombrea+'(CONVw).webp'
-            im.save(nom,'webp',save_all=True)
-        display.appendtext('Creado archivo: '+nom+'\n')
+        t3 = threading.Thread(target=convertir)
+        t3.start()
+
+def convertir():
+    nombrea,ex=os.path.splitext(((archivo_selec).split("/"))[-1])
+    if ex=='.webp':
+        nom=nombrea+'(CONVg).gif'
+        im.save(nom,'gif',save_all=True,background=0)
+    else:
+        nom=nombrea+'(CONVw).webp'
+        im.save(nom,'webp',save_all=True)
+    display.appendtext('Creado archivo: '+nom+'\n')
 
 def verify():
     global ver
@@ -233,7 +237,7 @@ buttons.pack(fill='both', expand=1, padx=1, pady=1)
 
 buttons.add('LIMPIAR',bg='light green',command=12)
 buttons.add('CARPETA',bg='light green',command=direc)
-buttons.add('CONVERTIR',bg='light green',command=convertir)
+buttons.add('CONVERTIR',bg='light green',command=inicia_conv)
 buttons.add('EXTRAER',bg='light green',command=iniciar_extract)
 buttons.add('BUSCAR',bg='light green',command=busca)
 buttons.add('RECORTAR',bg='light green',command=recorte)
@@ -243,7 +247,6 @@ buttons.alignbuttons()
 texto_inicio()
 
 ventana.mainloop()
-
 
 
 
