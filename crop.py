@@ -10,10 +10,10 @@ def convertir():
     if im!="":
         nombrea,ex=os.path.splitext(((archivo_selec).split("/"))[-1])
         if ex=='.webp':
-            nom=nombrea+'.gif'
+            nom=nombrea+'(CONVg).gif'
             im.save(nom,'gif',save_all=True,background=0)
         else:
-            nom=nombrea+'.webp'
+            nom=nombrea+'(CONVw).webp'
             im.save(nom,'webp',save_all=True)
         display.insert(END,'Creado archivo: '+nom+'\n')
 
