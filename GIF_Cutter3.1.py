@@ -25,10 +25,10 @@ def inicia_conv():
 def convertir():
     nombrea,ex=os.path.splitext(((archivo_selec).split("/"))[-1])
     if ex=='.webp':
-        nom=nombrea+'(CONVg).gif'
+        nom=nombrea+'(CONV).gif'
         im.save(nom,'gif',save_all=True,background=0)
     else:
-        nom=nombrea+'(CONVw).webp'
+        nom=nombrea+'(CONV).webp'
         im.save(nom,'webp',save_all=True)
     display.appendtext('Creado archivo: '+nom+'\n')
 
@@ -225,8 +225,8 @@ def texto_inicio():
 display = Pmw.ScrolledText(ventana, hscrollmode='none',
                       vscrollmode='dynamic', hull_relief='sunken',
                       hull_background='gray20', hull_borderwidth=10,
-                      text_background='black', text_width=73,
-                      text_foreground='light blue', text_height=22,
+                      text_background='blue', text_width=73,
+                      text_foreground='green2', text_height=22,
                       text_padx=10, text_pady=10, text_relief='groove',
                       text_font=('Fixedsys', 10))
 display.pack(padx=0,pady=0)
@@ -235,7 +235,7 @@ buttons = Pmw.ButtonBox(ventana,hull_background="LightBlue3")
 
 buttons.pack(fill='both', expand=1, padx=1, pady=1)
 
-buttons.add('LIMPIAR',bg='light green',command=12)
+buttons.add('LIMPIAR',bg='light green',command=clear)
 buttons.add('CARPETA',bg='light green',command=direc)
 buttons.add('CONVERTIR',bg='light green',command=inicia_conv)
 buttons.add('EXTRAER',bg='light green',command=iniciar_extract)
@@ -247,6 +247,7 @@ buttons.alignbuttons()
 texto_inicio()
 
 ventana.mainloop()
+
 
 
 
