@@ -221,8 +221,8 @@ ver = False
 canvas = ""
 
 display = scrolledtext.ScrolledText(ventana,borderwidth=10,
-                      background='light gray', width=73,
-                      foreground='black', height=22,
+                      background='blue', width=73,
+                      foreground='green2', height=22,
                       padx=10, pady=10,#relief='groove'
                       font=('Fixedsys', 10))
 display.pack(padx=0,pady=0)
