@@ -212,6 +212,7 @@ def texto_inicio():
 
 ventana = Tk()
 ventana.title("GIF CUTTER")
+ventana.config(background="light green")
 _start = ""
 _end = ""
 size = ""
@@ -240,5 +241,4 @@ Button(nframe,text='RECORTAR',bg='light blue',width=15,height=2,command=recorte)
 texto_inicio()
 
 ventana.mainloop()
-
 
