@@ -155,7 +155,7 @@ def recorte():
 
 def name_file(cr,c,n):
     if cr == True:
-        nf = n+" crop "+str(count)+".png"
+        nf = n+"_crop "+str(count)+".png"
     else:
         nf = n+" "+str(count)+".png"
     return nf
@@ -241,4 +241,5 @@ Button(nframe,text='RECORTAR',bg='light blue',width=15,height=2,command=recorte)
 texto_inicio()
 
 ventana.mainloop()
+
 
