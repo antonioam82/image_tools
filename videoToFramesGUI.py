@@ -63,7 +63,7 @@ class App:
                 cv2.imwrite(name,frame)
                 count += 1
             else:
-                self.display.appendtext("\n\nPROCESS FINISHED: {} frames generated".format(count))
+                self.display.appendtext("\n\nPROCESS FINISHED: {} frames generated\n".format(count))
                 break
 
         self.cam.release()
