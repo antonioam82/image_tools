@@ -6,9 +6,6 @@ import cv2
 import threading
 import os
 
-os.chdir(r'C:\Users\Antonio\Documents\Nueva carpeta')
-
-
 class App:
     def __init__(self):
 
