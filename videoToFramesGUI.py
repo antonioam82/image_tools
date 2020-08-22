@@ -6,9 +6,6 @@ import cv2
 import threading
 import os
 
-os.chdir(r'C:\Users\Antonio\Documents\Nueva carpeta')
-
-
 class App:
     def __init__(self):
 
@@ -27,8 +24,8 @@ class App:
         botones = Pmw.ButtonBox(self.ventana)
         botones.pack(fill='both',expand=1,padx=1,pady=1)
 
-        botones.add('SELECT VIDEO',width=35,bg='light green',command=self.openFile)
-        botones.add('EXTRACT FRAMES',width=35,bg='light green',command=self.initExtract)
+        botones.add('SELECT VIDEO',width=35,bg='goldenrod1',command=self.openFile)
+        botones.add('EXTRACT FRAMES',width=35,bg='goldenrod1',command=self.initExtract)
 
         botones.alignbuttons()
 
