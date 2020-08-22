@@ -6,12 +6,14 @@ import cv2
 import threading
 import os
 
+os.chdir(r'C:\Users\Antonio\Documents\Nueva carpeta')
+
+
 class App:
     def __init__(self):
 
         self.ventana = Pmw.initialise(fontScheme = 'pmw1')
         self.file = ""
-
         self.display = Pmw.ScrolledText(self.ventana,hscrollmode='none',
                       vscrollmode='dynamic', hull_relief='sunken',
                       hull_background='gray20', hull_borderwidth=10,
@@ -43,13 +45,6 @@ class App:
 
     def extractFrames(self):
 
-        """try:
-            if not os.path.exists('video_frames'):
-                os.makedirs('video_frames')
-
-        except OSError:
-            print('ERROR')"""
-
         count = 0
         while(True):
             ret,frame = self.cam.read()
@@ -68,10 +63,14 @@ class App:
 
     def initExtract(self):
         if self.file != "":
-            t = threading.Thread(target=self.extractFrames)
-            t.start()
+            direct = filedialog.askdirectory()
+            if direct != "":
+                os.chdir(direct)
+                t = threading.Thread(target=self.extractFrames)
+                t.start()
             
             
 if __name__=="__main__":
     App()
+
 
