@@ -3,7 +3,10 @@
 from tkinter import filedialog
 import Pmw
 import cv2
+import threading
 import os
+
+os.chdir(r'C:\Users\Antonio\Documents\Nueva carpeta')
 
 
 class App:
@@ -25,7 +28,7 @@ class App:
         botones.pack(fill='both',expand=1,padx=1,pady=1)
 
         botones.add('SELECT VIDEO',width=50,bg='light green',command=self.openFile)
-        botones.add('EXTRACT FRAMES',width=50,bg='light green',command=self.extractFrames)
+        botones.add('EXTRACT FRAMES',width=50,bg='light green',command=self.initExtract)
 
         botones.alignbuttons()
 
@@ -41,7 +44,7 @@ class App:
             self.display.appendtext('ROOT: {}\n'.format(file))
 
     def extractFrames(self):
-        print(os.getcwd())
+
         """try:
             if not os.path.exists('video_frames'):
                 os.makedirs('video_frames')
@@ -59,11 +62,17 @@ class App:
                 cv2.imwrite(self.name,self.frame)
                 count += 1
             else:
+                self.display.appendtext("\n\nPROCESS FINISHED: {} frames generated".format(count))
                 break
 
         self.cam.release()
         cv2.destroyAllWindows()
+
+    def initExtract(self):
+        t = threading.Thread(target=self.extractFrames)
+        t.start()
             
             
 if __name__=="__main__":
     App()
+
