@@ -11,6 +11,8 @@ class App:
 
         self.ventana = Pmw.initialise(fontScheme = 'pmw1')
         self.file = ""
+        self.ventana.title('VIDEO TO FRAMES')
+        self.ventana.configure(bg='SeaGreen1')
         self.display = Pmw.ScrolledText(self.ventana,hscrollmode='none',
                       vscrollmode='dynamic', hull_relief='sunken',
                       hull_background='gray20', hull_borderwidth=10,
@@ -24,8 +26,8 @@ class App:
         botones = Pmw.ButtonBox(self.ventana)
         botones.pack(fill='both',expand=1,padx=1,pady=1)
 
-        botones.add('SELECT VIDEO',width=35,bg='goldenrod1',command=self.openFile)
-        botones.add('EXTRACT FRAMES',width=35,bg='goldenrod1',command=self.initExtract)
+        botones.add('SELECT VIDEO',width=35,bg='green yellow',command=self.openFile)
+        botones.add('EXTRACT FRAMES',width=35,bg='green yellow',command=self.initExtract)
 
         botones.alignbuttons()
 
