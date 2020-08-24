@@ -38,6 +38,8 @@ class App:
                 filetypes=(("mp4 files","*.mp4"),("all files","*.*")))
 
         if self.file != "":
+            archiv = self.file.split("/")[-1]
+            self.name,ex = os.path.splitext(archiv)
             self.cam = cv2.VideoCapture(self.file)
 
             self.display.appendtext('ROOT: {}\n'.format(self.file))
@@ -49,7 +51,7 @@ class App:
             ret,frame = self.cam.read()
             
             if ret:
-                name = 'frame'+str(count)+'.jpg'
+                name = self.name+str(count)+'.jpg'
                 self.display.appendtext('Creating...{}\n'.format(name))
                 cv2.imwrite(name,frame)
                 count += 1
