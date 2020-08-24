@@ -25,6 +25,8 @@ while True:
     
     root = input("Enter path to video: ")
     if os.path.exists(root):
+        file = root.split("/")[-1]
+        file_name,ex = os.path.splitext(file)
         cam = cv2.VideoCapture(root)
         #CREATE FRAME COUNTER.
         currentframe = 0
@@ -35,7 +37,7 @@ while True:
 
             if ret:
                 #IF VIDEO IS STILL LETF, CONTINUE CREATING FRAMES.
-                name = 'frame'+str(currentframe)+'.jpg'
+                name = file_name+str(currentframe)+'.jpg'
                 print('Creating...'+name)
         
                 #WRITE THE EXTRACTED FRAME.
