@@ -14,8 +14,8 @@ class App:
         self.ventana = Pmw.initialise(fontScheme = 'pmw1')
         self.label = Label(self.ventana,text="NO FILE SELECTED",bg='gray45',fg='white')
         self.label.pack(side='top')
-
         self.file = ""
+        self.executing = False
         self.ventana.title('VIDEO TO FRAMES')
         self.ventana.configure(bg='gray45')
         self.display = Pmw.ScrolledText(self.ventana,hscrollmode='none',
@@ -39,16 +39,17 @@ class App:
         self.ventana.mainloop()
 
     def openFile(self):
-        self.file = filedialog.askopenfilename(initialdir="/",title="SELECT FILE",
-                filetypes=(("mp4 files","*.mp4"),("all files","*.*")))
+        if self.executing == False:
+            self.file = filedialog.askopenfilename(initialdir="/",title="SELECT FILE",
+                                                   filetypes=(("mp4 files","*.mp4"),("all files","*.*")))
 
-        if self.file != "":
-            self.archiv = self.file.split("/")[-1]
-            self.name,ex = os.path.splitext(self.archiv)
-            self.cam = cv2.VideoCapture(self.file)
+            if self.file != "":
+                self.archiv = self.file.split("/")[-1]
+                self.name,ex = os.path.splitext(self.archiv)
+                self.cam = cv2.VideoCapture(self.file)
 
-            self.label.configure(text=self.archiv)
-            self.display.appendtext('ROOT: {}\n'.format(self.file))
+                self.label.configure(text=self.archiv)
+                self.display.appendtext('ROOT: {}\n'.format(self.file))
 
     def extractFrames(self):
 
@@ -63,15 +64,17 @@ class App:
                 count += 1
             else:
                 self.display.appendtext("\n\nPROCESS FINISHED: {} frames generated\n".format(count))
+                self.executing = False
                 break
 
         self.cam.release()
         cv2.destroyAllWindows()
 
     def initExtract(self):
-        if self.file != "":
+        if self.file != "" and self.executing == False:
             direct = filedialog.askdirectory()
             if direct != "":
+                self.executing = True
                 os.chdir(direct)
                 t = threading.Thread(target=self.extractFrames)
                 t.start()
