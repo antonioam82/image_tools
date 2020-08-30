@@ -48,13 +48,13 @@ class App:
             if self.file != "":
                 self.archiv = self.file.split("/")[-1]
                 self.name,ex = os.path.splitext(self.archiv)
-                self.cam = cv2.VideoCapture(self.file)
+                
 
                 self.label.configure(text=self.archiv)
                 self.display.appendtext('ROOT: {}\n'.format(self.file))
 
     def extractFrames(self):
-
+        self.cam = cv2.VideoCapture(self.file)
         count = 0
         while(True):
             ret,frame = self.cam.read()
