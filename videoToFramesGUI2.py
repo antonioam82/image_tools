@@ -80,9 +80,11 @@ class App:
         if self.color == True:
             self.color = False
             self.btnMode.configure(bg='light green',fg='red',text='CHANGE TO COLOR MODE')
+            self.display.appendtext('\nGRAY MODE\n')
         else:
             self.color = True
             self.btnMode.configure(bg='gray30',fg='white',text='CHANGE TO GRAY MODE')
+            self.display.appendtext('\nCOLOR MODE\n')
 
     def initExtract(self):
         if self.file != "" and self.executing == False:
