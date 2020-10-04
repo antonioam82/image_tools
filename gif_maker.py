@@ -99,18 +99,19 @@ while True:
                 if file in i:
                     frames.append(i[:-4])
             frames.sort(key=lambda x: int(x.split()[1]))
-            try:
-                frames_new = list(map(lambda x: x+".png",frames))
-            except:
-                frames_new = list(map(lambda x: x+".jpg",frames))
+            #try:
+                #frames_new = list(map(lambda x: x+".png",frames))
+            #except:
+                #print("busqueda se .jpg")
+            frames_new = list(map(lambda x: x+".jpg",frames))
             clip = ImageSequenceClip(frames_new,fps=speed)
             clip.write_gif(name)
             print("\nTAMAÑO")
             siz = size((os.stat(name)[6]))
             print("\n")
             show(name)
-        except:
-            print("Hubo un problema al realizar la operación")
+        except Exception as e:
+            print(str(e))
             
     print("")   
     conti = ns(input("¿Desea continuar?: "))
