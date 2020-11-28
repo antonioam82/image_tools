@@ -5,12 +5,11 @@ import random
 from os.path import isfile, join
 from VALID import OKI
 
-
 def convertToVideo(pathIn, pathOut, fps, time):
     print("\nCREATING VIDEO...\n")
     frame_array = []
     files = [f for f in os.listdir(pathIn) if isfile(join(pathIn, f))]
-    print(files)
+    #print(files)
     files.sort(key=lambda x: int((x.split(".")[0]).split(" ")[1]))#REORDENA FRAMES
     for i in range(len(files)):
         filename = pathIn+files[i]
@@ -49,7 +48,6 @@ def create_frames(d):
         print("DONE: ",name)
     print("TASK COMPLETED")
 
-#EJECUTAMOS  FUNCIÓN.
 directory = 'C:/Users/Antonio/Documents/videos/imas'
 create_frames(directory)
 
