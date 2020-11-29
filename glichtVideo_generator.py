@@ -3,7 +3,8 @@ import numpy as np
 import os
 import random
 from os.path import isfile, join
-from VALID import OKI
+from VALID import OKI, ns
+
 
 def convertToVideo(pathIn, pathOut, fps, time):
     print("\nCREATING VIDEO...\n")
@@ -28,6 +29,7 @@ def convertToVideo(pathIn, pathOut, fps, time):
     print("TASK COMPLETED")
 
 def create_frames(d):
+    global lista_frames
     os.chdir(d)
     fr_range = OKI(input("Número de frames: "))
     blu_rang = input("Rango azul: ")
@@ -46,8 +48,11 @@ def create_frames(d):
         name = "ima "+str(i)+".png"
         cv2.imwrite(name,img)
         print("DONE: ",name)
+        lista_frames.append(name)
     print("TASK COMPLETED")
 
+#EJECUTAMOS  FUNCIÓN.
+lista_frames=[]
 directory = 'C:/Users/Antonio/Documents/videos/imas'
 create_frames(directory)
 
@@ -56,3 +61,7 @@ pathOut=pathIn + 'glichtVid.mp4'
 fps = 30#15
 time = 2
 convertToVideo(pathIn, pathOut, fps, time)
+elim = ns(input("¿Eliminar frames generados?(n/s): "))
+if elim == "s":
+    for i in lista_frames:
+        os.remove(i)
