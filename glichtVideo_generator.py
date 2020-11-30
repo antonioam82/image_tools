@@ -57,7 +57,7 @@ create_frames(directory)
 
 pathIn = directory + '/'
 pathOut=pathIn + 'glichtVid.mp4' 
-fps = 30#15
+fps = 30
 time = 2
 convertToVideo(pathIn, pathOut, fps, time)
 elim = ns(input("¿Eliminar frames generados?(n/s): "))
