@@ -31,33 +31,37 @@ def convertToVideo(pathIn, pathOut, fps, time):
 def create_frames(d):
     global lista_frames
     os.chdir(d)
-    fr_range = int(((OKI(input("Duración en segundos: ")))*30)/2)
-    blu_rang = input("Rango azul: ")
-    gre_rang = input("Rango verde: ")
-    red_rang = input("Rango rojo: ")
-    rangB = blu_rang.split(",")
-    rangG = gre_rang.split(",")
-    rangR = red_rang.split(",")
+    frame_rate = OKI(input("Introduce Frame Rate: "))
+    fr_range = int(((OKI(input("Duración en segundos: ")))*frame_rate)/2)
+    blu_rang = input("Rango azul: ").split(",")
+    gre_rang = input("Rango verde: ").split(",")
+    red_rang = input("Rango rojo: ").split(",")
+    #rangB = blu_rang.split(",")
+    #rangG = gre_rang.split(",")
+    #rangR = red_rang.split(",")
     print("\nWRITTING "+str(fr_range)+" FRAMES...\n")
     for i in range(0,fr_range):
         img = np.zeros((900,1600,3),np.uint8)
 
         for x in range(900):
             for y in range(1600):
-                img[x,y] = [random.randint(int(rangB[0]),int(rangB[1])),random.randint(int(rangG[0]),int(rangG[1])),random.randint(int(rangR[0]),int(rangR[1]))]#0,256
+                img[x,y] = [random.randint(int(blu_rang[0]),int(blu_rang[1])),random.randint(int(gre_rang[0]),int(gre_rang[1])),random.randint(int(red_rang[0]),int(red_rang[1]))]#0,256
         name = "ima "+str(i)+".png"
+        
         cv2.imwrite(name,img)
         print("DONE: ",name)
         lista_frames.append(name)
     print("TASK COMPLETED")
+    return frame_rate
 
+#EJECUTAMOS  FUNCIÓN.
 lista_frames=[]
 directory = 'C:/Users/Antonio/Documents/videos/imas'
-create_frames(directory)
+fps = create_frames(directory)
 
 pathIn = directory + '/'
 pathOut=pathIn + 'glichtVid.mp4' 
-fps = 30
+#fps = #30#15
 time = 2
 convertToVideo(pathIn, pathOut, fps, time)
 elim = ns(input("¿Eliminar frames generados?(n/s): "))
