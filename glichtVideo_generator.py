@@ -5,7 +5,6 @@ import random
 from os.path import isfile, join
 from VALID import OKI, ns
 
-
 def convertToVideo(pathIn, pathOut, fps, time):
     print("\nCREATING VIDEO...\n")
     frame_array = []
