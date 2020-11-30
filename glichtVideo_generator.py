@@ -51,7 +51,6 @@ def create_frames(d):
         lista_frames.append(name)
     print("TASK COMPLETED")
 
-#EJECUTAMOS  FUNCIÓN.
 lista_frames=[]
 directory = 'C:/Users/Antonio/Documents/videos/imas'
 create_frames(directory)
