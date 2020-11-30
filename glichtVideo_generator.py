@@ -31,14 +31,14 @@ def convertToVideo(pathIn, pathOut, fps, time):
 def create_frames(d):
     global lista_frames
     os.chdir(d)
-    fr_range = OKI(input("Número de frames: "))
+    fr_range = int(((OKI(input("Duración en segundos: ")))*30)/2)
     blu_rang = input("Rango azul: ")
     gre_rang = input("Rango verde: ")
     red_rang = input("Rango rojo: ")
     rangB = blu_rang.split(",")
     rangG = gre_rang.split(",")
     rangR = red_rang.split(",")
-    print("\nCREATING FRAMES...\n")
+    print("\nWRITTING "+str(fr_range)+" FRAMES...\n")
     for i in range(0,fr_range):
         img = np.zeros((900,1600,3),np.uint8)
 
