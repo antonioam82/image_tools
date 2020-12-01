@@ -5,10 +5,11 @@ import random
 from os.path import isfile, join
 from VALID import OKI, ns
 
+
 def convertToVideo(pathIn, pathOut, fps, time):
     print("\nCREATING VIDEO...\n")
     frame_array = []
-    files = [f for f in os.listdir(pathIn) if isfile(join(pathIn, f))]
+    files = [f for f in os.listdir(pathIn) if isfile(join(pathIn, f)) and not 'glichtVid' in f]
     #print(files)
     files.sort(key=lambda x: int((x.split(".")[0]).split(" ")[1]))#REORDENA FRAMES
     for i in range(len(files)):
@@ -35,9 +36,7 @@ def create_frames(d):
     blu_rang = input("Rango azul: ").split(",")
     gre_rang = input("Rango verde: ").split(",")
     red_rang = input("Rango rojo: ").split(",")
-    #rangB = blu_rang.split(",")
-    #rangG = gre_rang.split(",")
-    #rangR = red_rang.split(",")
+
     print("\nWRITTING "+str(fr_range)+" FRAMES...\n")
     for i in range(0,fr_range):
         img = np.zeros((900,1600,3),np.uint8)
@@ -53,13 +52,12 @@ def create_frames(d):
     print("TASK COMPLETED")
     return frame_rate
 
-#EJECUTAMOS  FUNCIÓN.
 lista_frames=[]
 directory = 'C:/Users/Antonio/Documents/videos/imas'
 fps = create_frames(directory)
 
 pathIn = directory + '/'
-pathOut=pathIn + 'glichtVid.mp4' 
+pathOut=pathIn + 'glichtVid2.mp4' 
 #fps = #30#15
 time = 2
 convertToVideo(pathIn, pathOut, fps, time)
@@ -67,3 +65,4 @@ elim = ns(input("¿Eliminar frames generados?(n/s): "))
 if elim == "s":
     for i in lista_frames:
         os.remove(i)
+
