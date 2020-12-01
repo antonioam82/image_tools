@@ -8,8 +8,8 @@ from VALID import OKI, ns
 def convertToVideo(pathIn, pathOut, fps, time):
     print("\nCREATING VIDEO...\n")
     frame_array = []
-    files = [f for f in os.listdir(pathIn) if isfile(join(pathIn, f)) and not 'glichtVid' in f]
-    #print(files)
+    #files = [f for f in os.listdir(pathIn) if isfile(join(pathIn, f)) and not 'glichtVid' in f]
+    files = [f for f in lista_frames if isfile(join(pathIn, f)) and not 'glichtVid' in f]
     files.sort(key=lambda x: int((x.split(".")[0]).split(" ")[1]))#REORDENA FRAMES
     for i in range(len(files)):
         filename = pathIn+files[i]
@@ -56,8 +56,7 @@ directory = 'C:/Users/Antonio/Documents/videos/imas'
 fps = create_frames(directory)
 
 pathIn = directory + '/'
-pathOut=pathIn + 'glichtVid2.mp4' 
-#fps = #30#15
+pathOut=pathIn + 'glichtVid6.mp4'
 time = 2
 convertToVideo(pathIn, pathOut, fps, time)
 elim = ns(input("¿Eliminar frames generados?(n/s): "))
