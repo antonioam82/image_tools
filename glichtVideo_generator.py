@@ -5,6 +5,17 @@ import random
 from os.path import isfile, join
 from VALID import OKI, ns
 
+def define_name():
+    count = 0
+    for i in os.listdir():
+        if "glichtVid" in i:
+            count+=1
+    if count>0:
+        filename="glichtVid"+str(count)+".mp4"
+    else:
+        filename="glichtVid.mp4"
+    return filename
+
 def convertToVideo(pathIn, pathOut, fps, time):
     print("\nCREATING VIDEO...\n")
     frame_array = []
@@ -56,7 +67,8 @@ directory = 'C:/Users/Antonio/Documents/videos/imas'
 fps = create_frames(directory)
 
 pathIn = directory + '/'
-pathOut=pathIn + 'glichtVid6.mp4'
+fileName=define_name()
+pathOut=pathIn + fileName
 time = 2
 convertToVideo(pathIn, pathOut, fps, time)
 elim = ns(input("¿Eliminar frames generados?(n/s): "))
