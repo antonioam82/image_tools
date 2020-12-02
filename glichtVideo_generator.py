@@ -53,7 +53,8 @@ def create_frames(d):
 
         for x in range(900):
             for y in range(1600):
-                img[x,y] = [random.randint(int(blu_rang[0]),int(blu_rang[1])),random.randint(int(gre_rang[0]),int(gre_rang[1])),random.randint(int(red_rang[0]),int(red_rang[1]))]#0,256
+                img[x,y] = [random.randint(int(blu_rang[0]),int(blu_rang[1])),random.randint(int(gre_rang[0]),
+                            int(gre_rang[1])),random.randint(int(red_rang[0]),int(red_rang[1]))]#0,256
         name = "ima "+str(i)+".png"
         
         cv2.imwrite(name,img)
@@ -63,6 +64,7 @@ def create_frames(d):
     return frame_rate
 
 lista_frames=[]
+
 directory = 'C:/Users/Antonio/Documents/videos/imas'
 fps = create_frames(directory)
 
