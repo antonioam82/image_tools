@@ -63,18 +63,23 @@ def create_frames(d):
     print("TASK COMPLETED")
     return frame_rate
 
-lista_frames=[]
+while True:
+    lista_frames=[]
 
-directory = 'C:/Users/Antonio/Documents/videos/imas'
-fps = create_frames(directory)
+    directory = 'C:/Users/Antonio/Documents/videos/imas'
+    fps = create_frames(directory)
 
-pathIn = directory + '/'
-fileName=define_name()
-pathOut=pathIn + fileName
-time = 2
-convertToVideo(pathIn, pathOut, fps, time)
-elim = ns(input("¿Eliminar frames generados?(n/s): "))
-if elim == "s":
-    for i in lista_frames:
-        os.remove(i)
+    pathIn = directory + '/'
+    fileName=define_name()
+    pathOut=pathIn + fileName
+    time = 2
+    convertToVideo(pathIn, pathOut, fps, time)
+    elim = ns(input("¿Eliminar frames generados?(n/s): "))
+    if elim == "s":
+        for i in lista_frames:
+            os.remove(i)
+
+    conti = ns(input("¿Continuar?(n/s): "))
+    if conti == "n":
+        break
 
