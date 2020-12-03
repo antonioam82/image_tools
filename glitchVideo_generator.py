@@ -77,7 +77,6 @@ def validate_dir():
             break
     return dire
     
-
 while True:
     print("")
     print("_____________________________")
