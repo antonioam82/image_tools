@@ -63,10 +63,26 @@ def create_frames(d):
     print("TASK COMPLETED")
     return frame_rate
 
+def validate_dir():
+    while True:
+        dire = input("Introduce directorio válido: ")
+        if os.path.isdir(dire):
+            break
+    return dire
+    
+
 while True:
+    
+    print("")
+    print("_____________________________")
+    print("|                           |")
+    print("|      --GLITCH MAKER--     |")
+    print("|___________________________|")
+    print("")
+    
     lista_frames=[]
 
-    directory = 'C:/Users/Antonio/Documents/videos/imas'
+    directory = validate_dir() #input("Introduce directorio: ")#'C:/Users/Antonio/Documents/videos/imas'
     fps = create_frames(directory)
 
     pathIn = directory + '/'
