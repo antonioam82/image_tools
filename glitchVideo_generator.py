@@ -82,7 +82,7 @@ while True:
     
     lista_frames=[]
 
-    directory = validate_dir() #input("Introduce directorio: ")#'C:/Users/Antonio/Documents/videos/imas'
+    directory = validate_dir() 
     fps = create_frames(directory)
 
     pathIn = directory + '/'
