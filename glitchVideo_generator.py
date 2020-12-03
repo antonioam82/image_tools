@@ -43,16 +43,18 @@ def create_frames(d):
     os.chdir(d)
     frame_rate = OKI(input("Introduce Frame Rate: "))
     fr_range = int(((OKI(input("Duración en segundos: ")))*frame_rate)/2)
+    width = OKI(input("Ancho imagen: "))
+    height = OKI(input("Alto imagen: "))
     blu_rang = input("Rango azul: ").split(",")
     gre_rang = input("Rango verde: ").split(",")
     red_rang = input("Rango rojo: ").split(",")
 
     print("\nWRITTING "+str(fr_range)+" FRAMES...\n")
     for i in range(0,fr_range):
-        img = np.zeros((900,1600,3),np.uint8)
+        img = np.zeros((height,width,3),np.uint8)#900,1600
 
-        for x in range(900):
-            for y in range(1600):
+        for x in range(height):#900
+            for y in range(width):#1600
                 img[x,y] = [random.randint(int(blu_rang[0]),int(blu_rang[1])),random.randint(int(gre_rang[0]),
                             int(gre_rang[1])),random.randint(int(red_rang[0]),int(red_rang[1]))]#0,256
         name = "ima "+str(i)+".png"
@@ -72,7 +74,6 @@ def validate_dir():
     
 
 while True:
-    
     print("")
     print("_____________________________")
     print("|                           |")
@@ -82,7 +83,7 @@ while True:
     
     lista_frames=[]
 
-    directory = validate_dir() 
+    directory = validate_dir() #input("Introduce directorio: ")#'C:/Users/Antonio/Documents/videos/imas'
     fps = create_frames(directory)
 
     pathIn = directory + '/'
