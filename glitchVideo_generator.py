@@ -85,9 +85,7 @@ def validate_range(q):
             break
     return c
     
-    
 while True:
-    
     print("")
     print("_____________________________")
     print("|                           |")
