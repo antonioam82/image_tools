@@ -20,6 +20,7 @@ def convertToVideo(pathIn, pathOut, fps, time):
     if len(lista_frames) > 0:
         print("\nCREATING VIDEO...\n")
         frame_array = []
+        #files = [f for f in os.listdir(pathIn) if isfile(join(pathIn, f)) and not 'glichtVid' in f]
         files = [f for f in lista_frames if isfile(join(pathIn, f)) and not 'glichtVid' in f]
         files.sort(key=lambda x: int((x.split(".")[0]).split(" ")[1]))#REORDENA FRAMES
         for i in range(len(files)):
@@ -47,9 +48,9 @@ def create_frames(d):
     fr_range = int(((OKI(input("Duración en segundos: ")))*frame_rate)/2)
     width = OKI(input("Ancho imagen: "))
     height = OKI(input("Alto imagen: "))
-    blu_rang = input("Rango azul: ").split(",")
-    gre_rang = input("Rango verde: ").split(",")
-    red_rang = input("Rango rojo: ").split(",")
+    blu_rang = validate_range("Rango azul: ").split(",")
+    gre_rang = validate_range("Rango verde: ").split(",")
+    red_rang = validate_range("Rango rojo: ").split(",")
     
     if fr_range > 0:
         print("\nWRITTING "+str(fr_range)+" FRAMES...\n")
@@ -76,8 +77,17 @@ def validate_dir():
         if os.path.isdir(dire):
             break
     return dire
+
+def validate_range(q):
+    while True:
+        c = (input(q))
+        if str(c.split(",")[0]).isdigit() and str(c.split(",")[1]).isdigit():
+            break
+    return c
+    
     
 while True:
+    
     print("")
     print("_____________________________")
     print("|                           |")
@@ -87,7 +97,8 @@ while True:
     
     lista_frames=[]
 
-    directory = validate_dir()
+    #directory = validate_dir() #input("Introduce directorio: ")#'C:/Users/Antonio/Documents/videos/imas'
+    directory = 'C:/Users/Antonio/Documents/videos/imas'
     fps = create_frames(directory)
 
     pathIn = directory + '/'
@@ -104,4 +115,3 @@ while True:
     conti = ns(input("¿Continuar?(n/s): "))
     if conti == "n":
         break
-
