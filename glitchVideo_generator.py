@@ -20,7 +20,6 @@ def convertToVideo(pathIn, pathOut, fps, time):
     if len(lista_frames) > 0:
         print("\nCREATING VIDEO...\n")
         frame_array = []
-        #files = [f for f in os.listdir(pathIn) if isfile(join(pathIn, f)) and not 'glichtVid' in f]
         files = [f for f in lista_frames if isfile(join(pathIn, f)) and not 'glichtVid' in f]
         files.sort(key=lambda x: int((x.split(".")[0]).split(" ")[1]))#REORDENA FRAMES
         for i in range(len(files)):
@@ -85,9 +84,7 @@ def validate_range(q):
             break
     return c
     
-    
 while True:
-    
     print("")
     print("_____________________________")
     print("|                           |")
