@@ -76,6 +76,8 @@ def validate_size(st):
         size = OKI(input(st))
         if size > 0:
             break
+        else:
+            print("El valor introducido debe ser mayorde 0")
     return size
     
 def validate_dir():
