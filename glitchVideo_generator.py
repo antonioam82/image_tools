@@ -20,6 +20,7 @@ def convertToVideo(pathIn, pathOut, fps, time):
     if len(lista_frames) > 0:
         print("\nCREATING VIDEO...\n")
         frame_array = []
+        #files = [f for f in os.listdir(pathIn) if isfile(join(pathIn, f)) and not 'glichtVid' in f]
         files = [f for f in lista_frames if isfile(join(pathIn, f)) and not 'glichtVid' in f]
         files.sort(key=lambda x: int((x.split(".")[0]).split(" ")[1]))#REORDENA FRAMES
         for i in range(len(files)):
@@ -45,8 +46,8 @@ def create_frames(d):
     os.chdir(d)
     frame_rate = OKI(input("Introduce Frame Rate: "))
     fr_range = int(((OKI(input("Duración en segundos: ")))*frame_rate)/2)
-    width = OKI(input("Ancho imagen: "))
-    height = OKI(input("Alto imagen: "))
+    width = validate_size("Ancho imagen: ")
+    height = validate_size("Alto imagen: ")
     blu_rang = validate_range("Rango azul: ").split(",")
     gre_rang = validate_range("Rango verde: ").split(",")
     red_rang = validate_range("Rango rojo: ").split(",")
@@ -70,6 +71,13 @@ def create_frames(d):
     else:
         print("\n0 FRAMES GENERADOS")
 
+def validate_size(st):
+    while True:
+        size = OKI(input(st))
+        if size > 0:
+            break
+    return size
+    
 def validate_dir():
     while True:
         dire = input("Introduce directorio válido: ")
@@ -80,8 +88,10 @@ def validate_dir():
 def validate_range(q):
     while True:
         c = (input(q))
-        if str(c.split(",")[0]).isdigit() and str(c.split(",")[1]).isdigit():
-            break
+        tup=len(c.split(","))
+        if tup == 2:
+            if str(c.split(",")[0]).isdigit() and str(c.split(",")[1]).isdigit():
+                break
     return c
     
 while True:
@@ -94,7 +104,8 @@ while True:
     
     lista_frames=[]
 
-    directory = validate_dir() 
+    #directory = validate_dir() #input("Introduce directorio: ")#'C:/Users/Antonio/Documents/videos/imas'
+    directory = 'C:/Users/Antonio/Documents/videos/imas'
     fps = create_frames(directory)
 
     pathIn = directory + '/'
