@@ -20,7 +20,6 @@ def convertToVideo(pathIn, pathOut, fps, time):
     if len(lista_frames) > 0:
         print("\nCREATING VIDEO...\n")
         frame_array = []
-        #files = [f for f in os.listdir(pathIn) if isfile(join(pathIn, f)) and not 'glichtVid' in f]
         files = [f for f in lista_frames if isfile(join(pathIn, f)) and not 'glichtVid' in f]
         files.sort(key=lambda x: int((x.split(".")[0]).split(" ")[1]))#REORDENA FRAMES
         for i in range(len(files)):
@@ -82,7 +81,7 @@ def validate_size(st):
     
 def validate_dir():
     while True:
-        dire = input("Introduce directorio válido: ")
+        dire = input("Introduce directorio válido(ej:C:/Users/..): ")
         if os.path.isdir(dire):
             break
     return dire
@@ -95,7 +94,7 @@ def validate_range(q):
             if str(c.split(",")[0]).isdigit() and str(c.split(",")[1]).isdigit():
                 break
     return c
-    
+
 while True:
     print("")
     print("_____________________________")
@@ -106,10 +105,10 @@ while True:
     
     lista_frames=[]
 
-    directory = validate_dir() 
+    directory = validate_dir() #input("Introduce directorio: ")#'C:/Users/Antonio/Documents/videos/imas'
     fps = create_frames(directory)
 
-    pathIn = directory + '/'
+    pathIn = directory + '/' 
     fileName=define_name()
     pathOut=pathIn + fileName
     time = 2
