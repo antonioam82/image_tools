@@ -3,17 +3,28 @@ import numpy as np
 import os
 import random
 from os.path import isfile, join
-from VALID import OKI, ns
+
+def OKI(n):
+    try:
+        n=int(n)
+    except:
+        n=OKI(input("Caracter no valido: "))
+    return n
+
+def ns(c):
+    while c!=("s") and c!=("n"):
+        print(chr(7));c=input("Escribe solo \'n\' o \'s\' según su opción: ")
+    return(c)
 
 def define_name():
     count = 0
     for i in os.listdir():
-        if "glichtVid" in i:
+        if "glitchVid" in i:
             count+=1
     if count>0:
-        filename="glichtVid"+str(count)+".mp4"
+        filename="glitchVid"+str(count)+".mp4"
     else:
-        filename="glichtVid.mp4"
+        filename="glitchVid.mp4"
     return filename
 
 def convertToVideo(pathIn, pathOut, fps, time):
@@ -54,10 +65,10 @@ def create_frames(d):
     if fr_range > 0:
         print("\nWRITTING "+str(fr_range)+" FRAMES...\n")
         for i in range(0,fr_range):
-            img = np.zeros((height,width,3),np.uint8)#900,1600
+            img = np.zeros((height,width,3),np.uint8)
 
-            for x in range(height):#900
-                for y in range(width):#1600
+            for x in range(height):
+                for y in range(width):
                     img[x,y] = [random.randint(int(blu_rang[0]),int(blu_rang[1])),random.randint(int(gre_rang[0]),
                                 int(gre_rang[1])),random.randint(int(red_rang[0]),int(red_rang[1]))]#0,256
             name = "ima "+str(i)+".png"
@@ -76,7 +87,7 @@ def validate_size(st):
         if size > 0:
             break
         else:
-            print("El valor introducido debe ser mayorde 0")
+            print("El valor introducido debe ser mayor de 0")
     return size
     
 def validate_dir():
@@ -89,9 +100,12 @@ def validate_dir():
 def validate_range(q):
     while True:
         c = (input(q))
-        tup=len(c.split(","))
-        if tup == 2 and str(c.split(",")[0]).isdigit() and str(c.split(",")[1]).isdigit():
-            break
+        tup= c.split(",")
+        if len(tup) == 2:
+            elem1 = tup[0]
+            elem2 = tup[1]
+            if str(elem1).isdigit() and str(elem2).isdigit() and int(elem1) < int(elem2):
+                break
     return c
 
 while True:
@@ -104,7 +118,7 @@ while True:
     
     lista_frames=[]
 
-    directory = validate_dir() 
+    directory = validate_dir()
     fps = create_frames(directory)
 
     pathIn = directory + '/' 
