@@ -90,9 +90,8 @@ def validate_range(q):
     while True:
         c = (input(q))
         tup=len(c.split(","))
-        if tup == 2:
-            if str(c.split(",")[0]).isdigit() and str(c.split(",")[1]).isdigit():
-                break
+        if tup == 2 and str(c.split(",")[0]).isdigit() and str(c.split(",")[1]).isdigit():
+            break
     return c
 
 while True:
@@ -105,7 +104,7 @@ while True:
     
     lista_frames=[]
 
-    directory = validate_dir() #input("Introduce directorio: ")#'C:/Users/Antonio/Documents/videos/imas'
+    directory = validate_dir() 
     fps = create_frames(directory)
 
     pathIn = directory + '/' 
