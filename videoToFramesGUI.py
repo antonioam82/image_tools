@@ -32,7 +32,6 @@ class App:
         botones.pack(fill='both',expand=1,padx=1,pady=1)
         self.btnMode = Button(self.ventana,text="CHANGE TO GRAY MODE",width=73,bg='gray30',fg='white',command=self.mode)
         self.btnMode.pack(side='bottom')
-
         botones.add('SELECT VIDEO',width=35,bg='gray80',command=self.openFile)
         botones.add('EXTRACT FRAMES',width=35,bg='gray80',command=self.initExtract)
 
