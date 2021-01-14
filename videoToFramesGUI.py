@@ -28,7 +28,7 @@ class App:
         
         self.display.pack(padx=0,pady=0)
 
-        botones = Pmw.ButtonBox(self.ventana)
+        botones = Pmw.ButtonBox(self.ventana,hull_background="red")
         botones.pack(fill='both',expand=1,padx=1,pady=1)
         self.btnMode = Button(self.ventana,text="CHANGE TO GRAY MODE",width=73,bg='gray30',fg='white',command=self.mode)
         self.btnMode.pack(side='bottom')
@@ -94,7 +94,6 @@ class App:
                 os.chdir(direct)
                 t = threading.Thread(target=self.extractFrames)
                 t.start()
-            
             
 if __name__=="__main__":
     App()
