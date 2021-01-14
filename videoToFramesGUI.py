@@ -48,8 +48,6 @@ class App:
             if self.file != "":
                 self.archiv = self.file.split("/")[-1]
                 self.name,ex = os.path.splitext(self.archiv)
-                
-
                 self.label.configure(text=self.archiv)
                 self.display.appendtext('ROOT: {}\n'.format(self.file))
 
