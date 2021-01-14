@@ -48,6 +48,8 @@ class App:
             if self.file != "":
                 self.archiv = self.file.split("/")[-1]
                 self.name,ex = os.path.splitext(self.archiv)
+                
+
                 self.label.configure(text=self.archiv)
                 self.display.appendtext('ROOT: {}\n'.format(self.file))
 
@@ -59,7 +61,7 @@ class App:
             
             if ret:
                 name = self.name+" "+str(count)+'.jpg'
-                self.display.appendtext('Creating...{}\n'.format(name))
+                self.display.appendtext('Generated frame: {}\n'.format(name))
                 if self.color == False:
                     gray_frame = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)#
                     cv2.imwrite(name,gray_frame)
@@ -92,6 +94,7 @@ class App:
                 os.chdir(direct)
                 t = threading.Thread(target=self.extractFrames)
                 t.start()
+            
             
 if __name__=="__main__":
     App()
