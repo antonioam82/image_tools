@@ -59,10 +59,11 @@ class App:
         while(True):
             ret,frame = self.cam.read()
             if self.extract == False:
-                self.display.appendtext("\nSTOPPED\n")
+                self.display.appendtext("\nSTOPPED: {} frames generated\n".format(count-1))
                 break
             if ret:
                 name = self.name+" "+str(count)+'.jpg'
+                
                 self.display.appendtext('Generated frame: {}\n'.format(name))
                 if self.color == False:
                     gray_frame = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)#
@@ -71,7 +72,7 @@ class App:
                     cv2.imwrite(name,frame)
                 count += 1
             else:
-                self.display.appendtext("\n\nPROCESS FINISHED: {} frames generated\n".format(count))
+                self.display.appendtext("\n\nPROCESS FINISHED: {} frames generated\n".format(count-1))
                 self.executing = False
                 break
 
@@ -80,6 +81,7 @@ class App:
 
     def stop_pro(self):
         self.extract = False
+        self.executing = False
 
     def mode(self):
         if self.color == True:
@@ -100,6 +102,7 @@ class App:
                 os.chdir(direct)
                 t = threading.Thread(target=self.extractFrames)
                 t.start()
+            
             
 if __name__=="__main__":
     App()
