@@ -37,7 +37,7 @@ class App:
         botones.add('SELECT VIDEO',width=23,bg='gray80',command=self.openFile)
         botones.add('EXTRACT FRAMES',width=23,bg='gray80',command=self.initExtract)
         botones.add('STOP',width=23,bg='gray80',command=self.stop_pro)
-
+        self.display.appendtext("HELLO :)")
         botones.alignbuttons()
 
         self.ventana.mainloop()
@@ -48,6 +48,7 @@ class App:
                                                    filetypes=(("mp4 files","*.mp4"),("all files","*.*")))
 
             if self.file != "":
+                self.display.clear()
                 self.archiv = self.file.split("/")[-1]
                 self.name,ex = os.path.splitext(self.archiv)
                 self.label.configure(text=self.archiv)
@@ -103,7 +104,9 @@ class App:
                 t = threading.Thread(target=self.extractFrames)
                 t.start()
             
+            
 if __name__=="__main__":
     App()
+
 
 
