@@ -104,7 +104,6 @@ class App:
                 t = threading.Thread(target=self.extractFrames)
                 t.start()
             
-            
 if __name__=="__main__":
     App()
 
