@@ -55,6 +55,7 @@ class App:
                 self.display.appendtext('ROOT: {}\n'.format(self.file))
 
     def extractFrames(self):
+        self.display.clear()##########
         self.cam = cv2.VideoCapture(self.file)
         count = 1#0
         while(True):
