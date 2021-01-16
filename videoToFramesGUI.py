@@ -60,7 +60,7 @@ class App:
         while(True):
             ret,frame = self.cam.read()
             if self.extract == False:
-                self.display.appendtext("\nSTOPPED: {} frames generated\n".format(count-1))
+                self.display.appendtext("\nSTOPPED: {} frames generated.\n".format(count-1))
                 break
             if ret:
                 name = self.name+" "+str(count)+'.jpg'
@@ -73,7 +73,7 @@ class App:
                     cv2.imwrite(name,frame)
                 count += 1
             else:
-                self.display.appendtext("\n\nPROCESS FINISHED: {} frames generated\n".format(count-1))
+                self.display.appendtext("\n\nPROCESS FINISHED: {} frames generated.\n".format(count-1))
                 self.executing = False
                 break
 
@@ -103,6 +103,7 @@ class App:
                 os.chdir(direct)
                 t = threading.Thread(target=self.extractFrames)
                 t.start()
+            
             
 if __name__=="__main__":
     App()
