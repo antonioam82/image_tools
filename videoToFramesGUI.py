@@ -37,7 +37,7 @@ class App:
         botones.add('SELECT VIDEO',width=23,bg='gray80',command=self.openFile)
         botones.add('EXTRACT FRAMES',width=23,bg='gray80',command=self.initExtract)
         botones.add('STOP',width=23,bg='gray80',command=self.stop_pro)
-        self.display.appendtext("HELLO :)")
+        self.display.appendtext("WELCOME.")
         botones.alignbuttons()
 
         self.ventana.mainloop()
