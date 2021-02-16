@@ -15,6 +15,10 @@ class app():
         self.entryDir.place(x=0,y=0)
         self.textEntry = sct.ScrolledText(self.window,width=70,height=15)
         self.textEntry.place(x=5,y=28)
+        self.btnCopy = Button(self.window,text="COPY TEXT")
+        self.btnCopy.place(x=5,y=277)
+        self.btnClear = Button(self.window,text="CLEAR TEXT")
+        self.btnClear.place(x=80,y=277)
 
         self.window.mainloop()
 
