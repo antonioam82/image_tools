@@ -9,7 +9,10 @@ class app():
     def __init__(self):
         self.window = Tk()
         self.window.title("Image Steganography")
-        self.window.geometry("590x500")
+        self.window.geometry("593x500")
+
+        self.entryDir = Entry(self.window,width=98)
+        self.entryDir.place(x=0,y=0)
 
         self.window.mainloop()
 
