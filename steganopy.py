@@ -1,4 +1,7 @@
 from tkinter import *
+from tkinter import ttk
+from tkinter import messagebox, filedialog
+import tkinter.scrolledtext as sct
 import cv2
 import numpy as np
 
