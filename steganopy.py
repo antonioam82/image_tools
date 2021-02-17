@@ -31,8 +31,6 @@ class app():
         self.btnSearch = Button(self.window,text="SEARCH",width=20)
         self.btnSearch.place(x=5,y=315)
         
-        
-
         self.show_dir()
 
         self.window.mainloop()
