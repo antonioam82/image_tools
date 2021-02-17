@@ -28,6 +28,9 @@ class app():
         self.rdbEncode.place(x=420,y=277)
         self.rdbDecode = Radiobutton(self.window,text="Decode",variable=self.mode,value="de")
         self.rdbDecode.place(x=506,y=277)
+        self.btnSearch = Button(self.window,text="SEARCH",width=20)
+        self.btnSearch.place(x=5,y=315)
+        
         
 
         self.show_dir()
