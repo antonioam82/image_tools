@@ -13,6 +13,8 @@ class app():
         self.window.geometry("593x520")
 
         self.current_dir = StringVar()
+        self.mode = StringVar()
+        self.mode.set(None)
 
         self.entryDir = Entry(self.window,width=98,textvariable=self.current_dir)
         self.entryDir.place(x=0,y=0)
@@ -22,10 +24,11 @@ class app():
         self.btnCopy.place(x=5,y=277)
         self.btnClear = Button(self.window,text="CLEAR TEXT")
         self.btnClear.place(x=80,y=277)
-        self.rdbEncode = Radiobutton(self.window,text="Encode")
+        self.rdbEncode = Radiobutton(self.window,text="Encode",variable=self.mode,value="en")
         self.rdbEncode.place(x=420,y=277)
-        self.rdbDecode = Radiobutton(self.window,text="Decode")
+        self.rdbDecode = Radiobutton(self.window,text="Decode",variable=self.mode,value="de")
         self.rdbDecode.place(x=506,y=277)
+        
 
         self.show_dir()
 
@@ -38,4 +41,5 @@ class app():
 
 if __name__=="__main__":
     app()
+
 
