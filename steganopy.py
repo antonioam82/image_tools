@@ -12,6 +12,7 @@ class app():
         self.window.title("Image Steganography")
         self.window.geometry("593x520")
 
+        self.imaname = StringVar()
         self.current_dir = StringVar()
         self.mode = StringVar()
         self.mode.set(None)
@@ -30,7 +31,11 @@ class app():
         self.rdbDecode.place(x=506,y=277)
         self.btnSearch = Button(self.window,text="SEARCH",width=20)
         self.btnSearch.place(x=5,y=315)
+        self.entImage = Entry(self.window,width=37,font=('arial',14,'bold'),textvariable=self.imaname)
+        self.entImage.place(x=167,y=315)
         
+        
+
         self.show_dir()
 
         self.window.mainloop()
