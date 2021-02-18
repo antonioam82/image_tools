@@ -10,7 +10,7 @@ class app():
     def __init__(self):
         self.window = Tk()
         self.window.title("Image Steganography")
-        self.window.geometry("593x520")
+        self.window.geometry("593x410")
 
         self.imaname = StringVar()
         self.current_dir = StringVar()
@@ -33,7 +33,8 @@ class app():
         self.btnSearch.place(x=5,y=315)
         self.entImage = Entry(self.window,width=37,font=('arial',14,'bold'),textvariable=self.imaname)
         self.entImage.place(x=167,y=315)
-        
+        self.btnStart = Button(self.window,text="START",width=81)
+        self.btnStart.place(x=5,y=358)
         
 
         self.show_dir()
