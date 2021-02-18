@@ -11,6 +11,8 @@ class app():
         self.window = Tk()
         self.window.title("Image Steganography")
         self.window.geometry("593x410")
+        self.backgr = "gray90"
+        #self.window.configure(bg=self.backgr)
 
         self.imaname = StringVar()
         self.current_dir = StringVar()
@@ -21,19 +23,19 @@ class app():
         self.entryDir.place(x=0,y=0)
         self.textEntry = sct.ScrolledText(self.window,width=70,height=15)
         self.textEntry.place(x=5,y=28)
-        self.btnCopy = Button(self.window,text="COPY TEXT")
+        self.btnCopy = Button(self.window,text="COPY TEXT",bg=self.backgr)
         self.btnCopy.place(x=5,y=277)
-        self.btnClear = Button(self.window,text="CLEAR TEXT")
+        self.btnClear = Button(self.window,text="CLEAR TEXT",bg=self.backgr)
         self.btnClear.place(x=80,y=277)
         self.rdbEncode = Radiobutton(self.window,text="Encode",variable=self.mode,value="en")
         self.rdbEncode.place(x=420,y=277)
         self.rdbDecode = Radiobutton(self.window,text="Decode",variable=self.mode,value="de")
         self.rdbDecode.place(x=506,y=277)
-        self.btnSearch = Button(self.window,text="SEARCH",width=20)
+        self.btnSearch = Button(self.window,text="SEARCH",width=20,bg=self.backgr)
         self.btnSearch.place(x=5,y=315)
         self.entImage = Entry(self.window,width=37,font=('arial',14,'bold'),textvariable=self.imaname)
         self.entImage.place(x=167,y=315)
-        self.btnStart = Button(self.window,text="START",width=81)
+        self.btnStart = Button(self.window,text="START",width=81,bg=self.backgr)
         self.btnStart.place(x=5,y=358)
         
 
