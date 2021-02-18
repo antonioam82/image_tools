@@ -27,9 +27,9 @@ class app():
         self.btnCopy.place(x=5,y=277)
         self.btnClear = Button(self.window,text="CLEAR TEXT",bg=self.backgr)
         self.btnClear.place(x=80,y=277)
-        self.rdbEncode = Radiobutton(self.window,text="Encode",variable=self.mode,value="en")
+        self.rdbEncode = Radiobutton(self.window,text="Encode",variable=self.mode,value="EN",command=self.set_mode)
         self.rdbEncode.place(x=420,y=277)
-        self.rdbDecode = Radiobutton(self.window,text="Decode",variable=self.mode,value="de")
+        self.rdbDecode = Radiobutton(self.window,text="Decode",variable=self.mode,value="DE",command=self.set_mode)
         self.rdbDecode.place(x=506,y=277)
         self.btnSearch = Button(self.window,text="SEARCH",width=20,bg=self.backgr)
         self.btnSearch.place(x=5,y=315)
@@ -46,6 +46,11 @@ class app():
     def show_dir(self):
         dirr = os.getcwd()
         self.current_dir.set(dirr)
+
+    def set_mode(self):
+        self.btnStart.configure(text="START {}CODING".format(self.mode.get()))
+
+                                    
         
 
 if __name__=="__main__":
