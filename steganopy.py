@@ -51,8 +51,6 @@ class app():
         self.btnStart.configure(text="START {}CODING".format(self.mode.get()))
 
                                     
-        
-
 if __name__=="__main__":
     app()
 
