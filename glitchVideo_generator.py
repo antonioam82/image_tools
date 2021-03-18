@@ -2,6 +2,9 @@ import cv2
 import numpy as np
 import os
 import random
+from mhmovie.code import *
+from pydub import AudioSegment
+from pydub.generators import WhiteNoise
 from os.path import isfile, join
 
 def OKI(n):
@@ -31,6 +34,7 @@ def convertToVideo(pathIn, pathOut, fps, time):
     if len(lista_frames) > 0:
         print("\nCREATING VIDEO...\n")
         frame_array = []
+        #files = [f for f in os.listdir(pathIn) if isfile(join(pathIn, f)) and not 'glichtVid' in f]
         files = [f for f in lista_frames if isfile(join(pathIn, f)) and not 'glichtVid' in f]
         files.sort(key=lambda x: int((x.split(".")[0]).split(" ")[1]))#REORDENA FRAMES
         for i in range(len(files)):
@@ -55,20 +59,24 @@ def create_frames(d):
     global lista_frames
     os.chdir(d)
     frame_rate = OKI(input("Introduce Frame Rate: "))
-    fr_range = int(((OKI(input("Duración en segundos: ")))*frame_rate)/2)
+    duracion = OKI(input("Duración en segundos: "))
+    lasting = duracion*1000
+    fr_range = int((duracion*frame_rate)/2)
     width = validate_size("Ancho imagen: ")
     height = validate_size("Alto imagen: ")
     blu_rang = validate_range("Rango azul: ").split(",")
     gre_rang = validate_range("Rango verde: ").split(",")
     red_rang = validate_range("Rango rojo: ").split(",")
+
+    
     
     if fr_range > 0:
         print("\nWRITTING "+str(fr_range)+" FRAMES...\n")
         for i in range(0,fr_range):
-            img = np.zeros((height,width,3),np.uint8)
+            img = np.zeros((height,width,3),np.uint8)#900,1600
 
-            for x in range(height):
-                for y in range(width):
+            for x in range(height):#900
+                for y in range(width):#1600
                     img[x,y] = [random.randint(int(blu_rang[0]),int(blu_rang[1])),random.randint(int(gre_rang[0]),
                                 int(gre_rang[1])),random.randint(int(red_rang[0]),int(red_rang[1]))]#0,256
             name = "ima "+str(i)+".png"
@@ -76,8 +84,10 @@ def create_frames(d):
             cv2.imwrite(name,img)
             print("DONE: ",name)
             lista_frames.append(name)
+        #print("ADDING SOUND...")
+        
         print("TASK COMPLETED")
-        return frame_rate
+        return frame_rate, lasting
     else:
         print("\n0 FRAMES GENERADOS")
 
@@ -108,6 +118,15 @@ def validate_range(q):
                 break
     return c
 
+def add_audio(fn,d):
+    sound = WhiteNoise().to_audio_segment(duration=d)
+    sound.export("noise.mp3",format="mp3")
+    video = movie(fn)
+    sonido = music("noise.mp3")
+    result = video + sonido
+    result.save("noiseVid.mp4")
+    
+
 while True:
     print("")
     print("_____________________________")
@@ -118,14 +137,18 @@ while True:
     
     lista_frames=[]
 
-    directory = validate_dir()
-    fps = create_frames(directory)
+    #directory = validate_dir()
+    directory = 'C:/Users/Antonio/Documents/pruebas'
+    fps,dur = create_frames(directory)
 
     pathIn = directory + '/' 
     fileName=define_name()
+    print("NAME: ",fileName)
     pathOut=pathIn + fileName
     time = 2
     convertToVideo(pathIn, pathOut, fps, time)
+    add_audio(pathOut,dur)
+    
     if len(lista_frames) > 0:
         elim = ns(input("¿Eliminar frames generados?(n/s): "))
         if elim == "s":
