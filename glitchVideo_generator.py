@@ -3,7 +3,6 @@ import numpy as np
 import os
 import random
 from mhmovie.code import *
-from pydub import AudioSegment
 from pydub.generators import WhiteNoise
 from os.path import isfile, join
 
