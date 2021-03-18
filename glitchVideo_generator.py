@@ -67,8 +67,6 @@ def create_frames(d):
     gre_rang = validate_range("Rango verde: ").split(",")
     red_rang = validate_range("Rango rojo: ").split(",")
 
-    
-    
     if fr_range > 0:
         print("\nWRITTING "+str(fr_range)+" FRAMES...\n")
         for i in range(0,fr_range):
@@ -83,7 +81,6 @@ def create_frames(d):
             cv2.imwrite(name,img)
             print("DONE: ",name)
             lista_frames.append(name)
-        #print("ADDING SOUND...")
         
         print("TASK COMPLETED")
         return frame_rate, lasting
