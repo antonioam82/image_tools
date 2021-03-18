@@ -138,8 +138,7 @@ while True:
     
     lista_frames=[]
 
-    #directory = validate_dir()
-    directory = 'C:/Users/Antonio/Documents/pruebas'
+    directory = validate_dir()
     fps,dur = create_frames(directory)
 
     pathIn = directory + '/' 
