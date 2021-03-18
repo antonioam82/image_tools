@@ -125,6 +125,7 @@ def add_audio(fn,d):
     sonido = music("noise.mp3")
     result = video + sonido
     result.save("noiseVid.mp4")
+    os.remove(fn)
     
 
 while True:
