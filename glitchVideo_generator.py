@@ -3,6 +3,7 @@ import numpy as np
 import os
 import random
 from mhmovie.code import *
+#from pydub import AudioSegment
 from pydub.generators import WhiteNoise
 from os.path import isfile, join
 
@@ -18,15 +19,15 @@ def ns(c):
         print(chr(7));c=input("Escribe solo \'n\' o \'s\' según su opción: ")
     return(c)
 
-def define_name():
+def define_name(n):
     count = 0
     for i in os.listdir():
-        if "glitchVid" in i:
+        if n in i:
             count+=1
     if count>0:
-        filename="glitchVid"+str(count)+".mp4"
+        filename=n+str(count)+".mp4"
     else:
-        filename="glitchVid.mp4"
+        filename=n+".mp4"
     return filename
 
 def convertToVideo(pathIn, pathOut, fps, time):
@@ -67,6 +68,8 @@ def create_frames(d):
     gre_rang = validate_range("Rango verde: ").split(",")
     red_rang = validate_range("Rango rojo: ").split(",")
 
+    
+    
     if fr_range > 0:
         print("\nWRITTING "+str(fr_range)+" FRAMES...\n")
         for i in range(0,fr_range):
@@ -81,6 +84,7 @@ def create_frames(d):
             cv2.imwrite(name,img)
             print("DONE: ",name)
             lista_frames.append(name)
+        #print("ADDING SOUND...")
         
         print("TASK COMPLETED")
         return frame_rate, lasting
@@ -120,7 +124,8 @@ def add_audio(fn,d):
     video = movie(fn)
     sonido = music("noise.mp3")
     result = video + sonido
-    result.save("noiseVid.mp4")
+    namevid = define_name("noiseVid")
+    result.save(namevid)
     os.remove(fn)
     
 
@@ -134,12 +139,12 @@ while True:
     
     lista_frames=[]
 
-    directory = validate_dir()
+    #directory = validate_dir()
+    directory = 'C:/Users/Antonio/Documents/pruebas'
     fps,dur = create_frames(directory)
 
     pathIn = directory + '/' 
-    fileName=define_name()
-    print("NAME: ",fileName)
+    fileName=define_name("glichtvid")
     pathOut=pathIn + fileName
     time = 2
     convertToVideo(pathIn, pathOut, fps, time)
