@@ -3,6 +3,7 @@ import numpy as np
 import os
 import random
 from mhmovie.code import *
+#from pydub import AudioSegment
 from pydub.generators import WhiteNoise
 from os.path import isfile, join
 
@@ -18,21 +19,22 @@ def ns(c):
         print(chr(7));c=input("Escribe solo \'n\' o \'s\' según su opción: ")
     return(c)
 
-def define_name(n):
+def define_name(n,ex):
     count = 0
     for i in os.listdir():
         if n in i:
             count+=1
     if count>0:
-        filename=n+str(count)+".mp4"
+        filename=n+str(count)+ex
     else:
-        filename=n+".mp4"
+        filename=n+ex
     return filename
 
 def convertToVideo(pathIn, pathOut, fps, time):
     if len(lista_frames) > 0:
         print("\nCREATING VIDEO...\n")
         frame_array = []
+        #files = [f for f in os.listdir(pathIn) if isfile(join(pathIn, f)) and not 'glichtVid' in f]
         files = [f for f in lista_frames if isfile(join(pathIn, f)) and not 'glichtVid' in f]
         files.sort(key=lambda x: int((x.split(".")[0]).split(" ")[1]))#REORDENA FRAMES
         for i in range(len(files)):
@@ -82,6 +84,7 @@ def create_frames(d):
             cv2.imwrite(name,img)
             print("DONE: ",name)
             lista_frames.append(name)
+        #print("ADDING SOUND...")
         
         print("TASK COMPLETED")
         return frame_rate, lasting
@@ -116,14 +119,17 @@ def validate_range(q):
     return c
 
 def add_audio(fn,d):
+    print("ADDING SOUND...")
     sound = WhiteNoise().to_audio_segment(duration=d)
-    sound.export("noise.mp3",format="mp3")
+    namesound = define_name("whiteNoise",".mp3")
+    sound.export(namesound,format="mp3")
     video = movie(fn)
-    sonido = music("noise.mp3")
+    sonido = music(namesound)
     result = video + sonido
-    namevid = define_name("noiseVid")
+    namevid = define_name("noiseVid",".mp4")
     result.save(namevid)
     os.remove(fn)
+    os.remove(namesound)
     
 
 while True:
@@ -136,11 +142,12 @@ while True:
     
     lista_frames=[]
 
-    directory = validate_dir()
+    #directory = validate_dir()
+    directory = 'C:/Users/Antonio/Documents/pruebas'
     fps,dur = create_frames(directory)
 
     pathIn = directory + '/' 
-    fileName=define_name("glichtvid")
+    fileName=define_name("glichtvid",".mp4")
     pathOut=pathIn + fileName
     time = 2
     convertToVideo(pathIn, pathOut, fps, time)
