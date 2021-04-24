@@ -10,8 +10,10 @@ class app:
 
         self.currentDir = StringVar()
         self.currentDir.set(os.getcwd())
+        self.filename = StringVar()
 
         Entry(self.root,textvariable=self.currentDir,width=150).place(x=0,y=0)
+        Entry(self.root,textvariable=self.filename,font=('arial',20,'bold'),width=44).place(x=10,y=25)
 
         self.root.mainloop()
 
