@@ -34,10 +34,11 @@ class app:
         if self.fpath:
             try:
                 img = cv.imread(self.fpath)
-                kernel = np.ones((5,5),np.float32)/25
+                kernel = np.ones((3,3),np.float32)/9
                 dst = cv.filter2D(img,-1,kernel)
+                cv.imshow("ORIGINAL",img)
                 cv.imshow("NEW",dst)
-                cv.imwrite("NewImage.png",dst)
+                #cv.imwrite("NewImage.png",dst)
             except Exception as e:
                 messagebox.showwarning("UNEXPECTED ERROR",str(e))
             
@@ -45,4 +46,3 @@ class app:
         
 if __name__=="__main__":
     app()
-    
