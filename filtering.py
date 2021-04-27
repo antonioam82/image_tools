@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 from tkinter import filedialog, messagebox
 import cv2 as cv
 import numpy as np
@@ -19,7 +20,10 @@ class app:
         Entry(self.root,textvariable=self.currentDir,width=150).place(x=0,y=0)
         Entry(self.root,textvariable=self.filename,font=('arial',23,'bold'),width=40).place(x=10,y=25)
         Button(self.root,text="SEARCH",height=2,width=25,bg="light blue1",command=self.open_file).place(x=709,y=25)
-        Button(self.root,text="START",width=125,bg="light green",command=self.filter).place(x=10,y=85)
+        self.filter_method = ttk.Combobox(master=self.root,width=50)
+        self.filter_method.place(x=10,y=95)
+        Button(self.root,text="START",width=46,bg="light green",command=self.filter).place(x=364,y=92)
+        Button(self.root,text="SAVE",height=2,width=25,bg="light blue1").place(x=709,y=77)
 
         self.root.mainloop()
 
@@ -47,3 +51,4 @@ class app:
         
 if __name__=="__main__":
     app()
+
