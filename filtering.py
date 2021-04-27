@@ -47,8 +47,6 @@ class app:
             except Exception as e:
                 messagebox.showwarning("UNEXPECTED ERROR",str(e))
             
-            
-        
 if __name__=="__main__":
     app()
 
