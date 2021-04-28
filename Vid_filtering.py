@@ -38,7 +38,7 @@ class app:
     def open_file(self):
         self.file = filedialog.askopenfilename(initialdir="/",title="SELECT FILE",
                         filetypes=(("mp4 files","*.mp4"),("avi files","*.avi"),("all files","*.*")))
-        if self.file != "":
+        if self.file:
             self.filename.set((self.file).split("/")[-1])
             probe = ffmpeg.probe(self.file)
             self.video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
