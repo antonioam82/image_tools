@@ -16,7 +16,7 @@ class app:
         self.currentDir.set(os.getcwd())
         self.filename = StringVar()
         self.fpath = None
-        self.blur = ""
+        self.element = None
 
         Entry(self.root,textvariable=self.currentDir,width=158).place(x=0,y=0)
         Entry(self.root,textvariable=self.filename,font=('arial',23,'bold'),width=40).place(x=10,y=25)
@@ -36,9 +36,11 @@ class app:
             self.filename.set(self.fpath.split("/")[-1])
 
     def save(self):
-        self.new_file = filedialog.asksaveasfilename(initialdir="/",title="SAVE",defaultextension=".png",
+        if self.element:
+            self.new_file = filedialog.asksaveasfilename(initialdir="/",title="SAVE",defaultextension=".png",
                                                          filetypes=[('png files','*.png'),('jpg files','*jpg'),('all files','*')])
-        cv.imwrite(self.new_file,self.blur)
+            if sekf.new_file:
+                cv.imwrite(self.new_file,self.blur)
             
 
     def filter(self):
@@ -47,9 +49,10 @@ class app:
                 img = cv.imread(self.fpath)
                 #kernel = np.ones((3,3),np.float32)/9
                 #dst = cv.filter2D(img,-1,kernel)
-                self.blur = cv.bilateralFilter(img,9,75,75)
+                blur = cv.bilateralFilter(img,9,75,75)
                 cv.imshow("ORIGINAL",img)
-                cv.imshow("NEW",self.blur)
+                cv.imshow("NEW",blur)
+                self.element = True
                 #cv.imwrite("NewImage.png",dst)
             except Exception as e:
                 messagebox.showwarning("UNEXPECTED ERROR",str(e))
