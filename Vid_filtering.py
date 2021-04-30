@@ -34,6 +34,8 @@ class app:
         self.nframesLabel.place(x=790,y=190)
         self.prog_bar = ttk.Progressbar(self.root)
         self.prog_bar.place(x=10,y=170,width=687)
+        self.processLabel = Label(self.root,text="PROCESS",bg="lavender",width=97)
+        self.processLabel.place(x=10,y=148)
 
         self.root.mainloop()
 
