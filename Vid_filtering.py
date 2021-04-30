@@ -9,7 +9,7 @@ import os
 class app:
     def __init__(self):
         self.root = Tk()
-        self.root.title("Filter")
+        self.root.title("Video Filter")
         self.root.geometry("905x245")
         self.root.configure(bg="lavender")
 
