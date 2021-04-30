@@ -32,6 +32,8 @@ class app:
         Label(self.root,text="N FRAMES:",bg="lavender").place(x=721,y=190)
         self.nframesLabel = Label(self.root,bg='black',width=14,fg="light green")
         self.nframesLabel.place(x=790,y=190)
+        self.prog_bar = ttk.Progressbar(self.root)
+        self.prog_bar.place(x=10,y=164,width=687)
 
         self.root.mainloop()
 
