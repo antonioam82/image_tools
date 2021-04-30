@@ -10,7 +10,7 @@ class app:
     def __init__(self):
         self.root = Tk()
         self.root.title("Filter")
-        self.root.geometry("905x250")
+        self.root.geometry("905x245")
         self.root.configure(bg="lavender")
 
         self.currentDir = StringVar()
@@ -33,7 +33,7 @@ class app:
         self.nframesLabel = Label(self.root,bg='black',width=14,fg="light green")
         self.nframesLabel.place(x=790,y=190)
         self.prog_bar = ttk.Progressbar(self.root)
-        self.prog_bar.place(x=10,y=164,width=687)
+        self.prog_bar.place(x=10,y=170,width=687)
 
         self.root.mainloop()
 
