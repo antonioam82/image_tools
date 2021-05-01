@@ -58,12 +58,16 @@ class app:
         self.canceled = True
 
     def filtering(self):
+        counter = 0
         if self.file:
             self.cam = cv.VideoCapture(self.file)
             ret,frame = self.cam.read()
+            
             while self.canceled == False:
-                print("OK")
-            print("ENDED")
+                counter+=1
+                name = 'frame'+str(counter)+'.png'
+                print(name)
+            print("STOPPED")
             
 
     def init_task(self):
@@ -73,3 +77,4 @@ class app:
         
 if __name__=="__main__":
     app()
+
