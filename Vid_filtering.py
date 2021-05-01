@@ -4,6 +4,7 @@ from tkinter import filedialog, messagebox
 import cv2 as cv
 import ffmpeg
 import numpy as np
+import threading
 import os
 
 class app:
@@ -21,13 +22,13 @@ class app:
         self.fr = 0
         self.nframes = 0
         self.file = None
-        #self.
+        self.canceled = False
 
         Entry(self.root,textvariable=self.currentDir,width=158).place(x=0,y=0)
         Entry(self.root,textvariable=self.filename,font=('arial',23,'bold'),width=40).place(x=10,y=25)
         Button(self.root,text="SEARCH",height=2,width=25,bg="light blue1",command=self.open_file).place(x=709,y=25)
-        Button(self.root,text="START",width=97,height=2,bg="light green",command=self.filtering).place(x=8,y=77)
-        Button(self.root,text="CANCEL",height=2,width=25,bg="light blue1").place(x=709,y=77)
+        Button(self.root,text="START",width=97,height=2,bg="light green",command=self.init_task).place(x=8,y=77)
+        Button(self.root,text="CANCEL",height=2,width=25,bg="light blue1",command=self.cancel).place(x=709,y=77)
         Label(self.root,text="FRAME RATE:",bg="lavender").place(x=709,y=150)
         self.frLabel = Label(self.root,bg='black',width=14,fg="light green")
         self.frLabel.place(x=790,y=150)
@@ -53,11 +54,16 @@ class app:
             self.frLabel.configure(text=self.fr)
             self.nframesLabel.configure(text=self.nframes)
 
+    def cancel(self):
+        self.canceled = True
+
     def filtering(self):
         if self.file:
             self.cam = cv.VideoCapture(self.file)
             ret,frame = self.cam.read()
-            #print("OK")
+            while self.canceled == False:
+                print("OK")
+            print("ENDED")
             
 
     def init_task(self):
