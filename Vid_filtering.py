@@ -68,8 +68,9 @@ class app:
                 counter+=1
                 name = 'frame'+str(counter)+'.png'
                 percent = counter*100/int(self.nframes)
-                print(percent)
+                
                 self.prog_bar.step(percent-dif)
+                self.processLabel.configure(text="PROCESSING FRAMES: {}%".format(int(percent)))
                 dif=percent
                 #print(name)
             print("STOPPED")
