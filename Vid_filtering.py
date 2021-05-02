@@ -23,6 +23,7 @@ class app:
         self.nframes = 0
         self.file = None
         self.canceled = False
+        self.frames_list = []
 
         Entry(self.root,textvariable=self.currentDir,width=158).place(x=0,y=0)
         Entry(self.root,textvariable=self.filename,font=('arial',23,'bold'),width=40).place(x=10,y=25)
@@ -68,12 +69,12 @@ class app:
                 counter+=1
                 name = 'frame'+str(counter)+'.png'
                 blur = cv.bilateralFilter(frame,9,75,75)################
-                percent = counter*100/int(self.nframes)
+                self.frames_list.append(name)
                 
+                percent = counter*100/int(self.nframes)
                 self.prog_bar.step(percent-dif)
                 self.processLabel.configure(text="PROCESSING FRAMES: {}%".format(int(percent)))
                 dif=percent
-                #print(name)
             print("STOPPED")
             
 
