@@ -67,6 +67,7 @@ class app:
             while self.canceled == False and counter<int(self.nframes):
                 counter+=1
                 name = 'frame'+str(counter)+'.png'
+                blur = cv.bilateralFilter(frame,9,75,75)################
                 percent = counter*100/int(self.nframes)
                 
                 self.prog_bar.step(percent-dif)
@@ -83,5 +84,6 @@ class app:
         
 if __name__=="__main__":
     app()
+
 
 
