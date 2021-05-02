@@ -28,7 +28,7 @@ class app:
         Entry(self.root,textvariable=self.currentDir,width=158).place(x=0,y=0)
         Entry(self.root,textvariable=self.filename,font=('arial',23,'bold'),width=40).place(x=10,y=25)
         Button(self.root,text="SEARCH",height=2,width=25,bg="light blue1",command=self.open_file).place(x=709,y=25)
-        Button(self.root,text="START",width=97,height=2,bg="light green",command=self.init_task).place(x=8,y=77)
+        Button(self.root,text="START FILTERING",width=97,height=2,bg="light green",command=self.init_task).place(x=8,y=77)
         Button(self.root,text="CANCEL",height=2,width=25,bg="light blue1",command=self.cancel).place(x=709,y=77)
         Label(self.root,text="FRAME RATE:",bg="lavender").place(x=709,y=150)
         self.frLabel = Label(self.root,bg='black',width=14,fg="light green")
@@ -45,7 +45,7 @@ class app:
 
     def open_file(self):
         self.file = filedialog.askopenfilename(initialdir="/",title="SELECT FILE",
-                        filetypes=(("mp4 files","*.mp4"),("avi files","*.avi"),("all files","*.*")))
+                        filetypes=(("mp4 files","*.mp4"),("avi files","*.avi")))
         if self.file:
             self.filename.set((self.file).split("/")[-1])
             probe = ffmpeg.probe(self.file)
@@ -75,6 +75,7 @@ class app:
                 self.prog_bar.step(percent-dif)
                 self.processLabel.configure(text="PROCESSING FRAMES: {}%".format(int(percent)))
                 dif=percent
+            print(counter)
             print("STOPPED")
             
 
