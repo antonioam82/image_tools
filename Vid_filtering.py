@@ -58,15 +58,20 @@ class app:
         self.canceled = True
 
     def filtering(self):
+        dif = 0
         counter = 0
         if self.file:
             self.cam = cv.VideoCapture(self.file)
             ret,frame = self.cam.read()
             
-            while self.canceled == False:
+            while self.canceled == False and counter<int(self.nframes):
                 counter+=1
                 name = 'frame'+str(counter)+'.png'
-                print(name)
+                percent = counter*100/int(self.nframes)
+                print(percent)
+                self.prog_bar.step(percent-dif)
+                dif=percent
+                #print(name)
             print("STOPPED")
             
 
