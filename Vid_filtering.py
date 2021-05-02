@@ -82,8 +82,7 @@ class app:
     def init_task(self):
         t = threading.Thread(target=self.filtering)
         t.start()
-            
-        
+
 if __name__=="__main__":
     app()
 
