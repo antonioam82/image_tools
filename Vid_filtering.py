@@ -28,7 +28,8 @@ class app:
         Entry(self.root,textvariable=self.currentDir,width=158).place(x=0,y=0)
         Entry(self.root,textvariable=self.filename,font=('arial',23,'bold'),width=40).place(x=10,y=25)
         Button(self.root,text="SEARCH",height=2,width=25,bg="light blue1",command=self.open_file).place(x=709,y=25)
-        Button(self.root,text="START FILTERING",width=97,height=2,bg="light green",command=self.init_task).place(x=8,y=77)
+        self.btnStart = Button(self.root,text="START FILTERING",width=97,height=2,bg="light green",command=self.init_task)
+        self.btnStart.place(x=8,y=77)
         Button(self.root,text="CANCEL",height=2,width=25,bg="light blue1",command=self.cancel).place(x=709,y=77)
         Label(self.root,text="FRAME RATE:",bg="lavender").place(x=709,y=150)
         self.frLabel = Label(self.root,bg='black',width=14,fg="light green")
@@ -61,7 +62,10 @@ class app:
     def filtering(self):
         dif = 0
         counter = 0
+        self.canceled = False
+        self.prog_bar.step(50)
         if self.file:
+            self.btnStart.configure(state='disabled')
             self.cam = cv.VideoCapture(self.file)
             ret,frame = self.cam.read()
             
@@ -77,6 +81,7 @@ class app:
                 dif=percent
             print(counter)
             print("STOPPED")
+            self.btnStart.configure(state='normal')
             
 
     def init_task(self):
@@ -85,6 +90,5 @@ class app:
 
 if __name__=="__main__":
     app()
-
 
 
