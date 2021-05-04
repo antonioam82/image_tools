@@ -65,6 +65,7 @@ class app:
         dif = 0
         counter = 0
         self.canceled = False
+        #self.prog_bar.step(50)
         if self.file:
             self.btnStart.configure(state='disabled')
             self.cam = cv.VideoCapture(self.file)
@@ -81,7 +82,7 @@ class app:
                 self.processLabel.configure(text="PROCESSING FRAMES: {}%".format(int(percent)))
                 dif=percent
             print(counter)
-            print("STOPPED")
+            self.processLabel.configure(text="PROCESS: ENDED")
             self.btnStart.configure(state='normal')
             
 
