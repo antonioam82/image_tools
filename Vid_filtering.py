@@ -48,7 +48,7 @@ class app:
 
     def open_file(self):
         self.file = filedialog.askopenfilename(initialdir="/",title="SELECT FILE",
-                        filetypes=(("mp4 files","*.mp4"),("avi files","*.avi")))
+                        filetypes=(("mp4 files","*.mp4"),("avi files","*.avi"),("gif files","*.gif")))
         if self.file:
             self.filename.set((self.file).split("/")[-1])
 
@@ -73,7 +73,6 @@ class app:
         dif = 0
         counter = 0
         self.canceled = False
-        #self.prog_bar.step(50)
         if self.file:
             self.btnStart.configure(state='disabled')
             self.cam = cv.VideoCapture(self.file)
