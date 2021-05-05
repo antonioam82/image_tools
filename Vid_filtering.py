@@ -68,12 +68,10 @@ class app:
         self.canceled = True
         self.prog_bar.stop()
 
-
     def filtering(self):
         dif = 0
         counter = 0
         self.canceled = False
-        #self.prog_bar.step(50)
         if self.file:
             self.btnStart.configure(state='disabled')
             self.cam = cv.VideoCapture(self.file)
