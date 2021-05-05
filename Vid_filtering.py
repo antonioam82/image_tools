@@ -24,6 +24,7 @@ class app:
         self.file = None
         self.canceled = False
         self.frames_list = []
+        
 
         Entry(self.root,textvariable=self.currentDir,width=158).place(x=0,y=0)
         Entry(self.root,textvariable=self.filename,font=('arial',23,'bold'),width=40).place(x=10,y=25)
@@ -76,7 +77,8 @@ class app:
         if self.file:
             self.btnStart.configure(state='disabled')
             self.cam = cv.VideoCapture(self.file)
-            ret,frame = self.cam.read()
+            #ret,frame = self.cam.read()
+            ret = True
             while self.canceled == False and ret:
                 ret,frame = self.cam.read()
                 if ret:
