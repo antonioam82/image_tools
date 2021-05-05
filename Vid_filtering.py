@@ -72,24 +72,25 @@ class app:
         dif = 0
         counter = 0
         self.canceled = False
+        #self.prog_bar.step(50)
         if self.file:
             self.btnStart.configure(state='disabled')
             self.cam = cv.VideoCapture(self.file)
             ret,frame = self.cam.read()
-            
-            while self.canceled == False and counter<int(self.nframes):
-                counter+=1
-                name = 'frame'+str(counter)+'.png'
-                blur = cv.bilateralFilter(frame,9,75,75)################
-                cv.imwrite(name,blur)##################################
-                self.frames_list.append(name)
+            while self.canceled == False:
+                ret,frame = self.cam.read()
+                if ret:
+                    counter+=1
+                    name = 'frame'+str(counter)+'.png'
+                    blur = cv.bilateralFilter(frame,9,75,75)################
+                    cv.imwrite(name,blur)##################################
+                    self.frames_list.append(name)
                 
-                percent = counter*100/int(self.nframes)
-                self.prog_bar.step(percent-dif)
-                self.processLabel.configure(text="PROCESSING FRAMES: {}%".format(int(percent)))
-                dif=percent
-            print(counter)
-            self.processLabel.configure(text="PROCESS: ENDED")
+                    percent = counter*100/int(self.nframes)
+                    self.prog_bar.step(percent-dif)
+                    self.processLabel.configure(text="PROCESSING FRAMES: {}%".format(int(percent)))
+                    dif=percent
+            #self.processLabel.configure(text="PROCESS: ENDED")
             self.btnStart.configure(state='normal')
             
 
