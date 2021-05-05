@@ -49,6 +49,9 @@ class app:
                         filetypes=(("mp4 files","*.mp4"),("avi files","*.avi")))
         if self.file:
             self.filename.set((self.file).split("/")[-1])
+            direc = "/".join((self.file).split("/")[:-1])
+            os.chdir(direc)
+            self.currentDir.set(os.getcwd())
             probe = ffmpeg.probe(self.file)
             self.video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
             self.fr = (self.video_streams[0]['avg_frame_rate'])
@@ -75,6 +78,7 @@ class app:
                 counter+=1
                 name = 'frame'+str(counter)+'.png'
                 blur = cv.bilateralFilter(frame,9,75,75)################
+                cv.imwrite(name,blur)##################################
                 self.frames_list.append(name)
                 
                 percent = counter*100/int(self.nframes)
