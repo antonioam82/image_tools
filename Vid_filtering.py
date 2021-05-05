@@ -11,7 +11,7 @@ class app:
     def __init__(self):
         self.root = Tk()
         self.root.title("Video Filter")
-        self.root.geometry("905x245")
+        self.root.geometry("905x249")
         self.root.configure(bg="lavender")
 
         self.currentDir = StringVar()
@@ -41,6 +41,7 @@ class app:
         self.prog_bar.place(x=10,y=170,width=687)
         self.processLabel = Label(self.root,text="PROCESS",bg="lavender",width=97)
         self.processLabel.place(x=10,y=148)
+        Button(self.root,text="CHANGE DIRECTORY",command=self.change_dir).place(x=292,y=220)
 
         self.root.mainloop()
 
@@ -49,15 +50,19 @@ class app:
                         filetypes=(("mp4 files","*.mp4"),("avi files","*.avi")))
         if self.file:
             self.filename.set((self.file).split("/")[-1])
-            direc = "/".join((self.file).split("/")[:-1])
-            os.chdir(direc)
-            self.currentDir.set(os.getcwd())
+
             probe = ffmpeg.probe(self.file)
             self.video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
             self.fr = (self.video_streams[0]['avg_frame_rate'])
             self.nframes = (self.video_streams[0]['nb_frames'])
             self.frLabel.configure(text=self.fr)
             self.nframesLabel.configure(text=self.nframes)
+
+    def change_dir(self):
+        directorio=filedialog.askdirectory()
+        if directorio:
+            os.chdir(directorio)
+            self.currentDir.set(os.getcwd())
 
     def cancel(self):
         self.canceled = True
