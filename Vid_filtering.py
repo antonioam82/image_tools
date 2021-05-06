@@ -85,7 +85,7 @@ class app:
         out = cv.VideoWriter('new_video.mp4',cv.VideoWriter_fourcc(*'mp4v'), 30, size)
         print("CREATING VIDEO...")
         C = 0
-        for i in range((len(frame_array[i]))+1):
+        for i in range(len(frame_array[i])):
             C+=1
             print(C)
             if C <= (len(frame_array)):
@@ -99,11 +99,9 @@ class app:
         dif = 0
         counter = 0
         self.canceled = False
-        #self.prog_bar.step(50)
         if self.file:
             self.btnStart.configure(state='disabled')
             self.cam = cv.VideoCapture(self.file)
-            #ret,frame = self.cam.read()
             ret = True
             while self.canceled == False and ret:
                 ret,frame = self.cam.read()
