@@ -49,7 +49,8 @@ class app:
         self.file = filedialog.askopenfilename(initialdir="/",title="SELECT FILE",
                         filetypes=(("mp4 files","*.mp4"),("avi files","*.avi"),("gif files","*.gif")))
         if self.file:
-            self.filename.set((self.file).split("/")[-1])
+            self.vidName = (self.file).split("/")[-1]
+            self.filename.set(self.vidName)
 
             probe = ffmpeg.probe(self.file)
             self.video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
@@ -82,7 +83,8 @@ class app:
             self.processLabel.configure(text="CREATING VIDEO: {}%".format(int(percent)))
             dif=percent
 
-        out = cv.VideoWriter('new_video.mp4',cv.VideoWriter_fourcc(*'mp4v'), eval(self.fr), size)
+        name,ex = os.path.splitext(self.vidName)
+        out = cv.VideoWriter(name+'(filtered)'+'.mp4',cv.VideoWriter_fourcc(*'mp4v'), eval(self.fr), size)
         print("CREATING VIDEO...")
         C = 0
         for i in range(len(frame_array[i])):
