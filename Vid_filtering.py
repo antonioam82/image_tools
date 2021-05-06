@@ -64,8 +64,11 @@ class app:
 
     def create_new_video(self):
         frame_array = []
-        print(len(self.frames_list))
+        counter = 0
+        dif = 0
         for i in range(len(self.frames_list)):
+            counter+=1
+
             filename = self.frames_list[i]
             img = cv.imread(filename)
             height, width, layers = img.shape
@@ -73,14 +76,17 @@ class app:
 
             for k in range(1):
                 frame_array.append(img)
-        #print(len(frame_array))
+
+            percent = counter*100/int(self.nframes)
+            self.prog_bar.step(percent-dif)
+            self.processLabel.configure(text="CREATING VIDEO: {}%".format(int(percent)))
+            dif=percent
 
         out = cv.VideoWriter('new_video.mp4',cv.VideoWriter_fourcc(*'mp4v'), eval(self.fr), size)
         print("CREATING VIDEO...")
         C = 0
         for i in range(len(frame_array[i])):
             C+=1
-            print(C)
             if C <= (len(frame_array)):
                 out.write(frame_array[i])
                 
