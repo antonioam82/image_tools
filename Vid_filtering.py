@@ -84,7 +84,8 @@ class app:
             dif=percent
 
         name,ex = os.path.splitext(self.vidName)
-        out = cv.VideoWriter(name+'(filtered)'+'.mp4',cv.VideoWriter_fourcc(*'mp4v'), eval(self.fr), size)
+        self.vid_name = name+'(filtered)'+'.mp4'
+        out = cv.VideoWriter(self.vid_name,cv.VideoWriter_fourcc(*'mp4v'), eval(self.fr), size)
         print("CREATING VIDEO...")
         C = 0
         for i in range(len(frame_array[i])):
@@ -97,8 +98,10 @@ class app:
         for i in self.frames_list:
             os.remove(i)
         self.frames_list = []
-            
+
         print("TASK COMPLETED")
+            
+        
 
     def filtering(self):
         directory = filedialog.askdirectory()
@@ -127,6 +130,7 @@ class app:
                         dif=percent
                 self.create_new_video()
                 self.processLabel.configure(text="PROCESS: ENDED")
+                messagebox.showinfo("TASK COMPLETED","Created video \'{}\'.".format(self.vid_name))
                 self.btnStart.configure(state='normal')
             
 
