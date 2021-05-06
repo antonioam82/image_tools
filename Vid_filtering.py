@@ -73,7 +73,7 @@ class app:
 
             for k in range(1):
                 frame_array.append(img)
-        print(len(frame_array))
+        #print(len(frame_array))
 
         out = cv.VideoWriter('new_video.mp4',cv.VideoWriter_fourcc(*'mp4v'), eval(self.fr), size)
         print("CREATING VIDEO...")
@@ -85,6 +85,9 @@ class app:
                 out.write(frame_array[i])
                 
         out.release()
+        
+        for i in self.frames_list:
+            os.remove(i)
             
         print("TASK COMPLETED")
 
