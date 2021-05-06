@@ -25,6 +25,7 @@ class app:
         self.canceled = False
         self.frames_list = []
         
+
         Entry(self.root,textvariable=self.currentDir,width=158).place(x=0,y=0)
         Entry(self.root,textvariable=self.filename,font=('arial',23,'bold'),width=40).place(x=10,y=25)
         Button(self.root,text="SEARCH",height=2,width=25,bg="light blue1",command=self.open_file).place(x=709,y=25)
@@ -81,7 +82,7 @@ class app:
                 frame_array.append(img)
         print(len(frame_array))
 
-        out = cv.VideoWriter('new_video.mp4',cv.VideoWriter_fourcc(*'mp4v'), self.fr, size)
+        out = cv.VideoWriter('new_video.mp4',cv.VideoWriter_fourcc(*'mp4v'), eval(self.fr), size)
         print("CREATING VIDEO...")
         C = 0
         for i in range(len(frame_array[i])):
@@ -95,29 +96,33 @@ class app:
         print("TASK COMPLETED")
 
     def filtering(self):
-        dif = 0
-        counter = 0
-        self.canceled = False
-        if self.file:
-            self.btnStart.configure(state='disabled')
-            self.cam = cv.VideoCapture(self.file)
-            ret = True
-            while self.canceled == False and ret:
-                ret,frame = self.cam.read()
-                if ret:
-                    counter+=1
-                    name = 'frame'+str(counter)+'.png'
-                    blur = cv.bilateralFilter(frame,9,75,75)################
-                    cv.imwrite(name,blur)##################################
-                    self.frames_list.append(name)
+        directory = filedialog.askdirectory()
+        if directory:
+            os.chdir(directory)
+            self.currentDir.set(os.getcwd())
+            dif = 0
+            counter = 0
+            self.canceled = False
+            if self.file:
+                self.btnStart.configure(state='disabled')
+                self.cam = cv.VideoCapture(self.file)
+                ret = True
+                while self.canceled == False and ret:
+                    ret,frame = self.cam.read()
+                    if ret:
+                        counter+=1
+                        name = 'frame'+str(counter)+'.png'
+                        blur = cv.bilateralFilter(frame,9,75,75)################
+                        cv.imwrite(name,blur)##################################
+                        self.frames_list.append(name)
                 
-                    percent = counter*100/int(self.nframes)
-                    self.prog_bar.step(percent-dif)
-                    self.processLabel.configure(text="PROCESSING FRAMES: {}%".format(int(percent)))
-                    dif=percent
-            self.create_new_video()
-            self.processLabel.configure(text="PROCESS: ENDED")
-            self.btnStart.configure(state='normal')
+                        percent = counter*100/int(self.nframes)
+                        self.prog_bar.step(percent-dif)
+                        self.processLabel.configure(text="PROCESSING FRAMES: {}%".format(int(percent)))
+                        dif=percent
+                self.create_new_video()
+                self.processLabel.configure(text="PROCESS: ENDED")
+                self.btnStart.configure(state='normal')
             
 
     def init_task(self):
