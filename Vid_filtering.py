@@ -69,10 +69,37 @@ class app:
         self.canceled = True
         self.prog_bar.stop()
 
+    def create_new_video(self):
+        frame_array = []
+        print(len(self.frames_list))
+        for i in range(len(self.frames_list)):
+            filename = self.frames_list[i]
+            img = cv.imread(filename)
+            height, width, layers = img.shape
+            size = (width,height)
+
+            for k in range(1):
+                frame_array.append(img)
+        print(len(frame_array))
+
+        out = cv.VideoWriter('new_video.mp4',cv.VideoWriter_fourcc(*'mp4v'), 30, size)
+        print("CREATING VIDEO...")
+        C = 0
+        for i in range((len(frame_array[i]))+1):
+            C+=1
+            print(C)
+            if C <= (len(frame_array)):
+                out.write(frame_array[i])
+                
+        out.release()
+            
+        print("TASK COMPLETED")
+
     def filtering(self):
         dif = 0
         counter = 0
         self.canceled = False
+        #self.prog_bar.step(50)
         if self.file:
             self.btnStart.configure(state='disabled')
             self.cam = cv.VideoCapture(self.file)
@@ -91,6 +118,7 @@ class app:
                     self.prog_bar.step(percent-dif)
                     self.processLabel.configure(text="PROCESSING FRAMES: {}%".format(int(percent)))
                     dif=percent
+            self.create_new_video()
             self.processLabel.configure(text="PROCESS: ENDED")
             self.btnStart.configure(state='normal')
             
