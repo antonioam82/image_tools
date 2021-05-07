@@ -97,41 +97,46 @@ class app:
         
         for i in self.frames_list:
             os.remove(i)
-        self.frames_list = []
+        #self.frames_list = []
 
         print("TASK COMPLETED")
+        print("FRA: ",len(frame_array))
             
         
 
     def filtering(self):
         directory = filedialog.askdirectory()
         if directory:
-            os.chdir(directory)
-            self.currentDir.set(os.getcwd())
-            dif = 0
-            counter = 0
-            self.canceled = False
-            if self.file:
-                self.btnStart.configure(state='disabled')
-                self.cam = cv.VideoCapture(self.file)
-                ret = True
-                while self.canceled == False and ret:
-                    ret,frame = self.cam.read()
-                    if ret:
-                        counter+=1
-                        name = 'frame'+str(counter)+'.png'
-                        blur = cv.bilateralFilter(frame,9,75,75)################
-                        cv.imwrite(name,blur)##################################
-                        self.frames_list.append(name)
+            try:
+                os.chdir(directory)
+                self.currentDir.set(os.getcwd())
+                dif = 0
+                counter = 0
+                self.canceled = False
+                if self.file:
+                    self.btnStart.configure(state='disabled')
+                    self.cam = cv.VideoCapture(self.file)
+                    ret = True
+                    while self.canceled == False and ret:
+                        ret,frame = self.cam.read()
+                        if ret:
+                            counter+=1
+                            name = 'frame'+str(counter)+'.png'
+                            blur = cv.bilateralFilter(frame,9,75,75)################
+                            cv.imwrite(name,blur)##################################
+                            self.frames_list.append(name)
                 
-                        percent = counter*100/int(self.nframes)
-                        self.prog_bar.step(percent-dif)
-                        self.processLabel.configure(text="PROCESSING FRAMES: {}%".format(int(percent)))
-                        dif=percent
-                self.create_new_video()
-                self.processLabel.configure(text="PROCESS: ENDED")
-                messagebox.showinfo("TASK COMPLETED","Created video \'{}\'.".format(self.vid_name))
-                self.btnStart.configure(state='normal')
+                            percent = counter*100/int(self.nframes)
+                            self.prog_bar.step(percent-dif)
+                            self.processLabel.configure(text="PROCESSING FRAMES: {}%".format(int(percent)))
+                            dif=percent
+                    self.create_new_video()
+                    print("NF: ",len(self.frames_list))
+                    self.processLabel.configure(text="PROCESS: ENDED")
+                    messagebox.showinfo("TASK COMPLETED","Created video \'{}\'.".format(self.vid_name))
+            except Exception as e:
+                messagebox.showarning("UNEXPECTED ERROR",str(e))
+            self.btnStart.configure(state='normal')
             
 
     def init_task(self):
