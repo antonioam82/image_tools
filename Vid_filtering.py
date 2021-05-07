@@ -135,7 +135,7 @@ class app:
                     self.processLabel.configure(text="PROCESS: ENDED")
                     messagebox.showinfo("TASK COMPLETED","Created video \'{}\'.".format(self.vid_name))
             except Exception as e:
-                messagebox.showarning("UNEXPECTED ERROR",str(e))
+                messagebox.showwarning("UNEXPECTED ERROR",str(e))
             self.btnStart.configure(state='normal')
             
 
