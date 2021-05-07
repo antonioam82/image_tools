@@ -97,7 +97,7 @@ class app:
         
         for i in self.frames_list:
             os.remove(i)
-        #self.frames_list = []
+        self.frames_list = []
 
         print("TASK COMPLETED")
         print("FRA: ",len(frame_array))
