@@ -23,7 +23,7 @@ class app:
         Button(self.root,text="SEARCH",height=2,width=25,bg="light blue1",command=self.open_file).place(x=709,y=25)
         self.filter_method = ttk.Combobox(master=self.root,width=50)
         self.filter_method.place(x=10,y=95)
-        Button(self.root,text="START",width=46,bg="light green",command=self.filter).place(x=364,y=92)
+        Button(self.root,text="START FILTERING",width=46,bg="light green",command=self.filter).place(x=364,y=92)
         Button(self.root,text="SAVE",height=2,width=25,bg="light blue1",command=self.save).place(x=709,y=77)
 
         self.root.mainloop()
@@ -39,8 +39,10 @@ class app:
         if self.element:
             self.new_file = filedialog.asksaveasfilename(initialdir="/",title="SAVE",defaultextension=".png",
                                                          filetypes=[('png files','*.png'),('jpg files','*jpg'),('all files','*')])
-            if sekf.new_file:
+            if self.new_file:
                 cv.imwrite(self.new_file,self.blur)
+                messagebox.showinfo("SAVED","Saved file \'{}\'.".format((self.new_file).split("/")[-1]))
+                
             
 
     def filter(self):
@@ -49,14 +51,16 @@ class app:
                 img = cv.imread(self.fpath)
                 #kernel = np.ones((3,3),np.float32)/9
                 #dst = cv.filter2D(img,-1,kernel)
-                blur = cv.bilateralFilter(img,9,75,75)
+                self.blur = cv.bilateralFilter(img,9,75,75)
                 cv.imshow("ORIGINAL",img)
-                cv.imshow("NEW",blur)
+                cv.imshow("NEW",self.blur)
                 self.element = True
                 #cv.imwrite("NewImage.png",dst)
             except Exception as e:
                 messagebox.showwarning("UNEXPECTED ERROR",str(e))
             
+            
+        
 if __name__=="__main__":
     app()
 
