@@ -29,6 +29,8 @@ class app:
         Button(self.root,text="START FILTERING",width=46,bg="light green",command=self.filter).place(x=364,y=92)
         Button(self.root,text="SAVE",height=2,width=25,bg="light blue1",command=self.save).place(x=709,y=77)
 
+        print(self.filter_method.get())
+
         self.root.mainloop()
 
     def open_file(self):
@@ -43,7 +45,7 @@ class app:
             self.new_file = filedialog.asksaveasfilename(initialdir="/",title="SAVE",defaultextension=".png",
                                                          filetypes=[('png files','*.png'),('jpg files','*jpg'),('all files','*')])
             if self.new_file:
-                cv.imwrite(self.new_file,self.blur)
+                cv.imwrite(self.new_file,self.filtered)
                 messagebox.showinfo("SAVED","Saved file \'{}\'.".format((self.new_file).split("/")[-1]))
                 
             
@@ -52,11 +54,14 @@ class app:
         if self.fpath:
             try:
                 img = cv.imread(self.fpath)
-                #kernel = np.ones((3,3),np.float32)/9
-                #dst = cv.filter2D(img,-1,kernel)
-                self.blur = cv.bilateralFilter(img,9,75,75)
+                if self.filter_method.get() == "2D Convolution ( Image Filtering )":
+                    kernel = np.ones((3,3),np.float32)/9
+                    self.filtered = cv.filter2D(img,-1,kernel)
+                elif self.filter_method.get() == "Gray Scale":
+                    self.filtered = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+                    
                 cv.imshow("ORIGINAL",img)
-                cv.imshow("NEW",self.blur)
+                cv.imshow("NEW",self.filtered)
                 self.element = True
                 #cv.imwrite("NewImage.png",dst)
             except Exception as e:
