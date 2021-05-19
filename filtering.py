@@ -23,6 +23,9 @@ class app:
         Button(self.root,text="SEARCH",height=2,width=25,bg="light blue1",command=self.open_file).place(x=709,y=25)
         self.filter_method = ttk.Combobox(master=self.root,width=50)
         self.filter_method.place(x=10,y=95)
+        self.filter_method["values"]=["2D Convolution ( Image Filtering )","Average Blurring","Gaussian Blurring","Median Blurring",
+                                      "Bilateral Filtering","Gray Scale"]
+        self.filter_method.set("2D Convolution ( Image Filtering )")
         Button(self.root,text="START FILTERING",width=46,bg="light green",command=self.filter).place(x=364,y=92)
         Button(self.root,text="SAVE",height=2,width=25,bg="light blue1",command=self.save).place(x=709,y=77)
 
