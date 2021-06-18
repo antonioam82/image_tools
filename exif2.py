@@ -14,10 +14,11 @@ class App:
         self.currentDir.set(os.getcwd())
         self.filename = StringVar()
 
-        canvas = Canvas(self.window,width=450,height=450)
+        canvas = Canvas(self.window,width=453,height=458)
         canvas.place(x=10,y=40)
         Entry(self.window,textvariable=self.currentDir,width=195).place(x=0,y=0)
-        Entry(self.window,textvariable=self.filename,width=40,font=('arial',18)).place(x=470,y=40)
+        Entry(self.window,textvariable=self.filename,width=40,font=('arial',18)).place(x=473,y=40)
+        Button(self.window,text="SEARCH",width=64).place(x=10,y=510)
         
 
         self.window.mainloop()
