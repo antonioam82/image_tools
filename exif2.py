@@ -12,14 +12,16 @@ class App:
 
         self.currentDir = StringVar()
         self.currentDir.set(os.getcwd())
+        self.filename = StringVar()
 
         canvas = Canvas(self.window,width=450,height=450)
         canvas.place(x=10,y=40)
-        self.entryDir = Entry(self.window,textvariable=self.currentDir,width=195)
-        self.entryDir.place(x=0,y=0)
+        Entry(self.window,textvariable=self.currentDir,width=195).place(x=0,y=0)
+        Entry(self.window,textvariable=self.filename,width=40,font=('arial',18)).place(x=470,y=40)
         
 
         self.window.mainloop()
 
 if __name__=="__main__":
     App()
+
