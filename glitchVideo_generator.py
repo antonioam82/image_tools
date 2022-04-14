@@ -3,7 +3,6 @@ import numpy as np
 import os
 import random
 from mhmovie.code import *
-#from pydub import AudioSegment
 from pydub.generators import WhiteNoise
 from os.path import isfile, join
 
@@ -34,14 +33,7 @@ def convertToVideo(pathIn, pathOut, fps, time):
     if len(lista_frames) > 0:
         print("\nCREATING VIDEO...\n")
         frame_array = []
-        #files = [f for f in os.listdir(pathIn) if isfile(join(pathIn, f)) and not 'glichtVid' in f]
-        #files = [f for f in lista_frames if isfile(join(pathIn, f)) and not 'glichtVid' in f]
-        #files.sort(key=lambda x: int((x.split(".")[0]).split(" ")[1]))#REORDENA FRAMES
-        #for i in range(len(files)):
         for i in lista_frames:
-            #filename = pathIn+files[i]
-            #print(filename)
-            #img=cv2.imread(filename)
             height, width, layers = i.shape
             size = (width,height)
 
@@ -81,14 +73,9 @@ def create_frames(d):
                 for y in range(width):#1600
                     img[x,y] = [random.randint(int(blu_rang[0]),int(blu_rang[1])),random.randint(int(gre_rang[0]),
                                 int(gre_rang[1])),random.randint(int(red_rang[0]),int(red_rang[1]))]#0,256
-            #name = "ima "+str(i)+".png"
-        
-            #cv2.imwrite(name,img)
-            #print("DONE: ",name)
             c+=1
             print("DONE:",c)
             lista_frames.append(img)
-        #print("ADDING SOUND...")
         
         print("TASK COMPLETED")
         return frame_rate, lasting
@@ -156,12 +143,6 @@ while True:
     time = 2
     convertToVideo(pathIn, pathOut, fps, time)
     add_audio(pathOut,dur)
-    
-    '''if len(lista_frames) > 0:
-        elim = ns(input("¿Eliminar frames generados?(n/s): "))
-        if elim == "s":
-            for i in lista_frames:
-                os.remove(i)'''
 
     conti = ns(input("¿Continuar?(n/s): "))
     if conti == "n":
