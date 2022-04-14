@@ -3,6 +3,7 @@ import numpy as np
 import os
 import random
 from mhmovie.code import *
+#from pydub import AudioSegment
 from pydub.generators import WhiteNoise
 from os.path import isfile, join
 
@@ -33,17 +34,19 @@ def convertToVideo(pathIn, pathOut, fps, time):
     if len(lista_frames) > 0:
         print("\nCREATING VIDEO...\n")
         frame_array = []
-        files = [f for f in lista_frames if isfile(join(pathIn, f)) and not 'glichtVid' in f]
-        files.sort(key=lambda x: int((x.split(".")[0]).split(" ")[1]))#REORDENA FRAMES
-        for i in range(len(files)):
-            filename = pathIn+files[i]
-            print(filename)
-            img=cv2.imread(filename)
-            height, width, layers = img.shape
+        #files = [f for f in os.listdir(pathIn) if isfile(join(pathIn, f)) and not 'glichtVid' in f]
+        #files = [f for f in lista_frames if isfile(join(pathIn, f)) and not 'glichtVid' in f]
+        #files.sort(key=lambda x: int((x.split(".")[0]).split(" ")[1]))#REORDENA FRAMES
+        #for i in range(len(files)):
+        for i in lista_frames:
+            #filename = pathIn+files[i]
+            #print(filename)
+            #img=cv2.imread(filename)
+            height, width, layers = i.shape
             size = (width,height)
 
             for k in range (time):
-                frame_array.append(img)
+                frame_array.append(i)
 
         out = cv2.VideoWriter(pathOut, cv2.VideoWriter_fourcc(*'mp4v'), fps, size)
         for i in range(len(frame_array)):
@@ -69,6 +72,7 @@ def create_frames(d):
     
     
     if fr_range > 0:
+        c = 0
         print("\nWRITTING "+str(fr_range)+" FRAMES...\n")
         for i in range(0,fr_range):
             img = np.zeros((height,width,3),np.uint8)#900,1600
@@ -77,11 +81,15 @@ def create_frames(d):
                 for y in range(width):#1600
                     img[x,y] = [random.randint(int(blu_rang[0]),int(blu_rang[1])),random.randint(int(gre_rang[0]),
                                 int(gre_rang[1])),random.randint(int(red_rang[0]),int(red_rang[1]))]#0,256
-            name = "ima "+str(i)+".png"
+            #name = "ima "+str(i)+".png"
         
-            cv2.imwrite(name,img)
-            print("DONE: ",name)
-            lista_frames.append(name)
+            #cv2.imwrite(name,img)
+            #print("DONE: ",name)
+            c+=1
+            print("DONE:",c)
+            lista_frames.append(img)
+        #print("ADDING SOUND...")
+        
         print("TASK COMPLETED")
         return frame_rate, lasting
     else:
@@ -140,6 +148,7 @@ while True:
 
     directory = validate_dir()
     fps,dur = create_frames(directory)
+    print(len(lista_frames))
 
     pathIn = directory + '/' 
     fileName=define_name("glichtvid",".mp4")
@@ -148,11 +157,11 @@ while True:
     convertToVideo(pathIn, pathOut, fps, time)
     add_audio(pathOut,dur)
     
-    if len(lista_frames) > 0:
+    '''if len(lista_frames) > 0:
         elim = ns(input("¿Eliminar frames generados?(n/s): "))
         if elim == "s":
             for i in lista_frames:
-                os.remove(i)
+                os.remove(i)'''
 
     conti = ns(input("¿Continuar?(n/s): "))
     if conti == "n":
