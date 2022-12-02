@@ -10,7 +10,7 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-src',type=str,help='Archivo original')
-    parser.add_argument('-dest',type=str,help='Archivo destino')
+    parser.add_argument('-dest',default='my_gif.gif',type=str,help='Archivo destino')
     parser.add_argument('--start',default=0.0,type=float,help='inicio')
     parser.add_argument('--end',default=None,type=str,help='final')
     parser.add_argument('--show',help='Mostrar resultado',action='store_true')
