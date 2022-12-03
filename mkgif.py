@@ -41,7 +41,7 @@ def gm(args):
             duration = float(args.end)
         else:
             duration = video_streams[0]['duration']
-        print("GIF DURATION: ",duration)
+        #print("GIF DURATION: ",duration)
         clip = (VideoFileClip(args.source)
         .subclip((0,0),(0,float(duration)))
         .resize(args.size/100))
