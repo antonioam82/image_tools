@@ -8,7 +8,7 @@ import os
 
 def main():
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description="Create gifs from videos.")
     parser.add_argument('-src','--source',required=True,type=str,help='Ruta archivo original')
     parser.add_argument('-dest','--destination',default='my_gif.gif',type=str,help='Ruta archivo destino')
     parser.add_argument('-st','--start',default=0.0,type=float,help='Minuto inicial del gif')
