@@ -34,21 +34,23 @@ def show(f):
     pyglet.app.run()
 
 def gm(args):
-            
-    probe = ffmpeg.probe(args.source)
-    video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
-    if args.end:
-        duration = float(args.end)
+    if args.source in os.getcwd():
+        probe = ffmpeg.probe(args.source)
+        video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
+        if args.end:
+            duration = float(args.end)
+        else:
+            duration = video_streams[0]['duration']
+        print("GIF DURATION: ",duration)
+        clip = (VideoFileClip(args.source)
+        .subclip((0,0),(0,float(duration)))
+        .resize(args.size/100))
+        print('CREATING GIF...')
+        clip.write_gif(args.destination)
+        if args.show:
+            show(args.destination)
     else:
-        duration = video_streams[0]['duration']
-    print("GIF DURATION: ",duration)
-    clip = (VideoFileClip(args.source)
-    .subclip((0,0),(0,float(duration)))
-    .resize(args.size/100))
-    print('CREATING GIF...')
-    clip.write_gif(args.destination)
-    if args.show:
-        show(args.destination)
+        print("ERROR. File not found.")
 
 if __name__=='__main__':
     main()
