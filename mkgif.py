@@ -34,7 +34,7 @@ def show(f):
     pyglet.app.run()
 
 def gm(args):
-    if args.source in os.getcwd():
+    if args.source in os.listdir():
         probe = ffmpeg.probe(args.source)
         video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
         if args.end:
