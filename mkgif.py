@@ -2,6 +2,7 @@ from moviepy.editor import *
 import sys
 import pyglet
 import ffmpeg
+import pathlib
 from pyglet.window import key
 import argparse
 import os
@@ -34,24 +35,27 @@ def show(f):
     pyglet.app.run()
 
 def gm(args):
-    if args.source in os.listdir():
-        probe = ffmpeg.probe(args.source)
-        video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
-        if args.end:
-            duration = float(args.end)
+    file_extension = pathlib.Path(args.source).suffix
+    if file_extension == '.mp4':
+        if args.source in os.listdir():
+            probe = ffmpeg.probe(args.source)
+            video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
+            if args.end:
+                duration = float(args.end)
+            else:
+                duration = video_streams[0]['duration']
+            #print("GIF DURATION: ",duration)
+            clip = (VideoFileClip(args.source)
+            .subclip((0,args.start),(0,float(duration)))
+            .resize(args.size/100))
+            print('CREATING GIF...')
+            clip.write_gif(args.destination)
+            if args.show:
+                show(args.destination)
         else:
-            duration = video_streams[0]['duration']
-        #print("GIF DURATION: ",duration)
-        clip = (VideoFileClip(args.source)
-        .subclip((0,args.start),(0,float(duration)))
-        .resize(args.size/100))
-        print('CREATING GIF...')
-        clip.write_gif(args.destination)
-        if args.show:
-            show(args.destination)
+            print("ERROR: File not found.")
     else:
-        print("ERROR. File not found.")
+        print("ERROR: The file must have an mp4 extension.")
 
 if __name__=='__main__':
     main()
-
