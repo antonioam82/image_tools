@@ -1,4 +1,4 @@
-from moviepy.editor import *
+from moviepy.editor import VideoFileClip
 import sys
 import pyglet
 import ffmpeg
