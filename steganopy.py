@@ -1,57 +1,66 @@
-from tkinter import *
-from tkinter import ttk
-from tkinter import messagebox, filedialog
-import tkinter.scrolledtext as sct
-import cv2
+from moviepy.editor import *
+import sys
+import pyfiglet
+import ffmpeg
+import pyglet
+import pathlib
+from pyglet.window import key
+import argparse
 import os
-import numpy as np
 
-class app():
-    def __init__(self):
-        self.window = Tk()
-        self.window.title("Image Steganography")
-        self.window.geometry("593x410")
-        self.backgr = "gray90"
-        #self.window.configure(bg=self.backgr)
+def main():
 
-        self.imaname = StringVar()
-        self.current_dir = StringVar()
-        self.mode = StringVar()
-        self.mode.set(None)
+    parser = argparse.ArgumentParser(prog=pyfiglet.figlet_format('\nMKGIF',font='graffiti'),description="Create gifs from videos in command line.")
+    parser.add_argument('-src','--source',required=True,type=str,help='Ruta archivo original')
+    parser.add_argument('-dest','--destination',default='my_gif.gif',type=str,help='Ruta archivo destino')
+    parser.add_argument('-st','--start',default=0.0,type=float,help='Segundo inicial del gif')
+    parser.add_argument('-e','--end',default=None,type=str,help='Segundo final del gif')
+    parser.add_argument('-shw','--show',help='Mostrar resultado',action='store_true')
+    parser.add_argument('-sz','--size',default=100,type=int,help='Tamaño en porcentage')
 
-        self.entryDir = Entry(self.window,width=98,textvariable=self.current_dir)
-        self.entryDir.place(x=0,y=0)
-        self.textEntry = sct.ScrolledText(self.window,width=70,height=15)
-        self.textEntry.place(x=5,y=28)
-        self.btnCopy = Button(self.window,text="COPY TEXT",bg=self.backgr)
-        self.btnCopy.place(x=5,y=277)
-        self.btnClear = Button(self.window,text="CLEAR TEXT",bg=self.backgr)
-        self.btnClear.place(x=80,y=277)
-        self.rdbEncode = Radiobutton(self.window,text="Encode",variable=self.mode,value="EN",command=self.set_mode)
-        self.rdbEncode.place(x=420,y=277)
-        self.rdbDecode = Radiobutton(self.window,text="Decode",variable=self.mode,value="DE",command=self.set_mode)
-        self.rdbDecode.place(x=506,y=277)
-        self.btnSearch = Button(self.window,text="SEARCH",width=20,bg=self.backgr)
-        self.btnSearch.place(x=5,y=315)
-        self.entImage = Entry(self.window,width=37,font=('arial',14,'bold'),textvariable=self.imaname)
-        self.entImage.place(x=167,y=315)
-        self.btnStart = Button(self.window,text="START",width=81,bg=self.backgr)
-        self.btnStart.place(x=5,y=358)
-        
+    args=parser.parse_args()
+    gm(args)
 
-        self.show_dir()
+def show(f):
+    animation = pyglet.image.load_animation(f)
+    bin = pyglet.image.atlas.TextureBin()
+    animation.add_to_texture_bin(bin)
+    sprite = pyglet.sprite.Sprite(animation)
+    w = sprite.width
+    h = sprite.height
+    window = pyglet.window.Window(width=w, height=h)
 
-        self.window.mainloop()
+    @window.event
+    def on_draw():
+        sprite.draw()
+    pyglet.app.run()
 
-    def show_dir(self):
-        dirr = os.getcwd()
-        self.current_dir.set(dirr)
+def gm(args):
+    file_extension = pathlib.Path(args.source).suffix
+    result_extension = pathlib.Path(args.destination).suffix
+    if file_extension == '.mp4' and result_extension == '.gif':
+        if args.source in os.listdir():
+            probe = ffmpeg.probe(args.source)
+            video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
+            duration = float(video_streams[0]['duration'])
+            
+            if args.end:
+                duration = float(args.end)
+            print(duration)
+            clip = (VideoFileClip(args.source)
+            .subclip((0,args.start),
+                     (0,duration))
+            .resize(args.size/100))
+            print('CREATING GIF...')
+            clip.write_gif(args.destination)
+            if args.show:
+                show(args.destination)
+        else:
+            print(f"ERROR: File '{args.source}' not found.")
+    else:
+        print("ERROR: Source file must be '.mp4' and result file must be '.gif'.")
 
-    def set_mode(self):
-        self.btnStart.configure(text="START {}CODING".format(self.mode.get()))
-
-                                    
-if __name__=="__main__":
-    app()
+if __name__=='__main__':
+    main()
 
 
