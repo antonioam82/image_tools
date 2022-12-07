@@ -10,7 +10,7 @@ import os
 
 def main():
 
-    parser = argparse.ArgumentParser(prog=pyfiglet.figlet_format('\nMKGIF',font='graffiti'),description="Create gifs from videos.")
+    parser = argparse.ArgumentParser(prog=pyfiglet.figlet_format('\nMKGIF',font='graffiti'),description="Create gifs from videos in command line.")
     parser.add_argument('-src','--source',required=True,type=str,help='Ruta archivo original')
     parser.add_argument('-dest','--destination',default='my_gif.gif',type=str,help='Ruta archivo destino')
     parser.add_argument('-st','--start',default=0.0,type=float,help='Segundo inicial del gif')
@@ -42,10 +42,12 @@ def gm(args):
         if args.source in os.listdir():
             probe = ffmpeg.probe(args.source)
             video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
-            duration = float(video_streams[0]['duration'])
             
             if args.end:
                 duration = float(args.end)
+            else:
+                duration = float(video_streams[0]['duration'])
+                
             print(duration)
             clip = (VideoFileClip(args.source)
             .subclip((0,args.start),
@@ -56,9 +58,10 @@ def gm(args):
             if args.show:
                 show(args.destination)
         else:
-            print("ERROR: File not found.")
+            print(f"ERROR: File '{args.source}' not found.")
     else:
         print("ERROR: Source file must be '.mp4' and result file must be '.gif'.")
 
 if __name__=='__main__':
     main()
+
