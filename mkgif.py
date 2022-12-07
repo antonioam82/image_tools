@@ -1,4 +1,4 @@
-from moviepy.editor import VideoFileClip
+from moviepy.editor import *
 import sys
 import pyglet
 import ffmpeg
@@ -36,17 +36,19 @@ def show(f):
 
 def gm(args):
     file_extension = pathlib.Path(args.source).suffix
-    if file_extension == '.mp4':
+    result_extension = pathlib.Path(args.source).suffix
+    if file_extension == '.mp4' and result_extension == '.gif':
         if args.source in os.listdir():
             probe = ffmpeg.probe(args.source)
             video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
+            duration = float(video_streams[0]['duration'])
+            
             if args.end:
                 duration = float(args.end)
-            else:
-                duration = video_streams[0]['duration']
-            #print("GIF DURATION: ",duration)
+            print(duration)
             clip = (VideoFileClip(args.source)
-            .subclip((0,args.start),(0,float(duration)))
+            .subclip((0,args.start),
+                     (0,duration))
             .resize(args.size/100))
             print('CREATING GIF...')
             clip.write_gif(args.destination)
@@ -55,7 +57,7 @@ def gm(args):
         else:
             print("ERROR: File not found.")
     else:
-        print("ERROR: The file must have an mp4 extension.")
+        print("ERROR: Source file must be '.mp4' and result file must be '.gif'.")
 
 if __name__=='__main__':
     main()
