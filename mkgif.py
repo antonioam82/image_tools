@@ -1,7 +1,8 @@
 from moviepy.editor import *
 import sys
-import pyglet
+import pyfiglet
 import ffmpeg
+import pyglet
 import pathlib
 from pyglet.window import key
 import argparse
@@ -9,7 +10,7 @@ import os
 
 def main():
 
-    parser = argparse.ArgumentParser(description="Create gifs from videos.")
+    parser = argparse.ArgumentParser(prog=pyfiglet.figlet_format('\nMKGIF',font='graffiti'),description="Create gifs from videos.")
     parser.add_argument('-src','--source',required=True,type=str,help='Ruta archivo original')
     parser.add_argument('-dest','--destination',default='my_gif.gif',type=str,help='Ruta archivo destino')
     parser.add_argument('-st','--start',default=0.0,type=float,help='Segundo inicial del gif')
@@ -36,7 +37,7 @@ def show(f):
 
 def gm(args):
     file_extension = pathlib.Path(args.source).suffix
-    result_extension = pathlib.Path(args.source).suffix
+    result_extension = pathlib.Path(args.destination).suffix
     if file_extension == '.mp4' and result_extension == '.gif':
         if args.source in os.listdir():
             probe = ffmpeg.probe(args.source)
