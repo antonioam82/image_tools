@@ -41,22 +41,28 @@ def gm(args):
     result_extension = pathlib.Path(args.destination).suffix
     if file_extension == '.mp4' and result_extension == '.gif':
         if args.source in os.listdir():
-            probe = ffmpeg.probe(args.source)
-            video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
+            try:
+                probe = ffmpeg.probe(args.source)
+                video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
             
-            if args.end:
-                duration = float(args.end)
-            else:
-                duration = float(video_streams[0]['duration'])
-                
-            clip = (VideoFileClip(args.source)
-            .subclip((0,args.start),
-                     (0,duration))
-            .resize(args.size/100))
-            print('CREATING GIF...')
-            clip.write_gif(args.destination)
-            if args.show:
-                show(args.destination)
+                if args.end:
+                    duration = float(args.end)
+                else:
+                    duration = float(video_streams[0]['duration'])
+
+                if args.start < duration:
+                    clip = (VideoFileClip(args.source)
+                    .subclip((0,args.start),
+                         (0,duration))
+                    .resize(args.size/100))
+                    print('CREATING GIF...')
+                    clip.write_gif(args.destination)
+                    if args.show:
+                        show(args.destination)
+                else:
+                    print("ERROR: Start value should be smaller than end value.")
+            except Exception as e:
+                print("ERROR: ",str(e))
         else:
             print(f"ERROR: File '{args.source}' not found.")
     else:
