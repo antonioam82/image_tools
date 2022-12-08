@@ -10,7 +10,7 @@ import os
 
 def main():
 
-    parser = argparse.ArgumentParser(prog=pyfiglet.figlet_format('\nMKGIF',font='graffiti'),description="Create gifs from videos in command line.")
+    parser = argparse.ArgumentParser(prog="MKGIF",conflict_handler='resolve',description="Create gifs from videos in command line.")
     parser.add_argument('-src','--source',required=True,type=str,help='Ruta archivo original')
     parser.add_argument('-dest','--destination',default='my_gif.gif',type=str,help='Ruta archivo destino')
     parser.add_argument('-st','--start',default=0.0,type=float,help='Segundo inicial del gif')
@@ -36,6 +36,7 @@ def show(f):
     pyglet.app.run()
 
 def gm(args):
+    print(pyfiglet.figlet_format('MKGIF',font='graffiti'))
     file_extension = pathlib.Path(args.source).suffix
     result_extension = pathlib.Path(args.destination).suffix
     if file_extension == '.mp4' and result_extension == '.gif':
@@ -63,4 +64,3 @@ def gm(args):
 
 if __name__=='__main__':
     main()
-
