@@ -48,7 +48,6 @@ def gm(args):
             else:
                 duration = float(video_streams[0]['duration'])
                 
-            print(duration)
             clip = (VideoFileClip(args.source)
             .subclip((0,args.start),
                      (0,duration))
