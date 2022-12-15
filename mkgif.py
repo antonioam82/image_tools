@@ -1,5 +1,5 @@
 from moviepy.editor import *
-import sys
+#import sys
 import pyfiglet
 import ffmpeg
 import pyglet
@@ -16,7 +16,7 @@ def main():
     parser.add_argument('-st','--start',default=0.0,type=float,help='Segundo inicial del gif')
     parser.add_argument('-e','--end',default=None,type=str,help='Segundo final del gif')
     parser.add_argument('-shw','--show',help='Mostrar resultado',action='store_true')
-    parser.add_argument('-sz','--size',default=100,type=int,help='Tamaño en porcentage')
+    parser.add_argument('-sz','--size',default=100,type=int,help='Tamaño en porcentaje')
 
     args=parser.parse_args()
     gm(args)
@@ -34,6 +34,13 @@ def show(f):
     def on_draw():
         sprite.draw()
     pyglet.app.run()
+
+def get_size_format(b, factor=1024, suffix="B"):
+	for unit in ["","K","M","G","T","P","E","Z"]:
+	    if b < factor:
+	        return f"{b:.4f}{unit}{suffix}"
+	    b /= factor
+	return f"{b:.4f}Y{suffix}"
 
 def gm(args):
     print(pyfiglet.figlet_format('MKGIF',font='graffiti'))
@@ -57,6 +64,8 @@ def gm(args):
                     .resize(args.size/100))
                     print('CREATING GIF...')
                     clip.write_gif(args.destination)
+                    size = get_size_format(os.stat(args.destination).st_size)
+                    print(f"Ceated gif '{args.destination}' with size {size}.")
                     if args.show:
                         show(args.destination)
                 else:
