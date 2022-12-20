@@ -7,9 +7,9 @@ import pathlib
 from pyglet.window import key
 import argparse
 import os
-
+ 
 def main():
-
+ 
     parser = argparse.ArgumentParser(prog="MKGIF",conflict_handler='resolve',description="Create gifs from videos in command line.")
     parser.add_argument('-src','--source',required=True,type=str,help='Ruta archivo original')
     parser.add_argument('-dest','--destination',default='my_gif.gif',type=str,help='Ruta archivo destino')
@@ -17,10 +17,10 @@ def main():
     parser.add_argument('-e','--end',default=None,type=str,help='Segundo final del gif')
     parser.add_argument('-shw','--show',help='Mostrar resultado',action='store_true')
     parser.add_argument('-sz','--size',default=100,type=int,help='Tamaño en porcentaje')
-
+ 
     args=parser.parse_args()
     gm(args)
-
+ 
 def show(f):
     animation = pyglet.image.load_animation(f)
     bin = pyglet.image.atlas.TextureBin()
@@ -29,19 +29,19 @@ def show(f):
     w = sprite.width
     h = sprite.height
     window = pyglet.window.Window(width=w, height=h)
-
+ 
     @window.event
     def on_draw():
         sprite.draw()
     pyglet.app.run()
-
+ 
 def get_size_format(b, factor=1024, suffix="B"):
 	for unit in ["","K","M","G","T","P","E","Z"]:
 	    if b < factor:
 	        return f"{b:.4f}{unit}{suffix}"
 	    b /= factor
 	return f"{b:.4f}Y{suffix}"
-
+ 
 def gm(args):
     print(pyfiglet.figlet_format('MKGIF',font='graffiti'))
     file_extension = pathlib.Path(args.source).suffix
@@ -51,12 +51,12 @@ def gm(args):
             try:
                 probe = ffmpeg.probe(args.source)
                 video_streams = [stream for stream in probe["streams"] if stream["codec_type"] == "video"]
-            
+ 
                 if args.end:
                     duration = float(args.end)
                 else:
                     duration = float(video_streams[0]['duration'])
-
+ 
                 if args.start < duration:
                     clip = (VideoFileClip(args.source)
                     .subclip((0,args.start),
@@ -65,7 +65,7 @@ def gm(args):
                     print('CREATING GIF...')
                     clip.write_gif(args.destination)
                     size = get_size_format(os.stat(args.destination).st_size)
-                    print(f"Ceated gif '{args.destination}' with size {size}.")
+                    print(f"Created gif '{args.destination}' with size {size}.")
                     if args.show:
                         show(args.destination)
                 else:
@@ -76,6 +76,7 @@ def gm(args):
             print(f"ERROR: File '{args.source}' not found.")
     else:
         print("ERROR: Source file must be '.mp4' and result file must be '.gif'.")
-
+ 
 if __name__=='__main__':
     main()
+
