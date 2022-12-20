@@ -67,7 +67,7 @@ def gm(args):
                         print('CREATING GIF...')
                         clip.write_gif(args.destination)
                         size = get_size_format(os.stat(args.destination).st_size)
-                        print(f"Ceated gif '{args.destination}' with size {size}.")
+                        print(f"Created gif '{args.destination}' with size {size}.")
                         if args.show:
                             show(args.destination)
                     else:
