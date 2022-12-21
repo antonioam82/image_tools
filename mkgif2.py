@@ -73,14 +73,17 @@ def gm(args):
                     else:
                         print("ERROR: Start value should be smaller than end value.")
                 else:
-                    print("CONVERTING...")
-                    file = Image.open(args.source)
-                    file.save(args.destination,'gif',save_all=True,background=0)
-                    file.close()
-                    size = get_size_format(os.stat(args.destination).st_size)
-                    print(f"Created {args.destination} with size {size} from {args.source}")
-                    if args.show:
-                        show(args.destination)
+                    if args.size == 100 and args.start == 0.0 and not args.end:
+                        print("CONVERTING...")
+                        file = Image.open(args.source)
+                        file.save(args.destination,'gif',save_all=True,background=0)
+                        file.close()
+                        size = get_size_format(os.stat(args.destination).st_size)
+                        print(f"Created {args.destination} with size {size} from {args.source}")
+                        if args.show:
+                            show(args.destination)
+                    else:
+                        print("-st/--start, -e/--end and -sz/--size specs not allowed for '.webp'/'.gif' conversion")
             except Exception as e:
                 print("ERROR: ",str(e))
         else:
