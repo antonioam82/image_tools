@@ -38,7 +38,7 @@ def show(f):
             sprite.draw()
         pyglet.app.run()
     except Exception as e:
-        print("Unexpected error: ",str(e))
+        print("UNEXPECTED ERROR: ",str(e))
 
 def get_size_format(b, factor=1024, suffix="B"):
 	for unit in ["","K","M","G","T","P","E","Z"]:
@@ -89,11 +89,11 @@ def gm(args):
                     else:
                         print("-st/--start, -e/--end and -sz/--size specs not allowed for '.webp' to '.gif' conversion")
             except Exception as e:
-                print("ERROR: ",str(e))
+                print("UNEXPECTED ERROR: ",str(e))
         else:
-            print(f"ERROR: File '{args.source}' not found.")
+            print(f"FILE NOT FOUND: File '{args.source}' not found.")
     else:
-        print("ERROR: Source file must be '.mp4' or '.webp' and result file must be '.gif'.")
+        print("WRONG FILE FORMAT: Source file must be '.mp4' or '.webp' and result file must be '.gif'.")
 
 if __name__=='__main__':
     main()
