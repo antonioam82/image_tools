@@ -75,7 +75,7 @@ def gm(args):
                         if args.show:
                             show(args.destination)
                     else:
-                        print("ERROR: Start value should be smaller than end value.")
+                        print("ERROR: Start value must be smaller than end value.")
                 else:
                     if args.size == 100 and args.start == 0.0 and not args.end:
                         print("CONVERTING...")
