@@ -24,18 +24,21 @@ def main():
     gm(args)
 
 def show(f):
-    animation = pyglet.image.load_animation(f)
-    bin = pyglet.image.atlas.TextureBin()
-    animation.add_to_texture_bin(bin)
-    sprite = pyglet.sprite.Sprite(animation)
-    w = sprite.width
-    h = sprite.height
-    window = pyglet.window.Window(width=w, height=h)
-
-    @window.event
-    def on_draw():
-        sprite.draw()
-    pyglet.app.run()
+    try:
+        animation = pyglet.image.load_animation(f)
+        bin = pyglet.image.atlas.TextureBin()
+        animation.add_to_texture_bin(bin)
+        sprite = pyglet.sprite.Sprite(animation)
+        w = sprite.width
+        h = sprite.height
+        window = pyglet.window.Window(width=w, height=h)
+        
+        @window.event
+        def on_draw():
+            sprite.draw()
+        pyglet.app.run()
+    except Exception as e:
+        print("Unexpected error: ",str(e))
 
 def get_size_format(b, factor=1024, suffix="B"):
 	for unit in ["","K","M","G","T","P","E","Z"]:
