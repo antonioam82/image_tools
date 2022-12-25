@@ -12,13 +12,14 @@ import os
 def main():
 
     parser = argparse.ArgumentParser(prog="MKGIF",conflict_handler='resolve',description="Create gifs from videos in command line or convert '.webp' files into '.gif'.",
-                                     epilog = "Do not spec -st/--start, -e/--end and -sz/--size args for '.webp' to '.gif' conversions.")
+                                     epilog = "Do not spec -st/--start, -e/--end, -sz/--size and -spd/--speed args for '.webp' to '.gif' conversion")
     parser.add_argument('-src','--source',required=True,type=str,help='Ruta archivo original')
     parser.add_argument('-dest','--destination',default='my_gif.gif',type=str,help='Ruta archivo destino')
     parser.add_argument('-st','--start',default=0.0,type=float,help='Segundo inicial del gif')
     parser.add_argument('-e','--end',default=None,type=str,help='Segundo final del gif')
     parser.add_argument('-shw','--show',help='Mostrar resultado',action='store_true')
     parser.add_argument('-sz','--size',default=100,type=int,help='Tamaño en porcentaje')
+    parser.add_argument('-spd','--speed',default=100,type=int,help='Velocidad de animación en porcentaje')
 
     args=parser.parse_args()
     gm(args)
@@ -67,7 +68,8 @@ def gm(args):
                         clip = (VideoFileClip(args.source)
                         .subclip((0,args.start),
                              (0,duration))
-                        .resize(args.size/100))
+                        .resize(args.size/100)
+                        .speedx(args.speed/100))
                         print('CREATING GIF...')
                         clip.write_gif(args.destination)
                         size = get_size_format(os.stat(args.destination).st_size)
@@ -77,7 +79,7 @@ def gm(args):
                     else:
                         print("ERROR: Start value must be smaller than end value.")
                 else:
-                    if args.size == 100 and args.start == 0.0 and not args.end:
+                    if args.size == 100 and args.start == 0.0 and args.speed == 100 and not args.end:
                         print("CONVERTING...")
                         file = Image.open(args.source)
                         file.save(args.destination,'gif',save_all=True,background=0)
@@ -87,7 +89,7 @@ def gm(args):
                         if args.show:
                             show(args.destination)
                     else:
-                        print("-st/--start, -e/--end and -sz/--size specs not allowed for '.webp' to '.gif' conversion")
+                        print("-st/--start, -e/--end, -sz/--size and -spd/--speed specs not allowed for '.webp' to '.gif' conversion")
             except Exception as e:
                 print("UNEXPECTED ERROR: ",str(e))
         else:
