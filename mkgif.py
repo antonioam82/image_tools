@@ -17,6 +17,7 @@ def main():
     parser.add_argument('-e','--end',default=None,type=str,help='Segundo final del gif')
     parser.add_argument('-shw','--show',help='Mostrar resultado',action='store_true')
     parser.add_argument('-sz','--size',default=100,type=int,help='Tamaño en porcentaje')
+    parser.add_argument('-spd','--speed',default=100,type=int,help='Velocidad de animación en porcentaje')
  
     args=parser.parse_args()
     gm(args)
@@ -61,7 +62,8 @@ def gm(args):
                     clip = (VideoFileClip(args.source)
                     .subclip((0,args.start),
                          (0,duration))
-                    .resize(args.size/100))
+                    .resize(args.size/100)
+                    .speedx(args.speed/100))
                     print('CREATING GIF...')
                     clip.write_gif(args.destination)
                     size = get_size_format(os.stat(args.destination).st_size)
@@ -79,4 +81,3 @@ def gm(args):
  
 if __name__=='__main__':
     main()
-
