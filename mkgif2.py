@@ -18,8 +18,9 @@ def main():
     parser.add_argument('-st','--start',default=0.0,type=float,help='Segundo inicial del gif')
     parser.add_argument('-e','--end',default=None,type=str,help='Segundo final del gif')
     parser.add_argument('-shw','--show',help='Mostrar resultado',action='store_true')
-    parser.add_argument('-sz','--size',default=100,type=int,help='Tamaño en porcentaje')
-    parser.add_argument('-spd','--speed',default=100,type=int,help='Velocidad de animación en porcentaje')
+    parser.add_argument('-sz','--size',default=100,type=int,help='Tamaño relativo')
+    parser.add_argument('-spd','--speed',default=100,type=int,help='Velocidad relativa de animación')
+    parser.add_argument('-fps','--fraps',default=None,type=int,help='Frames por segundo')
 
     args=parser.parse_args()
     gm(args)
@@ -71,7 +72,7 @@ def gm(args):
                         .resize(args.size/100)
                         .speedx(args.speed/100))
                         print('CREATING GIF...')
-                        clip.write_gif(args.destination)
+                        clip.write_gif(args.destination,fps=args.fraps)
                         size = get_size_format(os.stat(args.destination).st_size)
                         print(f"Created gif '{args.destination}' with size {size}.")
                         if args.show:
