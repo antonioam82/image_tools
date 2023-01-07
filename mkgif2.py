@@ -73,6 +73,7 @@ def gm(args):
                         .speedx(args.speed/100))
                         print('CREATING GIF...')
                         clip.write_gif(args.destination,fps=args.fraps)
+                        clip.close()
                         size = get_size_format(os.stat(args.destination).st_size)
                         print(f"Created gif '{args.destination}' with size {size}.")
                         if args.show:
