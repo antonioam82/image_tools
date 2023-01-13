@@ -47,7 +47,7 @@ def gm(args):
     print(pyfiglet.figlet_format('MKGIF',font='graffiti'))
     file_extension = pathlib.Path(args.source).suffix
     result_extension = pathlib.Path(args.destination).suffix
-    a = 0
+    
     if file_extension == '.mp4' and result_extension == '.gif':
         if args.source in os.listdir():
             try:
