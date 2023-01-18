@@ -8,13 +8,17 @@ import pathlib
 from pyglet.window import key
 import argparse
 import random
-from colorama import Fore, init
+from colorama import Fore, init, Style
 import os
 
 init()
 color = [Fore.RED,Fore.GREEN,Fore.YELLOW,Fore.BLUE,Fore.CYAN,
                       Fore.MAGENTA,Fore.WHITE]
+
+bright = [Style.DIM,Style.NORMAL,Style.BRIGHT]
+
 index = random.randint(0,6)
+b_index = random.randint(0,2)
 
 def main():
 
@@ -57,7 +61,7 @@ def get_size_format(b, factor=1024, suffix="B"):
 	return f"{b:.4f}Y{suffix}"
  
 def gm(args):
-    print(color[index]+pyfiglet.figlet_format('MKGIF',font='graffiti')+Fore.RESET)
+    print(color[index]+bright[b_index]+pyfiglet.figlet_format('MKGIF',font='graffiti')+Fore.RESET+Style.RESET_ALL)
     file_extension = pathlib.Path(args.source).suffix
     result_extension = pathlib.Path(args.destination).suffix
     if (file_extension == '.mp4' or file_extension == '.webp') and result_extension == '.gif':
