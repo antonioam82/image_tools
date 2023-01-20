@@ -23,7 +23,7 @@ b_index = random.randint(0,2)
 def main():
 
     parser = argparse.ArgumentParser(prog="MKGIF",conflict_handler='resolve',description="Create gifs from videos in command line or convert '.webp' files into '.gif'.",
-                                     epilog = "Do not spec -st/--start, -e/--end, -sz/--size and -spd/--speed args for '.webp' to '.gif' conversion")
+                                     epilog = "Visit https://github.com/antonioam82")
     parser.add_argument('-src','--source',required=True,type=str,help='Ruta archivo original')
     parser.add_argument('-dest','--destination',default='my_gif.gif',type=str,help='Ruta archivo destino')
     parser.add_argument('-st','--start',default=0.0,type=float,help='Segundo inicial del gif')
@@ -112,3 +112,4 @@ def gm(args):
 
 if __name__=='__main__':
     main()
+
