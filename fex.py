@@ -18,8 +18,7 @@ def extract_frames(name,ex):
             count+=1
         else:
             break
-    self.cam.release()
-    
+    self.cam.release()  
 
 def check_source_ext(file):
     supported_formats = ['.mp4','.avi','.mov','.wmv','.rm','.webp']
