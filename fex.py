@@ -8,18 +8,18 @@ from pynput import keyboard
 init()
 
 def extract_frames(name,ex):
-    cam = cv2.VideoCapture(nam+ex)
+    cam = cv2.VideoCapture(name+ex)
     count = 1
     while(True):
         ret,frame = cam.read()
         
         if ret:
-            cv2.inwrite(name+str(count)+ex,frame)
+            cv2.imwrite(name+str(count)+".png",frame)
             count+=1
         else:
             break
-    self.cam.release()  
-
+    cam.release()
+    
 def check_source_ext(file):
     supported_formats = ['.mp4','.avi','.mov','.wmv','.rm','.webp']
     name, ex = os.path.splitext(file)
@@ -41,7 +41,7 @@ def main():
     print("NOMBRE DEL VIDEO: ",name)
     print("EXTENSION: ",extension)
 
-    extract_frame(name,extension)
+    extract_frames(name,extension)
 
 if __name__=='__main__':
     main()
