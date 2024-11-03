@@ -10,16 +10,14 @@ init()
 def extract_frames(name,ex):
     cam = cv2.VideoCapture(name+ex)
     num_frames = int(cam.get(cv2.CAP_PROP_FRAME_COUNT))
-    print("NUMBER OF FRAMES: ",num_frames)
+    print(f"EXTRACTING {num_frames} FRAMES")
     pbar = tqdm(total=num_frames,unit='frames',ncols=100)
     count = 1
     while(True):
         ret,frame = cam.read()
         
         if ret:
-            
             cv2.imwrite(name+str(count)+".png",frame)
-            
             pbar.update(1)
             count+=1
             
@@ -48,7 +46,7 @@ def main():
 
     args = parser.parse_args()
     name, extension = os.path.splitext(args.source)
-    print("NOMBRE DEL VIDEO: ",name)
+    print("VIDEO NAME: ",name)
     print("EXTENSION: ",extension)
 
     extract_frames(name,extension)
