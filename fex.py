@@ -9,16 +9,26 @@ init()
 
 def extract_frames(name,ex):
     cam = cv2.VideoCapture(name+ex)
+    num_frames = int(cam.get(cv2.CAP_PROP_FRAME_COUNT))
+    print("NUMBER OF FRAMES: ",num_frames)
+    pbar = tqdm(total=num_frames,unit='frames',ncols=100)
     count = 1
     while(True):
         ret,frame = cam.read()
         
         if ret:
+            
             cv2.imwrite(name+str(count)+".png",frame)
+            
+            pbar.update(1)
             count+=1
+            
         else:
             break
+        
     cam.release()
+    pbar.close()
+    print("\nDONE")
     
 def check_source_ext(file):
     supported_formats = ['.mp4','.avi','.mov','.wmv','.rm','.webp']
