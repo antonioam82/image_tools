@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import cv2
 import argparse
 import os
@@ -14,28 +16,33 @@ def on_press(key):
         stop = True
         return False
 
-def extract_frames(name,ex):
+def extract_frames(name,ex,args):
     cam = cv2.VideoCapture(name+ex)
     num_frames = int(cam.get(cv2.CAP_PROP_FRAME_COUNT))
-    print(f"EXTRACTING {num_frames} FRAMES (press space bar to cancel)")
+    
     listener = keyboard.Listener(on_press=on_press)
     listener.start()
-    pbar = tqdm(total=num_frames,unit='frames',ncols=100)
-    count = 1
+    initial_frame = args.from_frame
+    cam.set(cv2.CAP_PROP_POS_FRAMES,initial_frame)###########################
+    total_frames = num_frames - initial_frame###########################
+    print(f"EXTRACTING {total_frames} FRAMES (press space bar to cancel)")
+    pbar = tqdm(total=total_frames,unit='frames',ncols=100)
+    
+    count = 0
     ret = True
     while ret:
         ret,frame = cam.read()
+        count+=1
         
         if ret:
             cv2.imwrite(name+str(count)+".png",frame)
             pbar.update(1)
-            count+=1
-
+            
         if stop:
                 print(Fore.YELLOW + Style.NORMAL + "\nFrame extraction interrupted by user." + Fore.RESET + Style.RESET_ALL)
                 pbar.disable = True
                 break
-        
+                
     cam.release()
     pbar.close()
     listener.stop()
@@ -57,13 +64,14 @@ def main():
                                      description = "Extract frames from video.",
                                      epilog = "...")
     parser.add_argument('-src','--source',required=True,type=check_source_ext,help='Source file name')
+    parser.add_argument('-from','--from_frame',default=0,type=int,help='Frame index to extract from')
 
     args = parser.parse_args()
     name, extension = os.path.splitext(args.source)
     print("VIDEO NAME: ",name)
     #print("EXTENSION: ",extension)
 
-    extract_frames(name,extension)
+    extract_frames(name,extension,args)
 
 if __name__=='__main__':
     main()
