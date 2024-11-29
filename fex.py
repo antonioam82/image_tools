@@ -19,7 +19,7 @@ def on_press(key):
 def extract_frames(name,ex,args):
     cam = cv2.VideoCapture(name+ex)
     num_frames = int(cam.get(cv2.CAP_PROP_FRAME_COUNT))
-    print(num_frames)
+    #print(num_frames)
     
     listener = keyboard.Listener(on_press=on_press)
     listener.start()
@@ -31,7 +31,7 @@ def extract_frames(name,ex,args):
     else:
         final_frame = num_frames
     
-    if (initial_frame >= 0 and initial_frame <= num_frames)and (final_frame > 0 and final_frame <= num_frames):
+    if (initial_frame >= 0 and initial_frame <= num_frames)and (final_frame > 0 and final_frame <= num_frames) and (initial_frame < final_frame):
         cam.set(cv2.CAP_PROP_POS_FRAMES,initial_frame)###########################
         total_frames = abs(num_frames - initial_frame) - abs(final_frame - num_frames)###########################
         print(f"EXTRACTING {total_frames} FRAMES (press space bar to cancel)")
