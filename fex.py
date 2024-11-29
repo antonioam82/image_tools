@@ -47,9 +47,10 @@ def extract_frames(name,ex,args):
                 cv2.imwrite(name+str(count)+".png",frame)
                 pbar.update(1)
 
-            current_frame = int(cam.get(cv2.CAP_PROP_POS_FRAMES))
-            if current_frame >= args.to_frame:
-                break
+            if args.to_frame:
+                current_frame = int(cam.get(cv2.CAP_PROP_POS_FRAMES))
+                if current_frame >= args.to_frame:
+                    break
             
             if stop:
                 print(Fore.YELLOW + Style.NORMAL + "\nFrame extraction interrupted by user." + Fore.RESET + Style.RESET_ALL)
