@@ -1,8 +1,5 @@
 import cv2
 import numpy as np
-import os
-
-os.chdir(r'C:\Users\anton\OneDrive\Documentos\files_used\my_gifs')
 
 # Cargar la imagen
 img = cv2.imread('cop.jpg')
