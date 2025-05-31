@@ -33,7 +33,10 @@ def extract_frames(name,ex,args):
     
     if (initial_frame >= 0 and initial_frame <= num_frames)and (final_frame > 0 and final_frame <= num_frames) and (initial_frame < final_frame):
         cam.set(cv2.CAP_PROP_POS_FRAMES,initial_frame)###########################
-        total_frames = abs(num_frames - initial_frame) - abs(final_frame - num_frames)###########################
+        if initial_frame == 0:
+            total_frames = abs(num_frames - initial_frame) - abs(final_frame - num_frames)###########################
+        else:
+            total_frames = abs(num_frames - (initial_frame +1)) - abs(final_frame - num_frames)###########################
         print(f"EXTRACTING {total_frames} FRAMES (press space bar to cancel)")
         pbar = tqdm(total=total_frames,unit='frames',ncols=100)
     
@@ -44,7 +47,7 @@ def extract_frames(name,ex,args):
             count+=1
         
             if ret:
-                cv2.imwrite(name+str(count)+".png",frame)
+                cv2.imwrite(name+str(count)+"."+args.extension,frame)
                 pbar.update(1)
 
             if args.to_frame:
@@ -64,9 +67,14 @@ def extract_frames(name,ex,args):
             print("DONE")
     else:
         print(Fore.RED+Style.BRIGHT+"Invalid index for initial or final frame."+Fore.RESET+Style.RESET_ALL)
+
+def check_outp_ext(ex):
+    if ex not in ['png','jpg']:
+        raise argparse.ArgumentTypeError(Fore.RED+Style.BRIGHT+f"Output files must be 'png' or 'jpg' ('{ex}' is not valid)."+Fore.RESET+Style.RESET_ALL)
+    return ex
     
 def check_source_ext(file):
-    supported_formats = ['.mp4','.avi','.mov','.wmv','.rm','.webp']
+    supported_formats = ['.mp4','.avi','.mov','.wmv','.rm','.webp','.gif']
     name, ex = os.path.splitext(file)
     if file in os.listdir():
         if ex not in supported_formats:
@@ -82,6 +90,7 @@ def main():
     parser.add_argument('-src','--source',required=True,type=check_source_ext,help='Source file name')
     parser.add_argument('-from','--from_frame',default=0,type=int,help='Frame index to extract from')
     parser.add_argument('-to','--to_frame',default=None,type=int,help='Frame index to extract to')
+    parser.add_argument('-ex','--extension',default='png',type=check_outp_ext,help='Output extension')
 
     args = parser.parse_args()
     name, extension = os.path.splitext(args.source)
