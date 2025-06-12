@@ -6,6 +6,7 @@ import os
 from tqdm import tqdm
 from colorama import Fore, init, Style
 from pynput import keyboard
+import shutil
 
 init()
 
@@ -48,6 +49,8 @@ def extract_frames(name,ex,args):
         
             if ret:
                 cv2.imwrite(name+str(count)+"."+args.extension,frame)
+                '''if args.folder_name:
+                    destination = '''
                 pbar.update(1)
 
             if args.to_frame:
@@ -91,9 +94,12 @@ def main():
     parser.add_argument('-from','--from_frame',default=0,type=int,help='Frame index to extract from')
     parser.add_argument('-to','--to_frame',default=None,type=int,help='Frame index to extract to')
     parser.add_argument('-ex','--extension',default='png',type=check_outp_ext,help='Output extension')
+    parser.add_argument('-cf','--create_folder',default="",help='.....')
 
     args = parser.parse_args()
     name, extension = os.path.splitext(args.source)
+    if args.create_folder != "": #################################################################3333
+        os.makedirs(args.create_folder)#################################################################3
     print("VIDEO NAME: ",name)
     #print("EXTENSION: ",extension)
 
