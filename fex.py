@@ -48,9 +48,11 @@ def extract_frames(name,ex,args):
             count+=1
         
             if ret:
-                cv2.imwrite(name+str(count)+"."+args.extension,frame)
-                '''if args.folder_name:
-                    destination = '''
+                frame_name = name+str(count)+"."+args.extension
+                cv2.imwrite(frame_name,frame)
+                if args.create_folder: ########################
+                    destination =  os.path.join(args.create_folder, frame_name)
+                    shutil.move(frame_name, destination) ########################
                 pbar.update(1)
 
             if args.to_frame:
@@ -98,10 +100,9 @@ def main():
 
     args = parser.parse_args()
     name, extension = os.path.splitext(args.source)
-    if args.create_folder != "": #################################################################3333
+    if args.create_folder != "" and not os.path.exists(args.create_folder): #################################################################3333
         os.makedirs(args.create_folder)#################################################################3
-    print("VIDEO NAME: ",name)
-    #print("EXTENSION: ",extension)
+    print("VIDEO NAME: ",name+extension)
 
     extract_frames(name,extension,args)
 
