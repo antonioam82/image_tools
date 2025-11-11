@@ -6,7 +6,7 @@ import os
 from tqdm import tqdm
 from colorama import Fore, init, Style
 from pynput import keyboard
-import shutil
+#import shutil
 
 init()
 
@@ -49,10 +49,13 @@ def extract_frames(name,ex,args):
         
             if ret:
                 frame_name = name+str(count)+"."+args.extension
-                cv2.imwrite(frame_name,frame)
+                
                 if args.create_folder: ########################
                     destination =  os.path.join(args.create_folder, frame_name)
-                    shutil.move(frame_name, destination) ########################
+                else:
+                    destination = frame_name
+                    #shutil.move(frame_name, destination) ########################
+                cv2.imwrite(destination,frame)
                 pbar.update(1)
 
             if args.to_frame:
