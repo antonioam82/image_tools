@@ -38,7 +38,7 @@ def extract_frames(name,ex,args):
             total_frames = abs(num_frames - initial_frame) - abs(final_frame - num_frames)###########################
         else:
             total_frames = abs(num_frames - (initial_frame +1)) - abs(final_frame - num_frames)###########################
-        print(f"EXTRACTING {total_frames} FRAMES (press space bar to cancel)")
+        print(f"EXTRACTING {total_frames + 1} FRAMES (press space bar to cancel)")
         pbar = tqdm(total=total_frames,unit='frames',ncols=100)
     
         count = 0
@@ -60,8 +60,13 @@ def extract_frames(name,ex,args):
 
             if args.to_frame:
                 current_frame = int(cam.get(cv2.CAP_PROP_POS_FRAMES))
+                pbar.update(1)
+                
                 if current_frame >= args.to_frame:
+                    pbar.disable = True
                     break
+
+                
             
             if stop:
                 print(Fore.YELLOW + Style.NORMAL + "\nFrame extraction interrupted by user." + Fore.RESET + Style.RESET_ALL)
