@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import cv2
 import argparse
+from PIL import Image
 import os
 from tqdm import tqdm
 from colorama import Fore, init, Style
@@ -16,6 +17,16 @@ def on_press(key):
     if key == keyboard.Key.space:
         stop = True
         return False
+
+def extract_webp_frames(name,ex,args):
+    img = Image.open(name+ex)
+
+    for i in range(img.n_frames):
+        img.seek(i)
+        img.save(f"frame_{i:03d}.png")
+        print(f"Guardado: 'frame_{i:03d}.png'")
+    print("Extracción completa.")
+    
 
 def extract_frames(name,ex,args):
     cam = cv2.VideoCapture(name+ex)
@@ -89,7 +100,7 @@ def check_outp_ext(ex):
 def check_source_ext(file):
     supported_formats = ['.mp4','.avi','.mov','.wmv','.rm','.webp','.gif']
     name, ex = os.path.splitext(file)
-    if file in os.listdir():
+    if os.path.exists(file):
         if ex not in supported_formats:
             raise argparse.ArgumentTypeError(Fore.RED+Style.BRIGHT+f"Source file must be '.mp4', '.avi', '.mov', '.wmv', '.rm' or '.webp' ('{ex}' is not valid)."+Fore.RESET+Style.RESET_ALL)
     else:
@@ -112,7 +123,10 @@ def main():
         os.makedirs(args.create_folder)#################################################################3
     print("VIDEO NAME: ",name+extension)
 
-    extract_frames(name,extension,args)
+    if extension != ".webp":
+        extract_frames(name,extension,args)
+    else:
+        extract_webp_frames(name,extension,args)
 
 if __name__=='__main__':
     main()
