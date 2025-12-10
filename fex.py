@@ -31,6 +31,9 @@ def on_press(key):
     print("Extracción completa.")'''
 
 def extract_webp_frames(name, ex, args):
+    listener = keyboard.Listener(on_press=on_press)
+    listener.start()
+    
     img = Image.open(name + ex)
     output_dir = args.create_folder if args.create_folder else os.getcwd()
     if args.create_folder:
@@ -45,7 +48,14 @@ def extract_webp_frames(name, ex, args):
         img.save(save_path)
         print(f"Guardado: {save_path}")
 
-    print("Extracción completa.")   
+        if stop:
+            print(Fore.YELLOW + Style.NORMAL + "\nFrame extraction interrupted by user." + Fore.RESET + Style.RESET_ALL)
+            #pbar.disable = True
+            break
+
+    if not stop:
+        print("DONE")
+    listener.stop()
 
 def extract_frames(name,ex,args):
     cam = cv2.VideoCapture(name+ex)
@@ -96,8 +106,6 @@ def extract_frames(name,ex,args):
                     pbar.disable = True
                     break
 
-                
-            
             if stop:
                 print(Fore.YELLOW + Style.NORMAL + "\nFrame extraction interrupted by user." + Fore.RESET + Style.RESET_ALL)
                 pbar.disable = True
