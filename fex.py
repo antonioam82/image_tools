@@ -18,15 +18,34 @@ def on_press(key):
         stop = True
         return False
 
-def extract_webp_frames(name,ex,args):
+'''def extract_webp_frames(name,ex,args):
     img = Image.open(name+ex)
 
     for i in range(img.n_frames):
         img.seek(i)
-        img.save(f"frame_{i:03d}.png")
-        print(f"Guardado: 'frame_{i:03d}.png'")
-    print("Extracción completa.")
-    
+        if args.create_folder:
+            os.path.join(args.create_folder, img.save(f"frame_{i}.png"))
+        else:
+            img.save(f"frame_{i}.png")
+        #print(f"Guardado: 'frame_{i}.png'")#print(f"Guardado: 'frame_{i:03d}.png'")
+    print("Extracción completa.")'''
+
+def extract_webp_frames(name, ex, args):
+    img = Image.open(name + ex)
+    output_dir = args.create_folder if args.create_folder else os.getcwd()
+    if args.create_folder:
+        os.makedirs(output_dir, exist_ok=True)
+
+    for i in range(img.n_frames):
+        img.seek(i)
+        
+        frame_name = f"frame_{i}.png"
+        save_path = os.path.join(output_dir, frame_name)
+
+        img.save(save_path)
+        print(f"Guardado: {save_path}")
+
+    print("Extracción completa.")   
 
 def extract_frames(name,ex,args):
     cam = cv2.VideoCapture(name+ex)
