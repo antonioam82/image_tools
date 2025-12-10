@@ -30,7 +30,7 @@ def extract_webp_frames(name, ex, args):
     for i in range(img.n_frames):
         img.seek(i)
         
-        frame_name = f"frame_{i}.png"
+        frame_name = f"frame_{i+1}.png"
         save_path = os.path.join(output_dir, frame_name)
 
         img.save(save_path)
@@ -76,7 +76,7 @@ def extract_frames(name,ex,args):
             count+=1
         
             if ret:
-                frame_name = name+str(count)+"."+args.extension
+                frame_name = name+"_"+str(count)+"."+args.extension
                 
                 if args.create_folder: ########################
                     destination =  os.path.join(args.create_folder, frame_name)
