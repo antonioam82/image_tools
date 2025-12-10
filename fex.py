@@ -18,18 +18,6 @@ def on_press(key):
         stop = True
         return False
 
-'''def extract_webp_frames(name,ex,args):
-    img = Image.open(name+ex)
-
-    for i in range(img.n_frames):
-        img.seek(i)
-        if args.create_folder:
-            os.path.join(args.create_folder, img.save(f"frame_{i}.png"))
-        else:
-            img.save(f"frame_{i}.png")
-        #print(f"Guardado: 'frame_{i}.png'")#print(f"Guardado: 'frame_{i:03d}.png'")
-    print("Extracción completa.")'''
-
 def extract_webp_frames(name, ex, args):
     listener = keyboard.Listener(on_press=on_press)
     listener.start()
@@ -157,3 +145,4 @@ def main():
 
 if __name__=='__main__':
     main()
+
