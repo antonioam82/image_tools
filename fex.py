@@ -27,22 +27,29 @@ def extract_webp_frames(name, ex, args):
     if args.create_folder:
         os.makedirs(output_dir, exist_ok=True)
 
-    for i in range(img.n_frames):
+    total_frames = img.n_frames
+    print("TF: ",total_frames)
+
+    pbar = tqdm(total=img.n_frames,unit='frames',ncols=100)
+
+    for i in range(img.n_frames):#(img.n_frames):
         img.seek(i)
         
         frame_name = f"frame_{i+1}.png"
         save_path = os.path.join(output_dir, frame_name)
 
         img.save(save_path)
-        print(f"Guardado: {save_path}")
+        #print(f"Guardado: {save_path}")
+        pbar.update(1)
 
         if stop:
             print(Fore.YELLOW + Style.NORMAL + "\nFrame extraction interrupted by user." + Fore.RESET + Style.RESET_ALL)
-            #pbar.disable = True
+            pbar.disable = True
             break
 
     if not stop:
         print("DONE")
+    pbar.disable = True
     listener.stop()
 
 def extract_frames(name,ex,args):
